@@ -1,0 +1,8 @@
+
+    export const environment = {
+        production: true,
+        blobAccessToken:{sasToken: null,blobAccountUrl: 'https://blobuk.blob.core.windows.net/'},
+        api: undefined,  //Server URL: 'http://<direction>:<port>'
+        hotjarSiteId:undefined // Horjar ID
+        };
+    
