@@ -9,9 +9,9 @@
         </div>
     </div>
 </div>
-<div class="" *ngIf="loadedRequest && !showPanelEdit">
-    <div *ngIf="requests.length>0">
-        <div class="mt-4 mx-auto" style="max-width: 40rem !important;">
+<div class="mt-4 card card-block mx-auto" *ngIf="loadedRequest && !showPanelEdit" style="max-width: 40rem !important;">
+    <div *ngIf="requests.length>0" class="">
+        <div class="col-md-12" *ngIf="indexRequest==-1">
             <div class="card" *ngIf="tasksLoaded">
                 <div class="card-block p-1">
                     <div class="p-2">
@@ -39,7 +39,7 @@
                                 <em class="fas fa-info-circle"></em>
                             </div>
                             <div class="col-7 pl-2 pr-0">
-                                <p class="">{{'charts.noti2a' | translate:{value: groupName } }}</p>
+                                <p class="">{{'charts.noti2a' | translate }}</p>
                             </div>
                             <div class="col-4">
                                 <a class="btn btn-white btn-sm w-100" style="word-wrap: normal;" (click)="setCheck2(true)">
@@ -47,22 +47,6 @@
                                         Ok
                                     </span>
                                   </a>
-                            </div>
-                        </div>
-                        <div class="row font-small-3 mb-2">
-                            <div class="col-1 pr-0">
-                                <em class="fas fa-info-circle"></em>
-                            </div>
-                            <div class="col-7 pl-2 pr-0">
-                                <p class="">{{'war.The status of your profile is' | translate }}</p>
-                            </div>
-                            <div class="col-4">
-                                <span *ngIf="requests[0].status == null || requests[0].status == 'new'" class="badge badge-custom">{{'war.status.t1' | translate }}</span>
-                                <span *ngIf="requests[0].status == 'contacted'" class="badge badge-custom">{{'war.status.t2' | translate }}</span>
-                                <span *ngIf="requests[0].status == 'pending'" class="badge badge-custom">{{'war.status.t3' | translate }}</span>
-                                <span *ngIf="requests[0].status == 'ontheway'" class="badge badge-custom">{{'war.status.t4' | translate }}</span>
-                                <span *ngIf="requests[0].status == 'contactlost'" class="badge badge-custom">{{'war.status.opt5' | translate }}</span>
-                                <span *ngIf="requests[0].status == 'helped'" class="badge badge-custom">{{'war.status.opt6' | translate }}</span>
                             </div>
                         </div>
                         <!--One notification-->
@@ -88,121 +72,221 @@
                 <div class="card-block p-4 center-elements">
                     <i class="fa fa-spinner fa-spin fa-fw"></i>
                 </div>
-            </div> 
-        <div class="card card-block p-1">
-            <div class="p-2">
-                <h4 class="text-bold-500 mb-0">{{'war.Detailed information' | translate }}</h4>
             </div>
+        </div>
+        <div class="col-md-12" *ngIf="indexRequest==-1">
+            <button class="btn btn-dark" (click)="newRequest();">Create new</button>
+        </div>
+        <div *ngIf="indexRequest==-1">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>{{'generics.Date' | translate }}</th>
+                        <th>{{'generics.Status' | translate }}</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                    *ngFor="let request of requests ; let j = index">
+                        <td>
+                            <span>{{j}}</span>
+                        </td>
+                        <td>
+                            <span><strong>{{request.creationDate |date}}</strong></span>
+                        </td>
+                        <td>
+                            <span>
+                                <span *ngIf="request.status == null || request.status == 'new'" class="badge badge-custom">{{'war.status.t1' | translate }}</span>
+                                <span *ngIf="request.status == 'contacted'" class="badge badge-custom">{{'war.status.t2' | translate }}</span>
+                                <span *ngIf="request.status == 'pending'" class="badge badge-custom">{{'war.status.t3' | translate }}</span>
+                                <span *ngIf="request.status == 'ontheway'" class="badge badge-custom">{{'war.status.t4' | translate }}</span>
+                                <span *ngIf="request.status == 'contactlost'" class="badge badge-custom">{{'war.status.opt5' | translate }}</span>
+                                <span *ngIf="request.status == 'helped'" class="badge badge-custom">{{'war.status.opt6' | translate }}</span>
+                            </span>
+                        </td>
+                        <td>
+                            <a class="btn btn-outline-info btn-sm mb-0 mr-1" (click)="viewRequest(j);" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-outline-danger btn-sm mb-0 ml-1" (click)="confirmDeleteRequest(j);" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div *ngIf="indexRequest!=-1">
             <div class="p-2">
-                <div class="card-block">
-                    <div class="form-group">
-                        <div class="">
-                            <h4 class="content-header">{{'physicians.I am a physician who treats patients with' | translate }}</h4>
-                            <select id="group" name="group" class="form-control" ngModel #group="ngModel"
-                                [(ngModel)]="requests[0].group" [required]="true">
-                                <option [value]="null" disabled selected>--{{'generics.Please select' | translate }}--</option>
-                                <option *ngFor="let group of groups" [ngValue]="group._id">
-                                    <span
-                                        *ngIf="group.name != 'None'">{{group.name}}</span>
-                                    <span *ngIf="group.name == 'None'">{{'personalinfo.I dont belong to a
-                                        patient group' | translate }}</span>
-                                </option>
-                            </select>
-                            <div *ngIf="requests[0].group == '622f83174c824c0dec16c78b'" class="mb-3 mt-2">
-                                <p class="mb-1 text-bold-500">{{'physicians.othertreat' | translate }}</p>
-                                <input type="text" class="form-control" name="othergroup" id="othergroup"
-                                placeholder="{{'war.Write the name of your disease' | translate }}" ngModel required
-                                #othergroup="ngModel" [(ngModel)]="requests[0].othergroup">
+                <a (click)="back()" class="btn btn-primary" title="{{'generics.Back' | translate }}">
+                    <span class="menu-title">{{'generics.Back' | translate }}</span>
+                </a>
+            </div>
+            <div *ngFor="let request of requests ; let j = index">
+                <div class="mx-auto" *ngIf="indexRequest==j">
+                <div class="card card-block p-1">
+                    <div class="p-2">
+                        <h4 class="text-bold-500 mb-0">{{'war.Detailed information' | translate }}
+                            <span class="float-right">
+                                {{request.creationDate |date}}</span>
+                        </h4>
+                    </div>
+                    <div class="p-2">
+                        <div class="card-block">
+                            <div class="row font-small-3 mb-2">
+                                <div class="col-1 pr-0">
+                                    <em class="fas fa-info-circle"></em>
+                                </div>
+                                <div class="col-7 pl-2 pr-0">
+                                    <p class="">{{'war.The status of your profile is' | translate }}</p>
+                                </div>
+                                <div class="col-4">
+                                    <span *ngIf="request.status == null || request.status == 'new'" class="badge badge-custom">{{'war.status.t1' | translate }}</span>
+                                    <span *ngIf="request.status == 'contacted'" class="badge badge-custom">{{'war.status.t2' | translate }}</span>
+                                    <span *ngIf="request.status == 'pending'" class="badge badge-custom">{{'war.status.t3' | translate }}</span>
+                                    <span *ngIf="request.status == 'ontheway'" class="badge badge-custom">{{'war.status.t4' | translate }}</span>
+                                    <span *ngIf="request.status == 'contactlost'" class="badge badge-custom">{{'war.status.opt5' | translate }}</span>
+                                    <span *ngIf="request.status == 'helped'" class="badge badge-custom">{{'war.status.opt6' | translate }}</span>
+                                </div>
                             </div>
-                            <small class="form-text text-muted danger"
-                                *ngIf="!group.valid && (group.dirty || group.touched)">{{'generics.required'
-                                | translate }}</small>
+                            <div class="form-group">
+                                <div class="">
+                                    <h4 class="content-header">{{'physicians.I am a physician who treats patients with' | translate }}</h4>
+                                    <input type="text" class="form-control" name="group" id="group"
+                                        placeholder="{{'physicians.Write what kind of patients you treat' | translate }}" ngModel required
+                                        #group="ngModel" [(ngModel)]="request.group">
+                                    <!--<select id="group" name="group" class="form-control" ngModel #group="ngModel"
+                                        [(ngModel)]="request.group" [required]="true">
+                                        <option [value]="null" disabled selected>--{{'generics.Please select' | translate }}--</option>
+                                        <option *ngFor="let group of groups" [ngValue]="group._id">
+                                            <span
+                                                *ngIf="group.name != 'None'">{{group.name}}</span>
+                                            <span *ngIf="group.name == 'None'">{{'personalinfo.I dont belong to a
+                                                patient group' | translate }}</span>
+                                        </option>
+                                    </select>
+                                    <div *ngIf="request.group == '622f83174c824c0dec16c78b'" class="mb-3 mt-2">
+                                        <p class="mb-1 text-bold-500">{{'physicians.othertreat' | translate }}</p>
+                                        <input type="text" class="form-control" name="othergroup" id="othergroup"
+                                        placeholder="{{'war.Write the name of your disease' | translate }}" ngModel required
+                                        #othergroup="ngModel" [(ngModel)]="request.othergroup">
+                                    </div>-->
+                                    <small class="form-text text-muted danger"
+                                        *ngIf="!group.valid && (group.dirty || group.touched)">{{'generics.required'
+                                        | translate }}</small>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="">
+                                    <p class="mb-0 text-bold-500">{{'war.titleReferralMedicalCenter' | translate }}</p>
+                                    <input type="text" class="form-control mb-3" name="referralCenter" id="referralCenter"
+                                            placeholder="{{'war.Referral medical center' | translate }}" ngModel required
+                                            #referralCenter="ngModel" [(ngModel)]="request.referralCenter">
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="content-header d-block row col-12 mb-0">{{'physicians.Location' | translate }}</h4>
+                                <p *ngIf="request.lat!=''" class="mb-0">{{'war.This is where the patient is currently located' | translate }}</p>
+                                <p *ngIf="request.lat==''" class="mb-0" [innerHTML]="'war.optionalLocation' | translate "></p>
+                                <agm-map *ngIf="request.lat==''" [latitude]="lat" [longitude]="lng" [zoom]="zoom"  (mapReady)="mapReadyHandler2($event, j)">
+                                    <agm-marker *ngIf="request.lat!=''" [latitude]="request.lat" [longitude]="request.lng" [title]="'Pickup Location'"></agm-marker>
+                                </agm-map>
+                                <agm-map *ngIf="request.lat!=''" [latitude]="request.lat" [longitude]="request.lng" [zoom]="zoom"  (mapReady)="mapReadyHandler2($event, j)">
+                                    <agm-marker *ngIf="request.lat!=''" [latitude]="request.lat" [longitude]="request.lng" [title]="'Pickup Location'"></agm-marker>
+                                </agm-map>
+                                <a *ngIf="request.lat!=''" class="mt-2 btn btn-primary" (click)="deletelocation1(j)">{{'war.nosharelocation' | translate }}</a>
+                            </div>
+                    </div>
+                    <div class="card-block mt-3">
+                        <h4 class="content-header mt-0">{{'war.The drugs I need' | translate }}</h4>
+                        <p class="mb-0"><span [innerHTML]="'war.helpdrug' | translate "></span> <span class="ml-1"><a class="info" (click)="openModal(SampleDrug)">{{'war.helpdrug2' | translate }}</a></span></p>
+                        <div *ngIf="!callingTextAnalytics && request.drugs.length>0" class="table-responsive">
+                            <form class="mt-2">
+                                <label>{{'war.These are the drug currently needed' | translate }}</label>
+                            </form>
+                            <table class="table text-center">
+                                <thead>
+                                    <tr>
+                                        <th>{{'medication.Drug' | translate }}</th>
+                                        <th>{{'war.Boxes' | translate }}</th>
+                                        <th class="headerDosageStrength">{{'war.Dosage strength' | translate }}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let drug of request.drugs ; let i = index">
+                                        <td>
+                                            <span><strong>{{drug.name}}</strong></span>
+                                            <span class="d-block" *ngIf="drug.link!=''">
+                                                <a class="info" data-original-title="" title=""
+                                                href="https://www.whocc.no/atc_ddd_index/?code={{drug.link}}" target="_blank">
+                                                <span class="mr-1">whocc</span><em class="fa fa-external-link"></em>
+                                                </a>
+                                                <a class="info d-block" data-original-title="" title=""
+                                                href="https://www.rxreasoner.com/atccodes/{{drug.link}}" target="_blank">
+                                                <span class="mr-1">rxreasoner</span> <em class="fa fa-external-link"></em>
+                                                </a>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span>
+                                                <span *ngIf="drug.dose!=''">{{drug.dose}}</span>
+                                                <span *ngIf="drug.dose==''">-</span>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span>
+                                                <span *ngIf="drug.strength!=''">{{drug.strength}}</span>
+                                                <span *ngIf="drug.strength==''">-</span>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-outline-info btn-sm mb-0 col-sm-6 mr-1 ml-1 mb-1" (click)="editDrug(i, InfoDrug, false, j);" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
+                                            <a class="btn btn-outline-danger btn-sm mb-0 col-sm-6 mr-1 ml-1" (click)="confirmDeleteDrug(i, false, j);" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                        <div class="mt-2">
+                            <button class="btn btn-info" (click)="addDrug(InfoDrug, false, j)">{{'war.Add drug' | translate }}</button>
+                        </div>
+
+                        <div class="form-group mb-3 mt-3">
+                            <div class="">
+                                <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
+                                <input type="text" class="form-control mb-3" name="needAssistance" id="needAssistance"
+                                        placeholder="{{'war.needAssistance' | translate }}" ngModel required
+                                        #needAssistance="ngModel" [(ngModel)]="request.needAssistance">
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <div class="">
+                                <p class="mb-0 text-bold-500">{{'war.titleclinicalAdvice' | translate }}</p>
+                                <input type="text" class="form-control mb-3" name="clinicalAdvice" id="clinicalAdvice"
+                                        placeholder="{{'war.clinicalAdvice' | translate }}" ngModel required
+                                        #clinicalAdvice="ngModel" [(ngModel)]="request.clinicalAdvice">
+                            </div>
+                        </div>
+                        <h4 class="content-header">{{'war.Need other' | translate }}</h4>
+                        <textarea [autosize]="true" name="needsOther" [(ngModel)]="request.needsOther"
+                                    placeholder="{{'seizures.Write down any details' | translate }}"
+                                    class="form-control mt-2"></textarea>            
+                        <div class="center-elements mt-3">
+                            <button *ngIf="!saving" class="mt-2 btn btn-primary mr-1" (click)="confirmDeleteRequest(j);" href="javascript:void(0)">{{'generics.Delete' | translate}}</button>
+                            <button *ngIf="!saving" class="mt-2 btn btn-dark ml-1" (click)="updateRequest(request,requestIndex);">{{'generics.Save changes' | translate
+                                }}</button>
+                                <button *ngIf="saving" class="mt-2 btn btn-dark ml-1" [disabled]="saving" (click)="updateRequest(request,requestIndex);">{{'generics.Please wait' | translate
+                                }} <i class="fa fa-spinner fa-spin fa-fw"></i></button>
                         </div>
                     </div>
-                    <div>
-                        <h4 class="content-header d-block row col-12 mb-0">{{'physicians.Location' | translate }}</h4>
-                        <p *ngIf="requests[0].lat!=''" class="mb-0">{{'war.This is where the patient is currently located' | translate }}</p>
-                        <p *ngIf="requests[0].lat==''" class="mb-0" [innerHTML]="'war.optionalLocation' | translate "></p>
-                        <agm-map *ngIf="requests[0].lat==''" [latitude]="lat" [longitude]="lng" [zoom]="zoom"  (mapReady)="mapReadyHandler2($event)">
-                            <agm-marker *ngIf="showMarker && requests[0].lat!=''" [latitude]="requests[0].lat" [longitude]="requests[0].lng" [title]="'Pickup Location'"></agm-marker>
-                        </agm-map>
-                        <agm-map *ngIf="requests[0].lat!=''" [latitude]="requests[0].lat" [longitude]="requests[0].lng" [zoom]="zoom"  (mapReady)="mapReadyHandler2($event)">
-                            <agm-marker *ngIf="showMarker && requests[0].lat!=''" [latitude]="requests[0].lat" [longitude]="requests[0].lng" [title]="'Pickup Location'"></agm-marker>
-                        </agm-map>
-                        <a *ngIf="showMarker && requests[0].lat!=''" class="mt-2 btn btn-primary" (click)="deletelocation1()">{{'war.nosharelocation' | translate }}</a>
                     </div>
-            </div>
-            <div class="card-block mt-3">
-                <h4 class="content-header mt-0">{{'war.The drugs I need' | translate }}</h4>
-                <p class="mb-0"><span [innerHTML]="'war.helpdrug' | translate "></span> <span class="ml-1"><a class="info" (click)="openModal(SampleDrug)">{{'war.helpdrug2' | translate }}</a></span></p>
-                <div *ngIf="!callingTextAnalytics && requests[0].drugs.length>0" class="table-responsive">
-                    <form class="mt-2">
-                        <label>{{'war.These are the drug currently needed' | translate }}</label>
-                    </form>
-                    <table class="table text-center">
-                        <thead>
-                            <tr>
-                                <th>{{'medication.Drug' | translate }}</th>
-                                <th>{{'war.Boxes' | translate }}</th>
-                                <th class="headerDosageStrength">{{'war.Dosage strength' | translate }}</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                *ngFor="let drug of requests[0].drugs ; let i = index">
-                                <td>
-                                    <span><strong>{{drug.name}}</strong></span>
-                                    <span class="d-block" *ngIf="drug.link!=''">
-                                        <a class="info" data-original-title="" title=""
-                                        href="https://www.whocc.no/atc_ddd_index/?code={{drug.link}}" target="_blank">
-                                        <span class="mr-1">whocc</span><em class="fa fa-external-link"></em>
-                                        </a>
-                                        <a class="info d-block" data-original-title="" title=""
-                                        href="https://www.rxreasoner.com/atccodes/{{drug.link}}" target="_blank">
-                                        <span class="mr-1">rxreasoner</span> <em class="fa fa-external-link"></em>
-                                        </a>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span>
-                                        <span *ngIf="drug.dose!=''">{{drug.dose}}</span>
-                                        <span *ngIf="drug.dose==''">-</span>
-                                    </span>
-                                </td>
-                                <td>
-                                    <span>
-                                        <span *ngIf="drug.strength!=''">{{drug.strength}}</span>
-                                        <span *ngIf="drug.strength==''">-</span>
-                                    </span>
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-info btn-sm mb-0 col-sm-6 mr-1 ml-1 mb-1" (click)="editDrug(i, InfoDrug, false);" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
-                                    <a class="btn btn-outline-danger btn-sm mb-0 col-sm-6 mr-1 ml-1" (click)="confirmDeleteDrug(i, false);" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                </div>
-                <div class="mt-2">
-                    <button class="btn btn-info" (click)="addDrug(InfoDrug, false)">{{'war.Add drug' | translate }}</button>
-                </div>
-                <h4 class="content-header">{{'war.Need other' | translate }}</h4>
-                <textarea [autosize]="true" name="needsOther" [(ngModel)]="requests[0].needsOther"
-                            placeholder="{{'seizures.Write down any details' | translate }}"
-                            class="form-control mt-2"></textarea>            
-                <div class="center-elements mt-3">
-                    <button *ngIf="!saving" class="mt-2 btn btn-primary mr-1" (click)="confirmDeleteRequest(0);" href="javascript:void(0)">{{'generics.Delete' | translate}}</button>
-                    <button *ngIf="!saving" class="mt-2 btn btn-dark ml-1" (click)="updateRequest(requests[0],requestIndex);">{{'generics.Save changes' | translate
-                        }}</button>
-                        <button *ngIf="saving" class="mt-2 btn btn-dark ml-1" [disabled]="saving" (click)="updateRequest(requests[0],requestIndex);">{{'generics.Please wait' | translate
-                        }} <i class="fa fa-spinner fa-spin fa-fw"></i></button>
                 </div>
             </div>
             </div>
         </div>
-    </div>
+        
+        
     </div>
 
 </div>
@@ -232,7 +316,11 @@
                         <div *ngIf="step=='2'">
                             <h2 class="content-header mb-3 mt-0" style="font-weight: 600;">{{'generics.Welcome to ucr' | translate }}</h2>
                             <p class="mb-1 text-bold-500">{{'physicians.I am a physician who treats patients with' | translate }}</p>
-                            <select id="group" name="group" class="form-control mb-3" ngModel
+                            <input type="text" class="form-control mb-3" name="group" id="group"
+                                    placeholder="{{'physicians.Write what kind of patients you treat' | translate }}" ngModel required
+                                    #group="ngModel" [(ngModel)]="actualRequest.group">
+
+                            <!--<select id="group" name="group" class="form-control mb-3" ngModel
                                 [(ngModel)]="actualRequest.group">
                                 <option [value]="null" disabled selected>--{{'generics.Please select' | translate }}--</option>
                                 <option *ngFor="let group of groups" [ngValue]="group._id">
@@ -240,8 +328,8 @@
                                         *ngIf="group.name != 'None'">{{group.name}}</span>
                                     <span *ngIf="group.name == 'None'">{{'physicians.Does not appear on the list' | translate }}</span>
                                 </option>
-                            </select>
-                            <div *ngIf="actualRequest.group">
+                            </select>-->
+                            <!--<div *ngIf="actualRequest.group">
                                 <div *ngIf="actualRequest.group == '622f83174c824c0dec16c78b'" class="mb-3">
                                     <p class="mb-1 text-bold-500">{{'physicians.othertreat' | translate }}</p>
                                     <input type="text" class="form-control" name="othergroup" id="othergroup"
@@ -249,8 +337,16 @@
                                     #othergroup="ngModel" [(ngModel)]="actualRequest.othergroup">
                                 </div>
                                 
+                            </div>-->
+                            <div class="form-group mb-3">
+                                <div class="">
+                                    <p class="mb-0 text-bold-500">{{'war.titleReferralMedicalCenter' | translate }}</p>
+                                    <input type="text" class="form-control mb-3" name="referralCenter" id="referralCenter"
+                                            placeholder="{{'war.Referral medical center' | translate }}" ngModel required
+                                            #referralCenter="ngModel" [(ngModel)]="actualRequest.referralCenter">
+                                </div>
                             </div>
-                            
+
                             <div class="center-elements">
                                 <button class="mb-0 btn btn-primary mr-1"
                                           (click)="step='1'">{{'generics.Previous' | translate }}</button>
@@ -263,9 +359,9 @@
                                     <p class="mb-2">{{'war.location2' | translate }}</p>
                                     <p *ngIf="actualRequest.lat==''" class="mb-2" [innerHTML]="'war.optionalLocation' | translate "></p>
                                     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"  (mapReady)="mapReadyHandler($event)">
-                                        <agm-marker *ngIf="showMarker && actualRequest.lat!=''" [latitude]="actualRequest.lat" [longitude]="actualRequest.lng" [title]="'Pickup Location'"></agm-marker>
+                                        <agm-marker *ngIf="actualRequest.lat!=''" [latitude]="actualRequest.lat" [longitude]="actualRequest.lng" [title]="'Pickup Location'"></agm-marker>
                                     </agm-map>
-                                    <a *ngIf="showMarker && actualRequest.lat!=''" class="mt-2 btn btn-primary" (click)="deletelocation0()">{{'war.nosharelocation' | translate }}</a>
+                                    <a *ngIf="actualRequest.lat!=''" class="mt-2 btn btn-primary" (click)="deletelocation0()">{{'war.nosharelocation' | translate }}</a>
                                     <div class="center-elements mt-3">
                                         <button class="btn btn-primary mr-1 mb-0"
                                           (click)="step='2'">{{'generics.Previous' | translate }}</button>
@@ -318,8 +414,8 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <a class="btn btn-outline-info btn-sm mb-0 col-sm-6 mr-1 ml-1 mb-1" (click)="editDrug(i, InfoDrug, true);" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
-                                                <a class="btn btn-outline-danger btn-sm mb-0 col-sm-6 mr-1 ml-1" (click)="confirmDeleteDrug(i, true);" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
+                                                <a class="btn btn-outline-info btn-sm mb-0 col-sm-6 mr-1 ml-1 mb-1" (click)="editDrug(i, InfoDrug, true, '');" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-outline-danger btn-sm mb-0 col-sm-6 mr-1 ml-1" (click)="confirmDeleteDrug(i, true, '');" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -327,8 +423,25 @@
                                 
                             </div>
                             <div class="mt-2">
-                                <button class="btn btn-info" (click)="addDrug(InfoDrug, true)">{{'war.Add drug' | translate }}</button>
-                            </div>                                    
+                                <button class="btn btn-info" (click)="addDrug(InfoDrug, true, '')">{{'war.Add drug' | translate }}</button>
+                            </div>         
+                            <div class="form-group mb-3 mt-3">
+                                <div class="">
+                                    <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
+                                    <input type="text" class="form-control mb-3" name="needAssistance" id="needAssistance"
+                                            placeholder="{{'war.needAssistance' | translate }}" ngModel required
+                                            #needAssistance="ngModel" [(ngModel)]="actualRequest.needAssistance">
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <div class="">
+                                    <p class="mb-0 text-bold-500">{{'war.titleclinicalAdvice' | translate }}</p>
+                                    <input type="text" class="form-control mb-3" name="clinicalAdvice" id="clinicalAdvice"
+                                            placeholder="{{'war.clinicalAdvice' | translate }}" ngModel required
+                                            #clinicalAdvice="ngModel" [(ngModel)]="actualRequest.clinicalAdvice">
+                                </div>
+                            </div>
+
                                         <p class="text-bold-500 mb-0 mt-3">{{'war.Need other' | translate }}</p>
                                         <p>{{'war.Nedd other2' | translate }}</p>
                                         <textarea [autosize]="true" name="needsOther"  [(ngModel)]="actualRequest.needsOther"

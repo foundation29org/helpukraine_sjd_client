@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'environments/environment';
@@ -23,7 +23,7 @@ import { BlobStorageSupportService, IBlobAccessToken } from 'app/shared/services
     providers: [ApiDx29ServerService]
 })
 
-export class UsersAdminComponent implements OnDestroy{
+export class UsersAdminComponent implements OnInit, OnDestroy{
   @ViewChild('f') newLangForm: NgForm;
 
   addedlang: boolean = false;
@@ -38,10 +38,7 @@ export class UsersAdminComponent implements OnDestroy{
   modalReference: NgbModalRef;
   private subscription: Subscription = new Subscription();
   timeformat="";
-  currentGroup: any;
   countries: any;
-  groupId: any;
-  groupEmail: any;
   // Google map lat-long
   lat: number = 50.431134;
   lng: number = 30.654701;
@@ -56,11 +53,7 @@ export class UsersAdminComponent implements OnDestroy{
     containerName: 'filessupport'
   };
 
-  groups: Array<any> = [];
-  groupSelected: any ={};
-
   constructor(private http: HttpClient, public translate: TranslateService, private authService: AuthService, private authGuard: AuthGuard, public toastr: ToastrService, private modalService: NgbModal, private dateService: DateService,private adapter: DateAdapter<any>, private sortService: SortService, private apiDx29ServerService: ApiDx29ServerService, private blob: BlobStorageSupportService){
-    this.loadGroups();
     this.adapter.setLocale(this.authService.getLang());
     this.lang = this.authService.getLang()
     switch(this.authService.getLang()){
@@ -81,25 +74,11 @@ export class UsersAdminComponent implements OnDestroy{
     
   }
 
-  loadGroups() {
-    //cargar los grupos actuales
-    this.subscription.add( this.http.get(environment.api+'/api/groups/')
-    .subscribe( (res : any) => {
-      console.log(res);
-      this.groups = res;
-     }, (err) => {
-       console.log(err);
-     }));
-  }
-
-  onChangeGroup(value){
-    this.groupSelected = value;
-    this.authService.setGroup(value.name)
-    this.currentGroup = this.authService.getGroup()    
-    this.loadGroupId();
+  ngOnInit() {
+    this.getUsers();
     this.getAzureBlobSasToken();
   }
-
+  
   loadCountries(){
     this.subscription.add( this.http.get('assets/jsons/countries.json')
     .subscribe( (res : any) => {
@@ -115,20 +94,9 @@ export class UsersAdminComponent implements OnDestroy{
     this.subscription.unsubscribe();
   }
 
-  loadGroupId(){
-    this.subscription.add( this.http.get(environment.api+'/api/group/'+this.authService.getGroup())
-      .subscribe( (resGroup : any) => {
-        this.groupEmail = resGroup.email;
-        this.groupId = resGroup._id;
-        this.getUsers();
-      }, (err) => {
-        console.log(err);
-    }));
-  }
-
   getUsers(){
     this.loadingUsers = true;
-    this.subscription.add( this.http.get(environment.api+'/api/admin/users/'+this.groupId)
+    this.subscription.add( this.http.get(environment.api+'/api/admin/allusers/')
     .subscribe( (res : any) => {
       for(var j=0;j<res.length;j++){
         res[j].userName = this.capitalizeFirstLetter(res[j].userName);
@@ -138,7 +106,7 @@ export class UsersAdminComponent implements OnDestroy{
           res[j].icon = 'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|4286f4'
         }
       }
-      res.sort(this.sortService.GetSortOrderInverse("lastLogin"));
+      res.sort(this.sortService.GetSortOrderInverse("creationDate"));
       this.users = res;
       this.loadingUsers = false;      
     }, (err) => {
@@ -179,7 +147,7 @@ export class UsersAdminComponent implements OnDestroy{
     }else if(row.status=='helped'){
       status = this.translate.instant("war.status.opt6");
     }
-    var data = {status: row.status, email: row.email, groupEmail: row.groupEmail, userName: row.userName,lang: row.lang, group: this.authService.getGroup(), statusInfo: status};
+    var data = {status: row.status, email: row.email, userName: row.userName,lang: row.lang, group: this.authService.getGroup(), statusInfo: status};
     if(row.role=='User'){
       this.subscription.add( this.http.put(environment.api+'/api/patient/status/'+row.patientId, data)
       .subscribe( (res : any) => {

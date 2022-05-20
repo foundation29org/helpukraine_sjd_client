@@ -1,20 +1,4 @@
-<div class="row mt-3">
-	<div class="col-md-6">
-	  <div class="form-group">
-		<label for="lang">{{'groups.Groups' | translate }}</label>
-		<select id="lang" name="lang" class="form-control"  [(ngModel)]="groupSelected" #groupselected (ngModelChange)="onChangeGroup(groupSelected)">
-		  <option *ngFor="let group of groups" [ngValue]="group"> {{group.name}}</option>
-		</select>
-	  </div>
-	</div>
-	</div>
-<div class="row" *ngIf="groupSelected._id">
-	<div class="col-sm-12">
-		<div class="content-header">{{'adminRole.title' | translate }} {{currentGroup}}</div>
-		<p class="content-sub-header">{{'adminRole.subtitle' | translate }}</p>
-	</div>
-</div>
-<section id="" *ngIf="groupSelected._id">
+<section id="" >
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="card">
@@ -50,7 +34,7 @@
 		</div>
 	</div>
 </section>
-<div class="row" *ngIf="!addedlang && !working && groupSelected._id">
+<div class="row" *ngIf="!addedlang && !working ">
 	<div class="col-lg-12 col-12">
 
 
@@ -106,7 +90,7 @@
 							</span>
 						</ng-template>
 					</ngx-datatable-column>
-					<ngx-datatable-column name="{{'war.Last login' | translate }}" prop="lastLogin" [flexGrow]="2"
+					<ngx-datatable-column name="{{'war.creationDate' | translate }}" prop="creationDate" [flexGrow]="2"
 						[sortable]="true">
 						<ng-template let-value="value" ngx-datatable-cell-template>
 							<span>
@@ -115,8 +99,8 @@
 							</span>
 						</ng-template>
 					</ngx-datatable-column>
-					<ngx-datatable-column *ngIf="groupId == '622f83174c824c0dec16c78b'"
-						name="{{'land.Disease' | translate }}" prop="othergroup" [flexGrow]="3" [sortable]="true">
+					<ngx-datatable-column
+						name="{{'land.Disease' | translate }}" prop="group" [flexGrow]="3" [sortable]="true">
 						<ng-template let-value="value" ngx-datatable-cell-template let-row="row">
 							<span>
 								{{value}}
@@ -251,9 +235,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<p class="mb-0">
-									<strong>{{'war.Blocked account' | translate }}</strong>
+									<strong>{{'war.Blocked account' | translate }}</strong> {{user.blockedaccount}}
 								</p>
-								{{user.blockedaccount}}
 							</div>
 						</div>
 
@@ -262,11 +245,11 @@
 								{{'menu.Basic Info' | translate }}
 							</h4>
 							<div class="row">
-								<div class="col-md-12" *ngIf="groupId == '622f83174c824c0dec16c78b'">
+								<div class="col-md-12">
 									<p class="mb-0">
 										<strong>{{'land.Disease' | translate }}:</strong> <span class="ml-1"
-											*ngIf="user.othergroup">{{user.othergroup}}</span> <span class="ml-1"
-											*ngIf="!user.othergroup">-</span>
+											*ngIf="user.group">{{user.group}}</span> <span class="ml-1"
+											*ngIf="!user.group">-</span>
 									</p>
 								</div>
 								<div class="col-md-12">
@@ -288,16 +271,54 @@
 
 							</div>
 						</div>
-						<div *ngIf="user.role =='Clinical'">
-							<div class="col-md-12" *ngIf="groupId == '622f83174c824c0dec16c78b'">
+						<div *ngIf="user.role =='Clinical'" class="row">
+							<div class="col-md-12">
 								<p class="mb-0">
 									<strong>{{'land.Disease' | translate }}:</strong> <span class="ml-1"
-										*ngIf="user.othergroup">{{user.othergroup}}</span> <span class="ml-1"
-										*ngIf="!user.othergroup">-</span>
+										*ngIf="user.group">{{user.group}}</span> <span class="ml-1"
+										*ngIf="!user.group">-</span>
 								</p>
 							</div>
 						</div>
-
+						<div class="row">
+							<div class="col-md-12">
+								<p class="mb-0">
+									<strong>{{'war.Referral medical center' | translate }}:</strong> 
+									<span *ngIf="user.referralCenter">
+										{{user.referralCenter}}
+									</span>
+									<span *ngIf="!user.referralCenter">
+										-
+									</span>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<p class="mb-0">
+									<strong>{{'war.needAssistance' | translate }}:</strong> 
+									<span *ngIf="user.needAssistance">
+										{{user.needAssistance}}
+									</span>
+									<span *ngIf="!user.needAssistance">
+										-
+									</span>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<p class="mb-0">
+									<strong>{{'war.clinicalAdvice' | translate }}:</strong> 
+									<span *ngIf="user.clinicalAdvice">
+										{{user.clinicalAdvice}}
+									</span>
+									<span *ngIf="!user.clinicalAdvice">
+										-
+									</span>
+								</p>
+							</div>
+						</div>
 						<h4 class="mt-3 mb-0 text-bold-400">
 							{{'generics.Status' | translate }}
 						</h4>

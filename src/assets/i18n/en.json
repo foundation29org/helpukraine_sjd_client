@@ -1376,7 +1376,7 @@
     "Your progress": "My progress",
     "If you dont keep data updated it will decrease": "Keep your data up to date to have your container tank filled.",
     "noti1a": "Welcome! This is your notification area to see your case status and pending actions.",
-    "noti2a": "{{value}}'s team is working hard to coordinate with other entities and direct aid to where it is most needed. We hope they can also help you.",
+    "noti2a": "The team is working hard to coordinate with other entities and direct aid to where it is most needed. We hope they can also help you.",
     "noti3a": "How has the disease burden been lately?",
     "noti3b": "You haven't reported about your disease burden lately. Let's do it!",
     "noti4a": "Your container doesn't have seizure data. Do you want to add a seizure?",
@@ -1625,7 +1625,14 @@
     "nosharelocation": "I don't want to say my approximate location",
     "optionalLocation": "The approximate location has not been added. Click on the map to select it. <strong>This is optional.</strong>",
     "optionalLocation2": "The approximate location has not been added. <strong>This is optional.</strong>",
-    "map": "Map"
+    "map": "Map",
+    "creationDate": "Creation date",
+    "Referral medical center": "Referral medical center",
+    "titleReferralMedicalCenter": "Write the medical center of reference of the patient",
+    "titleneedAssistance": "Need assistance?",
+    "needAssistance": "Need for assistance",
+    "titleclinicalAdvice": "Do you need clinical advice?",
+    "clinicalAdvice": "Clinical advice"
   },
   "physicians":{
     "I am a physician who treats patients with": "What kind of patients do you treat?",
