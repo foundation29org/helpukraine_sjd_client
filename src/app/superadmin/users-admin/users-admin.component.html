@@ -134,7 +134,7 @@
 						[sortable]="true">
 						<ng-template let-value="value" ngx-datatable-cell-template let-row="row">
 							<span>
-								<select id="status" name="status{{i}}" [(ngModel)]="row.status" [disabled]="true"
+								<select id="status" name="status{{i}}" [(ngModel)]="row.status"
 									(change)="fieldStatusChanged(row)">
 									<option [ngValue]="null" disabled selected>--{{'generics.Select' | translate }}--
 									</option>
@@ -295,7 +295,7 @@
 						<p class="mb-0">{{'war.statussubtitle' | translate }}</p>
 						<div class="row mb-2">
 							<div class="col-md-12">
-								<select id="status" name="status{{i}}" class="" [(ngModel)]="user.status" [disabled]="true"
+								<select id="status" name="status{{i}}" class="" [(ngModel)]="user.status"
 									(change)="fieldStatusChanged(user)">
 									<option [ngValue]="null" disabled selected>--{{'generics.Select' | translate }}--
 									</option>
@@ -316,6 +316,10 @@
 						<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
 							<agm-marker [latitude]="user.lat" [longitude]="user.lng" [iconUrl]="user.icon"></agm-marker>
 						</agm-map>
+						<span *ngIf="user.country">
+							{{'personalinfo.Country' | translate }}: {{user.country}}
+						</span>
+						
 					</div>
 					<div class="col-lg-6">
 						<h4 class="mt-3 text-bold-400">
@@ -379,9 +383,11 @@
 						<p class="mb-0">{{'war.notessubtitle' | translate }}</p>
 						<div class="row">
 							<div class="col-md-12">
-								<textarea [autosize]="true" name="notes" [(ngModel)]="user.notes" [disabled]="true"
+								<textarea [autosize]="true" name="notes" [(ngModel)]="user.notes"
 									placeholder="{{'seizures.Write down any details' | translate }}"
 									class="form-control"></textarea>
+									<a class="mt-2 btn btn-dark" (click)="saveNotes()" href="javascript:void(0)">{{'war.Save
+										notes' | translate }}</a>
 							</div>
 						</div>
 					</div>
@@ -442,7 +448,7 @@
 									</td>
 									<td>{{msg.date | date: timeformat}}</td>
 									<td>
-										<select id="status" name="status{{i}}" [(ngModel)]="msg.status" [disabled]="true"
+										<select id="status" name="status{{i}}" [(ngModel)]="msg.status"
 											(change)="fieldStatusChanged2(msg, i)">
 											<option value="unread">{{'support.Unread' | translate }}</option>
 											<option value="read">{{'support.Read' | translate }}</option>

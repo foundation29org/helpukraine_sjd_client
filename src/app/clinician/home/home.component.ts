@@ -85,6 +85,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   mapClickListener: any;
   map: any;
   indexRequest= -1;
+  countries: any = [];
 
   constructor(private http: HttpClient, public translate: TranslateService, private authService: AuthService, private requestCliService: RequestCliService, public searchFilterPipe: SearchFilterPipe, public toastr: ToastrService, private dateService: DateService, private apiDx29ServerService: ApiDx29ServerService, private sortService: SortService, private adapter: DateAdapter<any>, private searchService: SearchService, private router: Router, private apiExternalServices: ApiExternalServices, private apif29BioService: Apif29BioService, private modalService: NgbModal, private zone: NgZone) {
     this.adapter.setLocale(this.authService.getLang());
@@ -104,6 +105,34 @@ export class HomeComponent implements OnInit, OnDestroy {
         break;
 
     }
+    this.loadCountries();
+  }
+
+  loadCountries() {
+    this.countries = [];
+    //load countries file
+    this.subscription.add(this.http.get('assets/jsons/phone_codes.json')
+      .subscribe((res: any) => {
+        //get country name
+        for (let row of res) {
+          var countryName = "";
+          var countryNameList = [];
+          countryNameList = row.name.split(/["]/g)
+          countryName = countryNameList[1]
+
+          var countryNombre = "";
+          var countryNombreList = [];
+          countryNombreList = row.nombre.split(/["]/g)
+          countryNombre = countryNombreList[1]
+          this.countries.push({ countryName: countryName, countryNombre: countryNombre })
+        }
+        if (this.lang == 'es') {
+          this.countries.sort(this.sortService.GetSortOrder("countryNombre"));
+        } else {
+          this.countries.sort(this.sortService.GetSortOrder("countryName"));
+        }
+      }));
+
   }
 
 
@@ -412,6 +441,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       notes: '',
       needs: '',
       needAssistance: '',
+      country: null,
       status: null,
       updateDate: Date.now(),
       group: null,
@@ -747,6 +777,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   back(){
     this.indexRequest = -1;
+    this.showPanelEdit = false;
   }
 }
 

@@ -208,6 +208,8 @@ export class HomeComponent implements OnInit, OnDestroy {
         break;
 
     }
+
+    this.loadCountries();
   }
 
 

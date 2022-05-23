@@ -113,13 +113,12 @@
                                             <agm-marker *ngIf="showMarker && basicInfoPatient.lat!=''" [latitude]="basicInfoPatient.lat" [longitude]="basicInfoPatient.lng" [title]="'Pickup Location'"></agm-marker>
                                         </agm-map>
                                         <a *ngIf="showMarker && basicInfoPatient.lat!=''" class="mt-2 btn btn-primary" (click)="deletelocation()">{{'war.nosharelocation' | translate }}</a>
-                                        <!--<p class="text-center mt-3">----- or -----</p>
+                                        <p class="text-center mt-3">----- {{'land.or' | translate }} -----</p>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>{{'personalinfo.Country' | translate }}</label>
+                                            <div class="col-md-12">
                                                 <select class="form-control" id="countryselectedCode" name="countryselectedCode"
                                                     [(ngModel)]="basicInfoPatient.country" #countryselectedCode="ngModel" ngModel>
-                                                    <option [ngValue]="null" disabled selected>--{{'personalinfo.Country' | translate }}--</option>
+                                                    <option [ngValue]="null" selected>--{{'personalinfo.Country' | translate }}--</option>
                                                     <option *ngFor="let country of countries; let i=index"
                                                         value="{{country.countryName}}">
                                                         <label *ngIf="lang!='es'"
@@ -129,12 +128,7 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                            <div class="col-md-6">
-                                                <label>{{'personalinfo.City' | translate }}</label>
-                                                <input type="text" id="city" class="form-control" name="city"
-                                                    placeholder="{{'personalinfo.City' | translate }}" [(ngModel)]="basicInfoPatient.city">
-                                            </div>
-                                          </div>-->
+                                          </div>
                                         
                                     <div class="center-elements mt-3">
                                         <span *ngIf="!sending">
@@ -216,9 +210,9 @@
                                         <div class="form-group mb-3">
                                             <div class="">
                                                 <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
-                                                <input type="text" class="form-control mb-3" name="needAssistance" id="needAssistance"
-                                                        placeholder="{{'war.needAssistance' | translate }}" ngModel required
-                                                        #needAssistance="ngModel" [(ngModel)]="basicInfoPatient.needAssistance">
+                                                <textarea [autosize]="true" name="needAssistance" [(ngModel)]="basicInfoPatient.needAssistance"
+									placeholder="{{'war.needAssistance' | translate }}" ngModel required #needAssistance="ngModel"
+									class="form-control mb-3"></textarea>
                                             </div>
                                         </div>
                             <div class="center-elements mt-3">
@@ -389,6 +383,22 @@
                                 <agm-marker *ngIf="showMarker && basicInfoPatient.lat!=''" [latitude]="basicInfoPatient.lat" [longitude]="basicInfoPatient.lng" [title]="'Pickup Location'"></agm-marker>
                             </agm-map>
                             <a *ngIf="showMarker && basicInfoPatient.lat!=''" class="mt-2 btn btn-primary" (click)="deletelocation()">{{'war.nosharelocation' | translate }}</a>
+                            <div class="row" *ngIf="basicInfoPatient.lat==''">
+                                <div class="col-md-12" >
+                                    <p class="text-center mt-3">----- {{'land.or' | translate }} -----</p>
+                                    <select class="form-control mt-2" id="countryselectedCode" name="countryselectedCode"
+                                        [(ngModel)]="basicInfoPatient.country" #countryselectedCode="ngModel" ngModel>
+                                        <option [ngValue]="null" selected>--{{'personalinfo.Country' | translate }}--</option>
+                                        <option *ngFor="let country of countries; let i=index"
+                                            value="{{country.countryName}}">
+                                            <label *ngIf="lang!='es'"
+                                                style="color:blue !important">{{country.countryName}}</label>
+                                            <label *ngIf="lang=='es'"
+                                                style="color:blue !important">{{country.countryNombre}}</label>
+                                        </option>
+                                    </select>
+                                </div>
+                              </div>
                         </div>
                     </form>
                     <div class="mt-3">
@@ -449,9 +459,9 @@
                           <div class="form-group mb-3 mt-2">
                             <div class="">
                                 <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
-                                <input type="text" class="form-control mb-3" name="needAssistance" id="needAssistance"
-                                        placeholder="{{'war.needAssistance' | translate }}" ngModel required
-                                        #needAssistance="ngModel" [(ngModel)]="basicInfoPatient.needAssistance">
+                                <textarea [autosize]="true" name="needAssistance" [(ngModel)]="basicInfoPatient.needAssistance"
+									placeholder="{{'war.needAssistance' | translate }}"
+									class="form-control"></textarea>
                             </div>
                         </div>          
                         <div class="center-elements mt-3">

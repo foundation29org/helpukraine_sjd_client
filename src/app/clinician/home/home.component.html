@@ -193,6 +193,22 @@
                                     <agm-marker *ngIf="request.lat!=''" [latitude]="request.lat" [longitude]="request.lng" [title]="'Pickup Location'"></agm-marker>
                                 </agm-map>
                                 <a *ngIf="request.lat!=''" class="mt-2 btn btn-primary" (click)="deletelocation1(j)">{{'war.nosharelocation' | translate }}</a>
+                                <div class="row" *ngIf="request.lat==''">
+                                    <div class="col-md-12" >
+                                        <p class="text-center mt-3">----- {{'land.or' | translate }} -----</p>
+                                        <select class="form-control mt-2" id="countryselectedCode" name="countryselectedCode"
+                                            [(ngModel)]="request.country" #countryselectedCode="ngModel" ngModel>
+                                            <option [ngValue]="null" selected>--{{'personalinfo.Country' | translate }}--</option>
+                                            <option *ngFor="let country of countries; let i=index"
+                                                value="{{country.countryName}}">
+                                                <label *ngIf="lang!='es'"
+                                                    style="color:blue !important">{{country.countryName}}</label>
+                                                <label *ngIf="lang=='es'"
+                                                    style="color:blue !important">{{country.countryNombre}}</label>
+                                            </option>
+                                        </select>
+                                    </div>
+                                  </div>
                             </div>
                     </div>
                     <div class="card-block mt-3">
@@ -255,9 +271,9 @@
                         <div class="form-group mb-3 mt-3">
                             <div class="">
                                 <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
-                                <input type="text" class="form-control mb-3" name="needAssistance" id="needAssistance"
-                                        placeholder="{{'war.needAssistance' | translate }}" ngModel required
-                                        #needAssistance="ngModel" [(ngModel)]="request.needAssistance">
+                                <textarea [autosize]="true" name="needAssistance" [(ngModel)]="request.needAssistance"
+									placeholder="{{'war.needAssistance' | translate }}" ngModel required #needAssistance="ngModel"
+									class="form-control mb-3"></textarea>
                             </div>
                         </div>          
                         <div class="center-elements mt-3">
@@ -288,6 +304,11 @@
                 </div>
                 <div *ngIf="loadedRequest">
                     <div class="justify-content-center align-items-center text-left">
+                        <span *ngIf="requests.length>0" class="float-right">
+                            <button type="button" class="close" aria-label="Close" (click)="back()">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </span>
                         <div *ngIf="step=='1'">
                             <h2 class="content-header mb-3 mt-0" style="font-weight: 600;">{{'homeraito.p1title' | translate }}</h2>
                             <p class="text-muted">
@@ -350,6 +371,22 @@
                                         <agm-marker *ngIf="actualRequest.lat!=''" [latitude]="actualRequest.lat" [longitude]="actualRequest.lng" [title]="'Pickup Location'"></agm-marker>
                                     </agm-map>
                                     <a *ngIf="actualRequest.lat!=''" class="mt-2 btn btn-primary" (click)="deletelocation0()">{{'war.nosharelocation' | translate }}</a>
+                                    <p class="text-center mt-3">----- {{'land.or' | translate }} -----</p>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <select class="form-control" id="countryselectedCode" name="countryselectedCode"
+                                                [(ngModel)]="actualRequest.country" #countryselectedCode="ngModel" ngModel>
+                                                <option [ngValue]="null" selected>--{{'personalinfo.Country' | translate }}--</option>
+                                                <option *ngFor="let country of countries; let i=index"
+                                                    value="{{country.countryName}}">
+                                                    <label *ngIf="lang!='es'"
+                                                        style="color:blue !important">{{country.countryName}}</label>
+                                                    <label *ngIf="lang=='es'"
+                                                        style="color:blue !important">{{country.countryNombre}}</label>
+                                                </option>
+                                            </select>
+                                        </div>
+                                      </div>
                                     <div class="center-elements mt-3">
                                         <button class="btn btn-primary mr-1 mb-0"
                                           (click)="step='2'">{{'generics.Previous' | translate }}</button>
@@ -416,9 +453,9 @@
                             <div class="form-group mb-3 mt-3">
                                 <div class="">
                                     <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
-                                    <input type="text" class="form-control mb-3" name="needAssistance" id="needAssistance"
-                                            placeholder="{{'war.needAssistance' | translate }}" ngModel required
-                                            #needAssistance="ngModel" [(ngModel)]="actualRequest.needAssistance">
+                                    <textarea [autosize]="true" name="needAssistance" [(ngModel)]="actualRequest.needAssistance"
+									placeholder="{{'war.needAssistance' | translate }}"
+									class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="center-elements mt-3">
