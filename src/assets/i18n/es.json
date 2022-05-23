@@ -1632,9 +1632,7 @@
     "Referral medical center": "Centro médico de referencia",
     "titleReferralMedicalCenter": "Escriba el centro médico de referencia del paciente",
     "titleneedAssistance": "¿Necesita asistencia?",
-    "needAssistance": "Necesidad de asistencia",
-    "titleclinicalAdvice": "¿Necesitas consejo clínico?",
-    "clinicalAdvice": "Consejo clínico"
+    "needAssistance": "Necesidad de asistencia"
   },
   "physicians":{
     "I am a physician who treats patients with": "¿Qué tipo de pacientes tratas?",

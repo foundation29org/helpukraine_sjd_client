@@ -259,19 +259,7 @@
                                         placeholder="{{'war.needAssistance' | translate }}" ngModel required
                                         #needAssistance="ngModel" [(ngModel)]="request.needAssistance">
                             </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <div class="">
-                                <p class="mb-0 text-bold-500">{{'war.titleclinicalAdvice' | translate }}</p>
-                                <input type="text" class="form-control mb-3" name="clinicalAdvice" id="clinicalAdvice"
-                                        placeholder="{{'war.clinicalAdvice' | translate }}" ngModel required
-                                        #clinicalAdvice="ngModel" [(ngModel)]="request.clinicalAdvice">
-                            </div>
-                        </div>
-                        <h4 class="content-header">{{'war.Need other' | translate }}</h4>
-                        <textarea [autosize]="true" name="needsOther" [(ngModel)]="request.needsOther"
-                                    placeholder="{{'seizures.Write down any details' | translate }}"
-                                    class="form-control mt-2"></textarea>            
+                        </div>          
                         <div class="center-elements mt-3">
                             <button *ngIf="!saving" class="mt-2 btn btn-primary mr-1" (click)="confirmDeleteRequest(j);" href="javascript:void(0)">{{'generics.Delete' | translate}}</button>
                             <button *ngIf="!saving" class="mt-2 btn btn-dark ml-1" (click)="updateRequest(request,requestIndex);">{{'generics.Save changes' | translate
@@ -433,26 +421,12 @@
                                             #needAssistance="ngModel" [(ngModel)]="actualRequest.needAssistance">
                                 </div>
                             </div>
-                            <div class="form-group mb-3">
-                                <div class="">
-                                    <p class="mb-0 text-bold-500">{{'war.titleclinicalAdvice' | translate }}</p>
-                                    <input type="text" class="form-control mb-3" name="clinicalAdvice" id="clinicalAdvice"
-                                            placeholder="{{'war.clinicalAdvice' | translate }}" ngModel required
-                                            #clinicalAdvice="ngModel" [(ngModel)]="actualRequest.clinicalAdvice">
-                                </div>
-                            </div>
-
-                                        <p class="text-bold-500 mb-0 mt-3">{{'war.Need other' | translate }}</p>
-                                        <p>{{'war.Nedd other2' | translate }}</p>
-                                        <textarea [autosize]="true" name="needsOther"  [(ngModel)]="actualRequest.needsOther"
-                                                    placeholder="{{'seizures.Write down any details' | translate }}"
-                                                    class="form-control mt-2"></textarea>
                             <div class="center-elements mt-3">
-                                <span class="danger d-block mb-2" *ngIf="!saving && actualRequest.drugs.length==0 && actualRequest.needsOther == ''">{{'war.mandatoryfields' | translate }}</span>
+                                <span class="danger d-block mb-2" *ngIf="!saving && actualRequest.drugs.length==0 && actualRequest.needAssistance == ''">{{'war.mandatoryfields' | translate }}</span>
                                 <button *ngIf="!saving" class="btn btn-primary mr-1 mb-0"
                                     (click)="step='3'">{{'generics.Previous' | translate }}</button>
                                 <button *ngIf="saving" [disabled]="saving" class="btn btn-dark ml-1 mb-0" (click)="setRequest();">{{'generics.Please wait' | translate}} <i class="fa fa-spinner fa-spin fa-fw"></i></button>
-                                <button *ngIf="!saving" [disabled]="actualRequest.drugs.length==0 && actualRequest.needsOther == ''" class="btn btn-dark ml-1 mb-0" (click)="setRequest();">{{'generics.Finish' | translate
+                                <button *ngIf="!saving" [disabled]="actualRequest.drugs.length==0 && actualRequest.needAssistance == ''" class="btn btn-dark ml-1 mb-0" (click)="setRequest();">{{'generics.Finish' | translate
                                     }}</button>
                             </div>
                         </div>

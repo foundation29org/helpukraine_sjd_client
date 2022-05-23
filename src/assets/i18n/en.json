@@ -1630,9 +1630,7 @@
     "Referral medical center": "Referral medical center",
     "titleReferralMedicalCenter": "Write the medical center of reference of the patient",
     "titleneedAssistance": "Need assistance?",
-    "needAssistance": "Need for assistance",
-    "titleclinicalAdvice": "Do you need clinical advice?",
-    "clinicalAdvice": "Clinical advice"
+    "needAssistance": "Need for assistance"
   },
   "physicians":{
     "I am a physician who treats patients with": "What kind of patients do you treat?",

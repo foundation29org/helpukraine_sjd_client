@@ -411,7 +411,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       lng: '',
       notes: '',
       needs: '',
-      needsOther: '',
+      needAssistance: '',
       status: null,
       updateDate: Date.now(),
       group: null,

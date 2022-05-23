@@ -1632,9 +1632,7 @@
         "Referral medical center": "Довідковий медичний центр",
         "titleReferralMedicalCenter": "Напишіть довідку медичного центру пацієнта",
         "titleneedAssistance": "Потрібна допомога?",
-        "needAssistance": "Потреба в допомозі",
-        "titleclinicalAdvice": "Вам потрібна клінічна консультація?",
-        "clinicalAdvice": "Клінічні поради"
+        "needAssistance": "Потреба в допомозі"
     },
     "physicians":{
       "I am a physician who treats patients with": "Яких пацієнтів ви лікуєте?",

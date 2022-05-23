@@ -213,13 +213,6 @@
                             <div class="mt-2">
                                 <button class="btn btn-info" (click)="addDrug(InfoDrug)">{{'war.Add drug' | translate }}</button>
                             </div>
-                                        <p class="text-bold-500 mb-1 mt-2">{{'war.Need shelter' | translate }}</p>
-                                        <div class="text-left form-group">
-                                            <mat-radio-group aria-label="Select an option" [(ngModel)]="basicInfoPatient.needShelter">
-                                                <mat-radio-button [value]=false>{{'generics.No' | translate }}</mat-radio-button>
-                                                <mat-radio-button [value]=true class="ml-2">{{'generics.Yes' | translate }}</mat-radio-button>
-                                              </mat-radio-group>
-                                        </div>
                                         <div class="form-group mb-3">
                                             <div class="">
                                                 <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
@@ -228,25 +221,12 @@
                                                         #needAssistance="ngModel" [(ngModel)]="basicInfoPatient.needAssistance">
                                             </div>
                                         </div>
-                                        <div class="form-group mb-3">
-                                            <div class="">
-                                                <p class="mb-0 text-bold-500">{{'war.titleclinicalAdvice' | translate }}</p>
-                                                <input type="text" class="form-control mb-3" name="clinicalAdvice" id="clinicalAdvice"
-                                                        placeholder="{{'war.clinicalAdvice' | translate }}" ngModel required
-                                                        #clinicalAdvice="ngModel" [(ngModel)]="basicInfoPatient.clinicalAdvice">
-                                            </div>
-                                        </div>
-                                        <p class="text-bold-500 mb-0">{{'war.Need other' | translate }}</p>
-                                        <p>{{'war.Nedd other2' | translate }}</p>
-                                        <textarea [autosize]="true" name="needsOther"  [(ngModel)]="basicInfoPatient.needsOther"
-                                                    placeholder="{{'seizures.Write down any details' | translate }}"
-                                                    class="form-control mt-2"></textarea>
                             <div class="center-elements mt-3">
-                                <span class="danger d-block mb-2" *ngIf="!saving && basicInfoPatient.drugs.length==0 && basicInfoPatient.needsOther == ''">{{'war.mandatoryfields' | translate }}</span>
+                                <span class="danger d-block mb-2" *ngIf="!saving && basicInfoPatient.drugs.length==0 && basicInfoPatient.needAssistance == ''">{{'war.mandatoryfields' | translate }}</span>
                                 <button class="btn btn-dark mr-1 mb-0"
                                     (click)="step='3'">{{'generics.Previous' | translate }}</button>
                                     <button *ngIf="saving" [disabled]="saving" class="btn btn-primary ml-1 mb-0" (click)="setNeeds();">{{'generics.Please wait' | translate}} <i class="fa fa-spinner fa-spin fa-fw"></i></button>
-                                <button *ngIf="!saving" class="btn btn-primary ml-1 mb-0" [disabled]="basicInfoPatient.drugs.length==0 && basicInfoPatient.needsOther == ''" (click)="setNeeds();">{{'generics.Finish' | translate
+                                <button *ngIf="!saving" class="btn btn-primary ml-1 mb-0" [disabled]="basicInfoPatient.drugs.length==0 && basicInfoPatient.needAssistance == ''" (click)="setNeeds();">{{'generics.Finish' | translate
                                     }}</button>
                             </div>
                         </div>
@@ -466,11 +446,6 @@
                         <div class="mt-2">
                             <button class="btn btn-info" (click)="addDrug(InfoDrug)">{{'war.Add drug' | translate }}</button>
                         </div>
-                        <h4 class="content-header mb-1">{{'war.Need shelter' | translate }}</h4>
-                        <mat-radio-group aria-label="Select an option" [(ngModel)]="basicInfoPatient.needShelter">
-                            <mat-radio-button [value]=false>{{'generics.No' | translate }}</mat-radio-button>
-                            <mat-radio-button [value]=true class="ml-2">{{'generics.Yes' | translate }}</mat-radio-button>
-                          </mat-radio-group>
                           <div class="form-group mb-3 mt-2">
                             <div class="">
                                 <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
@@ -478,19 +453,7 @@
                                         placeholder="{{'war.needAssistance' | translate }}" ngModel required
                                         #needAssistance="ngModel" [(ngModel)]="basicInfoPatient.needAssistance">
                             </div>
-                        </div>
-                        <div class="form-group mb-3">
-                            <div class="">
-                                <p class="mb-0 text-bold-500">{{'war.titleclinicalAdvice' | translate }}</p>
-                                <input type="text" class="form-control mb-3" name="clinicalAdvice" id="clinicalAdvice"
-                                        placeholder="{{'war.clinicalAdvice' | translate }}" ngModel required
-                                        #clinicalAdvice="ngModel" [(ngModel)]="basicInfoPatient.clinicalAdvice">
-                            </div>
-                        </div>
-                        <h4 class="content-header">{{'war.Need other' | translate }}</h4>
-                        <textarea [autosize]="true" name="needsOther" [(ngModel)]="basicInfoPatient.needsOther"
-                                    placeholder="{{'seizures.Write down any details' | translate }}"
-                                    class="form-control mt-2"></textarea>            
+                        </div>          
                         <div class="center-elements mt-3">
                             <button *ngIf="!saving" class="mt-2 btn btn-dark" (click)="setNeeds2();">{{'generics.Save changes' | translate
                                 }}</button>
