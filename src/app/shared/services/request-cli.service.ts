@@ -62,4 +62,14 @@ export class RequestCliService {
       //this.user = user;
     }
 
+    deletedrug(requestId, info){
+      //cargar las faqs del knowledgeBaseID
+      return this.http.post(environment.api+'/api/requestclin/deletedrug/'+requestId, info)
+        .map( (res : any) => {
+          return res;
+         }, (err) => {
+           console.log(err);
+         })
+    }
+
 }

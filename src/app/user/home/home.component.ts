@@ -520,6 +520,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       var paramssend = { drugs: this.newDrugs };
       this.subscription.add( this.http.put(environment.api+'/api/patient/drugs/'+this.authService.getCurrentPatient().sub, paramssend)
       .subscribe( (res : any) => {
+        console.log(res);
+        if(res.message=='drugs changed'){
+          this.newDrugs = res.patientUpdated.drugs;
+        }
         this.basicInfoPatient.drugs = this.newDrugs;
       }, (err) => {
         console.log(err.error);
@@ -643,9 +647,17 @@ export class HomeComponent implements OnInit, OnDestroy {
         allowOutsideClick: false
     }).then((result) => {
       if (result.value) {
-        this.basicInfoPatient.drugs.splice(index, 1);
-        this.newDrugs = this.basicInfoPatient.drugs;
-        this.saveDrugs();
+        var info = {drugs: this.basicInfoPatient.drugs, index: index};
+      this.subscription.add( this.http.post(environment.api+'/api/patient/deletedrug/'+this.authService.getCurrentPatient().sub, info)
+        .subscribe( (res : any) => {
+          this.basicInfoPatient.drugs.splice(index, 1);
+          this.newDrugs = this.basicInfoPatient.drugs;
+        }, (err) => {
+          console.log(err);
+        }));
+
+        
+        //this.saveDrugs();
       }
     });
   }

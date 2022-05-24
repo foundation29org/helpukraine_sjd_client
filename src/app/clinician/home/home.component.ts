@@ -419,6 +419,14 @@ export class HomeComponent implements OnInit, OnDestroy {
         allowOutsideClick: false
       }).then((result) => {
         if (result.value) {
+          //var info = this.requests[indexRequest].drugs[index];
+          var info = {drugs: this.requests[indexRequest].drugs, index: index};
+          this.subscription.add(this.requestCliService.deletedrug(this.requests[indexRequest]._id, info)
+          .subscribe((res: any) => {
+            console.log(res);
+          }, (err) => {
+            console.log(err);
+          }));
           this.requests[indexRequest].drugs.splice(index, 1);
           this.newDrugs = this.requests[indexRequest].drugs;
         }
@@ -470,6 +478,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if(info._id!=null){
       this.subscription.add(this.requestCliService.updateRequest(info._id, info)
       .subscribe((res: any) => {
+        console.log(res);
         this.saving = false;
         this.step = '1';
         this.toastr.success('', this.translate.instant("generics.Data saved successfully"));
