@@ -82,9 +82,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   checks: any = {};
   tasksLoaded: boolean = false;
   isWizard: boolean = false;
-  groupName = '';
   mapClickListener: any;
   map: any;
+  indexRequest= -1;
+  countries: any = [];
 
   constructor(private http: HttpClient, public translate: TranslateService, private authService: AuthService, private requestCliService: RequestCliService, public searchFilterPipe: SearchFilterPipe, public toastr: ToastrService, private dateService: DateService, private apiDx29ServerService: ApiDx29ServerService, private sortService: SortService, private adapter: DateAdapter<any>, private searchService: SearchService, private router: Router, private apiExternalServices: ApiExternalServices, private apif29BioService: Apif29BioService, private modalService: NgbModal, private zone: NgZone) {
     this.adapter.setLocale(this.authService.getLang());
@@ -104,6 +105,34 @@ export class HomeComponent implements OnInit, OnDestroy {
         break;
 
     }
+    this.loadCountries();
+  }
+
+  loadCountries() {
+    this.countries = [];
+    //load countries file
+    this.subscription.add(this.http.get('assets/jsons/phone_codes.json')
+      .subscribe((res: any) => {
+        //get country name
+        for (let row of res) {
+          var countryName = "";
+          var countryNameList = [];
+          countryNameList = row.name.split(/["]/g)
+          countryName = countryNameList[1]
+
+          var countryNombre = "";
+          var countryNombreList = [];
+          countryNombreList = row.nombre.split(/["]/g)
+          countryNombre = countryNombreList[1]
+          this.countries.push({ countryName: countryName, countryNombre: countryNombre })
+        }
+        if (this.lang == 'es') {
+          this.countries.sort(this.sortService.GetSortOrder("countryNombre"));
+        } else {
+          this.countries.sort(this.sortService.GetSortOrder("countryName"));
+        }
+      }));
+
   }
 
 
@@ -135,18 +164,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       }));
   }
 
-  getGroupName(){
-    //find the group name from the group id
-    if(this.requests.length > 0){
-      for(let i = 0; i < this.groups.length; i++){
-        if(this.requests[0].group == this.groups[i]._id){
-          this.groupName = this.groups[i].name;
-        }
-      }
-    }
-    
-  }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
     if (this.mapClickListener) {
@@ -171,20 +188,19 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.showPanelEdit = true;
         }else{
           this.showPanelEdit = false;
-          this.requests.sort(this.sortService.DateSort("creationDate"));
+          this.requests.sort(this.sortService.DateSortInver("creationDate"));
           for (let i = 0; i < this.requests.length; i++) {
             if(this.requests[i].lat!=''){
               this.requests[i].lat = parseFloat(this.requests[i].lat)
               this.requests[i].lng = parseFloat(this.requests[i].lng)
-              this.showMarker = true;
+              //this.showMarker = true;
             }else{
-              this.showMarker = false;
+              //this.showMarker = false;
             }
             
   
           }
           this.getChecks();
-          this.getGroupName();
         }
         
         
@@ -228,7 +244,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   initEnvironment() {
-    //this.userId = this.authService.getIdUser();
+    this.userId = this.authService.getIdUser();
+    console.log(this.userId);
     this.loadEnvironment();
   }
 
@@ -249,17 +266,17 @@ export class HomeComponent implements OnInit, OnDestroy {
   deletelocation0(){
     this.actualRequest.lat = ''
     this.actualRequest.lng = ''
-    this.showMarker = false;
-    if(this.requests.length>0){
+    //this.showMarker = false;
+    /*if(this.requests.length>0){
       this.requests[0].lat = ''
       this.requests[0].lng = ''
-    }
+    }*/
   }
 
-  deletelocation1(){
-    this.requests[0].lat = ''
-    this.requests[0].lng = ''
-    this.showMarker = false;
+  deletelocation1(index){
+    this.requests[index].lat = ''
+    this.requests[index].lng = ''
+    //this.showMarker = false;
     this.actualRequest.lat = ''
     this.actualRequest.lng = ''
   }
@@ -284,7 +301,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if (param[1]) {
           this.userInfo.lat = Number(param[0]);
           this.userInfo.lng = Number(param[1]);
-          this.showMarker = true;
+          //this.showMarker = true;
         }
 
       }, (err) => {
@@ -334,13 +351,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     console.log(index);
     this.requests[index].lat = $event.coords.lat;
     this.requests[index].lng = $event.coords.lng;
-    this.showMarker = true;
+    //this.showMarker = true;
   }
 
   changePickupMarkerLocation2($event: { coords: any }) {
     this.actualRequest.lat = $event.coords.lat;
     this.actualRequest.lng = $event.coords.lng;
-    this.showMarker = true;
+    //this.showMarker = true;
   }
 
   mapReadyHandler(map: google.maps.Map): void {
@@ -351,25 +368,25 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.log(e.latLng.lat(), e.latLng.lng());
         this.actualRequest.lat = e.latLng.lat();
         this.actualRequest.lng = e.latLng.lng();
-        this.showMarker = true;
+        //this.showMarker = true;
       });
     });
   }
 
-  mapReadyHandler2(map: google.maps.Map): void {
+  mapReadyHandler2(map: google.maps.Map, index): void {
     this.map = map;
     this.mapClickListener = this.map.addListener('click', (e: google.maps.MouseEvent) => {
       this.zone.run(() => {
         // Here we can get correct event
         console.log(e.latLng.lat(), e.latLng.lng());
-        this.requests[0].lat = e.latLng.lat();
-        this.requests[0].lng = e.latLng.lng();
-        this.showMarker = true;
+        this.requests[index].lat = e.latLng.lat();
+        this.requests[index].lng = e.latLng.lng();
+        //this.showMarker = true;
       });
     });
   }
 
-  confirmDeleteDrug(index, isWizard) {
+  confirmDeleteDrug(index, isWizard, indexRequest) {
     if(isWizard){
       Swal.fire({
         title: this.translate.instant("generics.Are you sure?"),
@@ -391,7 +408,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }else{
       Swal.fire({
         title: this.translate.instant("generics.Are you sure?"),
-        html: this.translate.instant("generics.Delete") + ': ' + this.requests[0].drugs[index].name,
+        html: this.translate.instant("generics.Delete") + ': ' + this.requests[indexRequest].drugs[index].name,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#0CC27E',
@@ -402,8 +419,16 @@ export class HomeComponent implements OnInit, OnDestroy {
         allowOutsideClick: false
       }).then((result) => {
         if (result.value) {
-          this.requests[0].drugs.splice(index, 1);
-          this.newDrugs = this.requests[0].drugs;
+          //var info = this.requests[indexRequest].drugs[index];
+          var info = {drugs: this.requests[indexRequest].drugs, index: index};
+          this.subscription.add(this.requestCliService.deletedrug(this.requests[indexRequest]._id, info)
+          .subscribe((res: any) => {
+            console.log(res);
+          }, (err) => {
+            console.log(err);
+          }));
+          this.requests[indexRequest].drugs.splice(index, 1);
+          this.newDrugs = this.requests[indexRequest].drugs;
         }
       });
     }
@@ -423,7 +448,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       lng: '',
       notes: '',
       needs: '',
-      needsOther: '',
+      needAssistance: '',
+      country: null,
       status: null,
       updateDate: Date.now(),
       group: null,
@@ -452,6 +478,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if(info._id!=null){
       this.subscription.add(this.requestCliService.updateRequest(info._id, info)
       .subscribe((res: any) => {
+        console.log(res);
         this.saving = false;
         this.step = '1';
         this.toastr.success('', this.translate.instant("generics.Data saved successfully"));
@@ -478,7 +505,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   setUserPosition(lat, lng){
     if(lat!=''){
-      this.showMarker = true;
+      //this.showMarker = true;
       this.lat = parseFloat(lat)
       this.lng = parseFloat(lng)
       this.userInfo.lat = parseFloat(lat)
@@ -489,7 +516,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           console.log(err);
         }));
     }else{
-      this.showMarker = false;
+      //this.showMarker = false;
     }
     
   }
@@ -518,6 +545,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   deleteRequest(_id){
     this.subscription.add(this.requestCliService.deleteRequest(_id)
       .subscribe((res: any) => {
+        this.indexRequest = -1;
         this.getRequestCli();
       }, (err) => {
         console.log(err);
@@ -525,7 +553,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       }));
   }
 
-  addDrug(InfoDrug, isWizard){
+  addDrug(InfoDrug, isWizard, indexRequest){
+    this.indexRequest = indexRequest;
     this.isWizard = isWizard;
     this.editingDrugIndex = -1;
     this.newDrug = {name: '', dose: '', link: '', strength: ''};
@@ -537,13 +566,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.modalReference = this.modalService.open(InfoDrug, ngbModalOptions);
   }
 
-  editDrug(index, InfoDrug, isWizard){
+  editDrug(index, InfoDrug, isWizard, indexRequest){
+    this.indexRequest = indexRequest;
     this.isWizard = isWizard;
     this.editingDrugIndex = index;
     if(isWizard){
       this.newDrug = this.actualRequest.drugs[index];
     }else{
-      this.newDrug = this.requests[0].drugs[index];
+      this.newDrug = this.requests[indexRequest].drugs[index];
     }
     
     let ngbModalOptions: NgbModalOptions = {
@@ -599,7 +629,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if(this.isWizard){
           this.actualRequest.drugs[this.editingDrugIndex] = drug;
         }else{
-          this.requests[0].drugs[this.editingDrugIndex] = drug;
+          this.requests[this.indexRequest].drugs[this.editingDrugIndex] = drug;
         }
         
       }else{
@@ -607,12 +637,12 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.actualRequest.drugs[this.editingDrugIndex] = drug;
           this.actualRequest.drugs.push(drug);
         }else{
-          this.requests[0].drugs.push(drug);
+          this.requests[this.indexRequest].drugs.push(drug);
         }
         
       }
       if(!this.isWizard){
-        this.updateRequest(this.requests[0],0);
+        this.updateRequest(this.requests[this.indexRequest],0);
       }
       this.closePanel();
     }
@@ -659,20 +689,20 @@ export class HomeComponent implements OnInit, OnDestroy {
                 if(this.isWizard){
                   this.actualRequest.drugs[this.editingDrugIndex] = drug;
                 }else{
-                  this.requests[0].drugs[this.editingDrugIndex] = drug;
+                  this.requests[this.indexRequest].drugs[this.editingDrugIndex] = drug;
                 }
                 
               }else{
                 if(this.isWizard){
                   this.actualRequest.drugs.push(drug);
                 }else{
-                  this.requests[0].drugs.push(drug);
+                  this.requests[this.indexRequest].drugs.push(drug);
                 }
                 
               }
               foundDrug = true;
               if(!this.isWizard){
-                this.updateRequest(this.requests[0],0);
+                this.updateRequest(this.requests[this.indexRequest],0);
               }
               
             }
@@ -683,8 +713,8 @@ export class HomeComponent implements OnInit, OnDestroy {
                 this.actualRequest.drugs[this.editingDrugIndex] = drug;
                 this.actualRequest.drugs[this.editingDrugIndex].link = "";
               }else{
-                this.requests[0].drugs[this.editingDrugIndex] = drug;
-                this.requests[0].drugs[this.editingDrugIndex].link = "";
+                this.requests[this.indexRequest].drugs[this.editingDrugIndex] = drug;
+                this.requests[this.indexRequest].drugs[this.editingDrugIndex].link = "";
               }
               
             }else{
@@ -692,12 +722,12 @@ export class HomeComponent implements OnInit, OnDestroy {
               if(this.isWizard){
                 this.actualRequest.drugs.push(drug);
               }else{
-                this.requests[0].drugs.push(drug);
+                this.requests[this.indexRequest].drugs.push(drug);
               }
               
             }
             if(!this.isWizard){
-              this.updateRequest(this.requests[0],0);
+              this.updateRequest(this.requests[this.indexRequest],0);
             }
             
           }
@@ -712,7 +742,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   getChecks(){
-    this.subscription.add( this.http.get(environment.api+'/api/requestclin/checks/'+this.requests[0]._id)
+    this.subscription.add( this.http.get(environment.api+'/api/requestclin/checks/'+this.userId)
     .subscribe( (res : any) => {
       this.checks = res.checks;
       this.tasksLoaded = true;
@@ -724,7 +754,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   setChecks(){
     var paramssend = { checks: this.checks };
-    this.subscription.add( this.http.put(environment.api+'/api/requestclin/checks/'+this.requests[0]._id, paramssend)
+    this.subscription.add( this.http.put(environment.api+'/api/requestclin/checks/'+this.userId, paramssend)
     .subscribe( (res : any) => {
       
      }, (err) => {
@@ -750,6 +780,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.modalReference = this.modalService.open(SampleDrug, ngbModalOptions);
   }
 
+  viewRequest(index){
+    this.indexRequest = index;
+  }
+
+  back(){
+    this.indexRequest = -1;
+    this.showPanelEdit = false;
+  }
 }
 
 export let lineChartSeries = [

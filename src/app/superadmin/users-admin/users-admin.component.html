@@ -1,20 +1,4 @@
-<div class="row mt-3">
-	<div class="col-md-6">
-	  <div class="form-group">
-		<label for="lang">{{'groups.Groups' | translate }}</label>
-		<select id="lang" name="lang" class="form-control"  [(ngModel)]="groupSelected" #groupselected (ngModelChange)="onChangeGroup(groupSelected)">
-		  <option *ngFor="let group of groups" [ngValue]="group"> {{group.name}}</option>
-		</select>
-	  </div>
-	</div>
-	</div>
-<div class="row" *ngIf="groupSelected._id">
-	<div class="col-sm-12">
-		<div class="content-header">{{'adminRole.title' | translate }} {{currentGroup}}</div>
-		<p class="content-sub-header">{{'adminRole.subtitle' | translate }}</p>
-	</div>
-</div>
-<section id="" *ngIf="groupSelected._id">
+<section id="" >
 	<div class="row">
 		<div class="col-sm-12">
 			<div class="card">
@@ -50,7 +34,7 @@
 		</div>
 	</div>
 </section>
-<div class="row" *ngIf="!addedlang && !working && groupSelected._id">
+<div class="row" *ngIf="!addedlang && !working ">
 	<div class="col-lg-12 col-12">
 
 
@@ -106,7 +90,7 @@
 							</span>
 						</ng-template>
 					</ngx-datatable-column>
-					<ngx-datatable-column name="{{'war.Last login' | translate }}" prop="lastLogin" [flexGrow]="2"
+					<ngx-datatable-column name="{{'war.creationDate' | translate }}" prop="creationDate" [flexGrow]="2"
 						[sortable]="true">
 						<ng-template let-value="value" ngx-datatable-cell-template>
 							<span>
@@ -115,8 +99,8 @@
 							</span>
 						</ng-template>
 					</ngx-datatable-column>
-					<ngx-datatable-column *ngIf="groupId == '622f83174c824c0dec16c78b'"
-						name="{{'land.Disease' | translate }}" prop="othergroup" [flexGrow]="3" [sortable]="true">
+					<ngx-datatable-column
+						name="{{'land.Disease' | translate }}" prop="group" [flexGrow]="3" [sortable]="true">
 						<ng-template let-value="value" ngx-datatable-cell-template let-row="row">
 							<span>
 								{{value}}
@@ -146,20 +130,11 @@
 							</span>
 						</ng-template>
 					</ngx-datatable-column>
-					<ngx-datatable-column name="{{'war.Need shelter' | translate }}" prop="needShelter" [flexGrow]="3"
-						[sortable]="true">
-						<ng-template let-value="value" ngx-datatable-cell-template>
-							<span>
-								<span *ngIf="value">{{'generics.Yes' | translate }}</span>
-								<span *ngIf="!value">{{'generics.No' | translate }}</span>
-							</span>
-						</ng-template>
-					</ngx-datatable-column>
 					<ngx-datatable-column name="{{'generics.Status' | translate }}" prop="status" [flexGrow]="3"
 						[sortable]="true">
 						<ng-template let-value="value" ngx-datatable-cell-template let-row="row">
 							<span>
-								<select id="status" name="status{{i}}" [(ngModel)]="row.status" [disabled]="true"
+								<select id="status" name="status{{i}}" [(ngModel)]="row.status"
 									(change)="fieldStatusChanged(row)">
 									<option [ngValue]="null" disabled selected>--{{'generics.Select' | translate }}--
 									</option>
@@ -251,9 +226,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<p class="mb-0">
-									<strong>{{'war.Blocked account' | translate }}</strong>
+									<strong>{{'war.Blocked account' | translate }}</strong> {{user.blockedaccount}}
 								</p>
-								{{user.blockedaccount}}
 							</div>
 						</div>
 
@@ -262,19 +236,11 @@
 								{{'menu.Basic Info' | translate }}
 							</h4>
 							<div class="row">
-								<div class="col-md-12" *ngIf="groupId == '622f83174c824c0dec16c78b'">
-									<p class="mb-0">
-										<strong>{{'land.Disease' | translate }}:</strong> <span class="ml-1"
-											*ngIf="user.othergroup">{{user.othergroup}}</span> <span class="ml-1"
-											*ngIf="!user.othergroup">-</span>
-									</p>
-								</div>
 								<div class="col-md-12">
 									<p class="mb-0">
-										<strong>{{'war.Need shelter' | translate }}:</strong> <span
-											*ngIf="user.needShelter" class="ml-1">{{'generics.Yes' | translate
-											}}</span><span *ngIf="!user.needShelter" class="ml-1">{{'generics.No' |
-											translate }}</span>
+										<strong>{{'land.Disease' | translate }}:</strong> <span class="ml-1"
+											*ngIf="user.group">{{user.group}}</span> <span class="ml-1"
+											*ngIf="!user.group">-</span>
 									</p>
 								</div>
 								<div class="col-md-12">
@@ -288,23 +254,48 @@
 
 							</div>
 						</div>
-						<div *ngIf="user.role =='Clinical'">
-							<div class="col-md-12" *ngIf="groupId == '622f83174c824c0dec16c78b'">
+						<div *ngIf="user.role =='Clinical'" class="row">
+							<div class="col-md-12">
 								<p class="mb-0">
 									<strong>{{'land.Disease' | translate }}:</strong> <span class="ml-1"
-										*ngIf="user.othergroup">{{user.othergroup}}</span> <span class="ml-1"
-										*ngIf="!user.othergroup">-</span>
+										*ngIf="user.group">{{user.group}}</span> <span class="ml-1"
+										*ngIf="!user.group">-</span>
 								</p>
 							</div>
 						</div>
-
+						<div class="row">
+							<div class="col-md-12">
+								<p class="mb-0">
+									<strong>{{'war.Referral medical center' | translate }}:</strong> 
+									<span *ngIf="user.referralCenter">
+										{{user.referralCenter}}
+									</span>
+									<span *ngIf="!user.referralCenter">
+										-
+									</span>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<p class="mb-0">
+									<strong>{{'war.needAssistance' | translate }}:</strong> 
+									<span *ngIf="user.needAssistance">
+										{{user.needAssistance}}
+									</span>
+									<span *ngIf="!user.needAssistance">
+										-
+									</span>
+								</p>
+							</div>
+						</div>
 						<h4 class="mt-3 mb-0 text-bold-400">
 							{{'generics.Status' | translate }}
 						</h4>
 						<p class="mb-0">{{'war.statussubtitle' | translate }}</p>
 						<div class="row mb-2">
 							<div class="col-md-12">
-								<select id="status" name="status{{i}}" class="" [(ngModel)]="user.status" [disabled]="true"
+								<select id="status" name="status{{i}}" class="" [(ngModel)]="user.status"
 									(change)="fieldStatusChanged(user)">
 									<option [ngValue]="null" disabled selected>--{{'generics.Select' | translate }}--
 									</option>
@@ -325,6 +316,10 @@
 						<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
 							<agm-marker [latitude]="user.lat" [longitude]="user.lng" [iconUrl]="user.icon"></agm-marker>
 						</agm-map>
+						<span *ngIf="user.country">
+							{{'personalinfo.Country' | translate }}: {{user.country}}
+						</span>
+						
 					</div>
 					<div class="col-lg-6">
 						<h4 class="mt-3 text-bold-400">
@@ -379,21 +374,7 @@
 							</div>
 						</div>
 
-						<h4 class="mt-3 text-bold-400">
-							{{'war.Need other' | translate }}
-						</h4>
-						<div class="row">
-							<div class="col-md-12">
-								<p *ngIf="user.needsOther!=''" [innerHTML]="user.needsOther | safe2: 'html'"
-									style="white-space: pre-line; display: block;"></p>
-								<span class="" *ngIf="lang!='uk' && user.needsOther!=''">
-									<a href="javascript:;" (click)="goToLink(user.needsOther)"
-										class="btn btn-dark mb-0 mb-2"><em
-											class="fa fa fa-language mr-1"></em>{{'war.Translate' | translate }}</a>
-								</span>
-								<p *ngIf="user.needsOther==''">{{'generics.No' | translate }}</p>
-							</div>
-						</div>
+				
 					</div>
 					<div class="col-lg-6">
 						<h4 class="mt-3 text-bold-400 mb-0">
@@ -402,9 +383,11 @@
 						<p class="mb-0">{{'war.notessubtitle' | translate }}</p>
 						<div class="row">
 							<div class="col-md-12">
-								<textarea [autosize]="true" name="notes" [(ngModel)]="user.notes" [disabled]="true"
+								<textarea [autosize]="true" name="notes" [(ngModel)]="user.notes"
 									placeholder="{{'seizures.Write down any details' | translate }}"
 									class="form-control"></textarea>
+									<a class="mt-2 btn btn-dark" (click)="saveNotes()" href="javascript:void(0)">{{'war.Save
+										notes' | translate }}</a>
 							</div>
 						</div>
 					</div>
@@ -465,7 +448,7 @@
 									</td>
 									<td>{{msg.date | date: timeformat}}</td>
 									<td>
-										<select id="status" name="status{{i}}" [(ngModel)]="msg.status" [disabled]="true"
+										<select id="status" name="status{{i}}" [(ngModel)]="msg.status"
 											(change)="fieldStatusChanged2(msg, i)">
 											<option value="unread">{{'support.Unread' | translate }}</option>
 											<option value="read">{{'support.Read' | translate }}</option>

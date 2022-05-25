@@ -118,28 +118,8 @@ export class SupportComponent implements OnDestroy{
   sendMsg(){
     if(this.authGuard.testtoken()){
       this.sending = true;
-      this.supportInfo.groupId = this.authService.getGroup();
-      if(this.supportInfo.groupId == null){
-        if( this.authService.getRole()=='User'){
-          this.supportInfo.groupId = '622f83174c824c0dec16c78b';
-          this.confirmSendEmail();
-        }else{
-          this.getGroupClinic();
-        }
-      }else{
-        this.confirmSendEmail();
-      }
-    }
-  }
-
-  getGroupClinic(){
-    this.subscription.add( this.http.get(environment.api+'/api/requestclin/group/'+this.authService.getIdUser())
-    .subscribe( (res : any) => {
-      this.supportInfo.groupId = res.groupId;
       this.confirmSendEmail();
-    }, (err) => {
-      console.log(err);
-    }));
+    }
   }
 
   confirmSendEmail(){

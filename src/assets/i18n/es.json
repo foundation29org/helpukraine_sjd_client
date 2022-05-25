@@ -1378,7 +1378,7 @@
     "Your progress": "Mi progreso",
     "If you dont keep data updated it will decrease": "Si no mantienes los datos actualizados disminuirá.",
     "noti1a": "¡Bienvenido! Esta es su área de notificación para ver el estado de su caso y las acciones pendientes.",
-    "noti2a": "El equipo de {{value}} está trabajando arduamente para coordinarse con otras entidades y dirigir la ayuda donde más se necesita. Esperamos que ellos también puedan ayudarte.",
+    "noti2a": "El equipo está trabajando arduamente para coordinarse con otras entidades y dirigir la ayuda donde más se necesita. Esperamos que ellos también puedan ayudarte.",
     "noti3a": "¿Cómo ha sido la carga de la enfermedad últimamente?",
     "noti3b": "No has informado sobre tu carga de enfermedad últimamente. Hagámoslo.",
     "noti4a": "Tu contenedor no tiene datos de crisis epilépticas. ¿Quiere añadir un crisis epilépticas?",
@@ -1627,7 +1627,12 @@
     "nosharelocation": "No quiero decir mi ubicación aproximada",
     "optionalLocation": "No se ha añadido la ubicación aproximada. Haga clic en el mapa para seleccionarlo. <strong>Esto es opcional.</strong>",
     "optionalLocation2": "No se ha añadido la ubicación aproximada. <strong>Esto es opcional.</strong>",
-    "map": "Mapa"
+    "map": "Mapa",
+    "creationDate": "Fecha de creación",
+    "Referral medical center": "Centro médico de referencia",
+    "titleReferralMedicalCenter": "Escriba el centro médico de referencia del paciente",
+    "titleneedAssistance": "¿Necesita asistencia?",
+    "needAssistance": "Necesidad de asistencia"
   },
   "physicians":{
     "I am a physician who treats patients with": "¿Qué tipo de pacientes tratas?",

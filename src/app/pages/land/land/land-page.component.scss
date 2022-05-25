@@ -18,3 +18,13 @@
     color: #b0b6bb !important;
     text-decoration: none;
   }
+
+  .iconworks{
+    width: 7em !important;
+  }
+
+  @media (max-width: 412px) {
+    .iconworks{
+      width: 5em !important;
+    }
+  }
