@@ -10,13 +10,13 @@
                     </div>
                 </div>
                 <div class="col-md-12 center-elements">
-                    <a routerLink="/login" class="btn btn-dark mt-1 btn-lg" title="{{'landraito.button' | translate }}">
+                    <button (click)="goTo()" class="btn btn-dark mt-1 btn-lg" title="{{'landraito.button' | translate }}">
                         <strong class="menu-title">{{'landraito.button' | translate }}</strong>
-                    </a>
+                    </button>
                 </div>
             </div>
             <div class="row pt-3 pb-3">
-                <div class="row offset-md-3 col-md-6">
+                <div class="row offset-lg-3 col-lg-6">
                     <div class='col-md-12 mb-2'>
                         <h3 class="text-bold-500 mt-5">{{'landraito.Contact us if' | translate }}:</h3>
                     </div>
@@ -46,15 +46,15 @@
                           </ul>
                     </div>
                     <div class="col-md-12 center-elements">
-                        <a routerLink="/login" class="btn btn-dark mt-1 btn-lg" title="{{'landraito.button' | translate }}">
+                        <button (click)="goTo()" class="btn btn-dark mt-1 btn-lg" title="{{'landraito.button' | translate }}">
                             <strong class="menu-title">{{'landraito.button' | translate }}</strong>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
             
             <div class="row pt-3 pb-3" style="background: #f5f5f5;">
-                <div class="row offset-md-3 col-md-6 mb-5">
+                <div class="row offset-lg-3 col-lg-6 mb-5">
                     <div class="col-lg-12">
                         <h3 class="text-bold-500 mt-5">{{'landraito.t2' | translate }}</h3>
                         <div class="row mt-3">
@@ -87,12 +87,12 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="row pt-3 pb-3 offset-md-3 col-md-6 mb-4">
+            <a id="waysoptions" class="akey"></a>
+            <div class="row pt-3 pb-3 offset-lg-1 col-lg-10 mb-4">
                 <div class='col-md-12 mb-2'>
                     <h3 class="text-bold-500 mt-5">{{'landraito.t3.title' | translate }}</h3>
                 </div>
-                <div class="col-md-4 center-elements">
+                <div class="col-md-4 mt-2 center-elements element-option">
                     <div style="display: inline-flex;height: 100px;">
                         <img style="max-width: 7em;" src='assets/img/land/app.png'/>
                     </div>
@@ -101,8 +101,11 @@
                             <p>{{'landraito.t3.1' | translate }}</p>
                         </div>
                     </div>
+                    <a routerLink="/login" class="btn btn-dark mt-1 btn-lg" style="width: 150px;" title="{{'landraito.button' | translate }}">
+                        <strong class="menu-title">{{'login.Login' | translate }}</strong>
+                    </a>
                 </div>
-                <div class="col-md-4 center-elements">
+                <div class="col-md-4 mt-2 center-elements element-option">
                     <div style="display: inline-flex;height: 100px;">
                         <img src='assets/img/land/mail.png'/>
                     </div>
@@ -112,7 +115,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 center-elements">
+                <div class="col-md-4 mt-2 center-elements element-option">
                     <div style="display: inline-flex;height: 100px;">
                         <img src='assets/img/land/phone.png'/>
                     </div>
@@ -126,7 +129,7 @@
                 </div>
             </div>
             <div class="row pt-3 pb-3" style="background: #f5f5f5;">
-                <div class="row offset-md-3 col-md-6">
+                <div class="row offset-lg-3 col-lg-6">
                     <div class='col-md-12'>
                         <h3 class="text-bold-500 mt-5">{{'landraito.t4.title' | translate }}</h3>
                     </div>
@@ -138,19 +141,19 @@
                     
                 </div>
     
-                <div class="row pt-3 pb-3 offset-md-3 col-md-6">
+                <div class="row pt-3 pb-3 offset-lg-3 col-lg-6">
                     <section style="padding-bottom: 50px !important;" class="col-lg-12">
                         <p class="mb-3">{{'landraito.t4.2' | translate }}</p>
                         <div class="row center-elements">
                             <div class="col-4 col-sm-3 mb-3 p-1">
-                                <a href="https://www.ibe-epilepsy.org/" target="_blank" class="dark">
-                                    <img class="img-responsive" src='assets/img/home/logos/IBE-Logo.png'>
+                                <a href="https://european-union.europa.eu/" target="_blank" class="dark">
+                                    <img class="img-responsive" src='assets/img/land/logos/eu_flag.jpg'>
                                 </a>
                                 
                               </div>
                             <div class="col-4 col-sm-3 mb-3 p-1">
-                                <a href="https://www.worldduchenne.org/" target="_blank" class="dark">
-                                    <img class="img-responsive" src='assets/img/home/logos/WDO_Logo_Large.png'>
+                                <a href="https://endo-ern.eu" target="_blank" class="dark">
+                                    <img class="img-responsive" src='assets/img/land/logos/ern-logo-single.png'>
                                 </a>
                             </div>
                             <div class="col-4 col-sm-3 mb-3 p-1">
@@ -159,13 +162,18 @@
                                 </a>
                             </div>
                             <div class="col-4 col-sm-3 mb-3 p-1">
-                                <a href="https://www.sma-europe.eu/" target="_blank" class="dark">
-                                    <img class="img-responsive" src='assets/img/home/logos/oopxBx20.png'>
+                                <a href="https://web.gencat.cat" target="_blank" class="dark">
+                                    <img class="img-responsive" src='assets/img/land/logos/salut.png'>
                                 </a>
                               </div>
+                            <div class="offset-sm-3 col-4 col-sm-3 mb-3 p-1">
+                                <a href="https://foundation29.org" target="_blank" class="dark">
+                                    <img class="img-responsive" src='assets/img/land/logos/f29.png'>
+                                </a>
+                            </div>
                             <div class="col-4 col-sm-3 mb-3 p-1">
-                                <a href="https://dravet.eu/" target="_blank" class="dark">
-                                    <img class="img-responsive" src='assets/img/home/logos/dravet.png'>
+                                <a href="https://www.sjdhospitalbarcelona.org" target="_blank" class="dark">
+                                    <img class="img-responsive" src='assets/img/land/logos/sjd.png'>
                                 </a>
                             </div>
                           </div>
