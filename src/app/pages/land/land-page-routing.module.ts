@@ -13,7 +13,7 @@ const routes: Routes = [
         path: '.',
         component: LandPageComponent,
         data: {
-          title: 'Relief ukraine'
+          title: 'Rare Diseases Hub Ukraine'
         },
       },
       {

@@ -91,7 +91,7 @@
                     <tr
                     *ngFor="let request of requests ; let j = index">
                         <td>
-                            <span>{{j}}</span>
+                            <span>{{request.salesforceId}}</span>
                         </td>
                         <td>
                             <span><strong>{{request.creationDate |date}}</strong></span>

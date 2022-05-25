@@ -1,176 +1,186 @@
 
 <div class="h-100">
-    <div class="mt-4 mb-4 card card-block mx-auto">
-        <div> <!--class="card-body"-->
+    <div class="mt-2 mb-0 card card-block mx-auto">
+        <div class="card-body no-padding">
             <div class="row pt-3 pb-3">
-                <div class="offset-md-2 col-md-8">
+                <div class="offset-md-3 col-md-6">
                     <div class="text-center">
-                        <h2 class="text-bold-500">BANER CABECERA IMAGEN + OBJETIVO HUB</h2>
-                        <p class="">This application connects patients with a rare disease from Ukraine with organizations and hospitals, members of the European Reference Network (ERN), with the aim to provide the specialized medical support they may need during this emergency.</p>
+                        <h2 class="text-bold-500">Rare Diseases Hub Ukraine</h2>
+                        <p class="">{{'landraito.title' | translate }}</p>
                     </div>
                 </div>
                 <div class="col-md-12 center-elements">
-                    <a routerLink="/login" class="btn btn-dark mt-1" title="Make a request">
-                        <strong class="menu-title">Make a request</strong>
-                    </a>
+                    <button (click)="goTo()" class="btn btn-dark mt-1 btn-lg" title="{{'landraito.button' | translate }}">
+                        <strong class="menu-title">{{'landraito.button' | translate }}</strong>
+                    </button>
+                </div>
+            </div>
+            <div class="row pt-3 pb-3">
+                <div class="row offset-lg-3 col-lg-6">
+                    <div class='col-md-12 mb-2'>
+                        <h3 class="text-bold-500 mt-5">{{'landraito.Contact us if' | translate }}:</h3>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="text-bold-500">{{'landraito.t1.1' | translate }}</h3>
+                        <div class="center-elements">
+                            <img src='assets/img/land/pati.png'/>
+                        </div>
+                        <ul style="padding-left: 1em;">
+                            <li>
+                                {{'landraito.p1.1' | translate }}
+                            </li>
+                            <li>
+                                {{'landraito.p1.2' | translate }}
+                            </li>
+                          </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h3 class="text-bold-500">{{'landraito.t1.2' | translate }}</h3>
+                        <div class="center-elements">
+                            <img src='assets/img/land/clin.png'/>
+                        </div>
+                        <ul style="padding-left: 1em;">
+                            <li>
+                                {{'landraito.p1.3' | translate }}
+                            </li>
+                          </ul>
+                    </div>
+                    <div class="col-md-12 center-elements">
+                        <button (click)="goTo()" class="btn btn-dark mt-1 btn-lg" title="{{'landraito.button' | translate }}">
+                            <strong class="menu-title">{{'landraito.button' | translate }}</strong>
+                        </button>
+                    </div>
                 </div>
             </div>
             
-            <div class="row pt-3 pb-3 offset-md-1 col-md-10">
-                <div class='col-md-12'>
-                    <h3 class="text-bold-500 mt-5">Contact us if:</h3>
-                </div>
-                <div class="col-md-6">
-                    <h3 class="text-bold-500">You are a patient</h3>
-                    <div class="center-elements">
-                        <img src='assets/img/land/pati.png'/>
-                    </div>
-                    <ul>
-                        <li>
-                            You have been diagnosed with a rare disease, you are in need of a specialized medical support or have an unmet acute clinical need at the moment.
-                        </li>
-                        <li>
-                            You have been permanent resident of Ukraine and you are currently affected by the war.
-                        </li>
-                      </ul>
-                </div>
-                <div class="col-md-6">
-                    <h3 class="text-bold-500">You are a patient</h3>
-                    <div class="center-elements">
-                        <img src='assets/img/land/clin.png'/>
-                    </div>
-                    <ul>
-                        <li>
-                            Working in a hospital, NGO, patient organization or emergency response entity in contact with a patient who has been diagnosed with a rare disease or high suspicion of having a rare disease.
-                        </li>
-                      </ul>
-                </div>
-                <div class="col-md-12 center-elements">
-                    <a routerLink="/login" class="btn btn-dark mt-1" title="Make a request">
-                        <strong class="menu-title">Make a request</strong>
-                    </a>
-                </div>
-            </div>
-
-            <div class="row pt-3 pb-3">
-                <div class="col-lg-12">
-                    <h3 class="text-bold-500 mt-5 offset-md-1 col-md-10">{{'landraito.t2' | translate }}</h3>
-                    <div class="row mt-3">
-                        <div class="col-3 pr-0 pl-0 center-elements">
-                            <img class="iconworks" src='assets/img/home/home2.jpg'>
+            <div class="row pt-3 pb-3" style="background: #f5f5f5;">
+                <div class="row offset-lg-3 col-lg-6 mb-5">
+                    <div class="col-lg-12">
+                        <h3 class="text-bold-500 mt-5">{{'landraito.t2' | translate }}</h3>
+                        <div class="row mt-3">
+                            <div class="col-3 pr-0 pl-0 center-elements">
+                                <img class="iconworks" src='assets/img/home/home2.jpg'>
+                            </div>
+                            <div class="col-9">
+                                <h5 class="text-bold-500">1. {{'landraito.t2.1t' | translate }}</h5>
+                                <p>{{'landraito.t2.1a' | translate }}</p>
+                            </div>
                         </div>
-                        <div class="col-9">
-                            <h5 class="text-bold-500">1. Contact us</h5>
-                            <p>Create your account to identify  yourself as patient or physician. You can also make a phone call or send an email.</p>
+                        <div class="row mt-3">
+                            <div class="col-3 pr-0 pl-0 center-elements">
+                                <img class="iconworks" src='assets/img/home/home3.jpg'>
+                            </div>
+                            <div class="col-9">
+                                <h5 class="text-bold-500">2. {{'landraito.t2.2t' | translate }}</h5>
+                                <p>{{'landraito.t2.1a' | translate }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-3 pr-0 pl-0 center-elements">
-                            <img class="iconworks" src='assets/img/home/home3.jpg'>
-                        </div>
-                        <div class="col-9">
-                            <h5 class="text-bold-500">2. Explain your medical need</h5>
-                            <p>Provide your basic information: what organization should help you, where you are and what you may need.</p>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-3 pr-0 pl-0 center-elements">
-                            <img class="iconworks" src='assets/img/home/home4.jpg'>
-                        </div>
-                        <div class="col-9">
-                            <h5 class="text-bold-500">3. Get contacted</h5>
-                            <p>The Hub team will process the request together with the ERN and will get in touch to try to give you the aid you may need.</p>
+                        <div class="row mt-3">
+                            <div class="col-3 pr-0 pl-0 center-elements">
+                                <img class="iconworks" src='assets/img/home/home4.jpg'>
+                            </div>
+                            <div class="col-9">
+                                <h5 class="text-bold-500">3. {{'landraito.t2.3t' | translate }}</h5>
+                                <p>{{'landraito.t2.3a' | translate }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row pt-3 pb-3">
-                <div class='col-md-12'>
-                    <h3 class="text-bold-500 mt-5 offset-md-1 col-md-10">Ways to make a request</h3>
+            <a id="waysoptions" class="akey"></a>
+            <div class="row pt-3 pb-3 offset-lg-1 col-lg-10 mb-4">
+                <div class='col-md-12 mb-2'>
+                    <h3 class="text-bold-500 mt-5">{{'landraito.t3.title' | translate }}</h3>
                 </div>
-                <div class="col-md-4 center-elements">
+                <div class="col-md-4 mt-2 center-elements element-option">
                     <div style="display: inline-flex;height: 100px;">
                         <img style="max-width: 7em;" src='assets/img/land/app.png'/>
                     </div>
                     <div style="display: block ruby;">
                         <div style="max-width: 150px;">
-                            <p>Register and fulfill the form to track your request</p>
+                            <p>{{'landraito.t3.1' | translate }}</p>
                         </div>
                     </div>
+                    <a routerLink="/login" class="btn btn-dark mt-1 btn-lg" style="width: 150px;" title="{{'landraito.button' | translate }}">
+                        <strong class="menu-title">{{'login.Login' | translate }}</strong>
+                    </a>
                 </div>
-                <div class="col-md-4 center-elements">
+                <div class="col-md-4 mt-2 center-elements element-option">
                     <div style="display: inline-flex;height: 100px;">
                         <img src='assets/img/land/mail.png'/>
                     </div>
                     <div style="display: block ruby;">
                         <div style="max-width: 150px;">
-                            <p>Send an email to <a mailto="rarediseaseshub4ua@sjd.es" href="mailto:rarediseaseshub4ua@sjd.es">rarediseaseshub4ua@sjd.es</a></p>
+                            <p>{{'landraito.t3.2' | translate }} <a mailto="rarediseaseshub4ua@sjd.es" href="mailto:rarediseaseshub4ua@sjd.es">rarediseaseshub4ua@sjd.es</a></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 center-elements">
+                <div class="col-md-4 mt-2 center-elements element-option">
                     <div style="display: inline-flex;height: 100px;">
                         <img src='assets/img/land/phone.png'/>
                     </div>
                     <div style="display: block ruby;">
                         <div style="max-width: 150px;">
-                            <p class="mb-0">Call </p>
+                            <p class="mb-0">{{'landraito.t3.3.1' | translate }} </p>
                             <p class="mb-0"><strong>+34 XXX XX XX XX</strong></p>
-                            <p>Monday to Friday from 9 am to 5 pm Central European Time</p>
+                            <p>{{'landraito.t3.3.2' | translate }}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row pt-3 pb-3">
-                <div class='col-md-12'>
-                    <h3 class="text-bold-500 mt-5 offset-md-1 col-md-10">Collaborate with Rare Diseases Hub Ukraine</h3>
-                </div>
-                <div class="col-md-12">
-                    <div class="offset-md-1 col-md-10">
-                        <p>If you are an organization and you can provide any help to patients with a rare disease, please write an email to <a mailto="rarediseaseshub4ua@sjd.es" href="mailto:rarediseaseshub4ua@sjd.es">rarediseaseshub4ua@sjd.es</a></p>
+            <div class="row pt-3 pb-3" style="background: #f5f5f5;">
+                <div class="row offset-lg-3 col-lg-6">
+                    <div class='col-md-12'>
+                        <h3 class="text-bold-500 mt-5">{{'landraito.t4.title' | translate }}</h3>
                     </div>
+                    <div class="col-md-12">
+                        <div class="">
+                            <p>{{'landraito.t4.1' | translate }} <a mailto="rarediseaseshub4ua@sjd.es" href="mailto:rarediseaseshub4ua@sjd.es">rarediseaseshub4ua@sjd.es</a></p>
+                        </div>
+                    </div>
+                    
                 </div>
-                
-            </div>
-
-            <div class="row pt-3 pb-3">
-                <section style="padding-bottom: 50px !important;" class="col-lg-12">
-                    <p class="mb-3 offset-md-1 col-md-10">These are the organizations that are working behind this tool.</p>
-                    <div class="row center-elements">
-                        <div class="col-4 col-sm-3 mb-3 p-1">
-                            <a href="https://www.ibe-epilepsy.org/" target="_blank" class="dark">
-                                <img class="img-responsive" src='assets/img/home/logos/IBE-Logo.png'>
-                                <span class="d-block">International Bureau for Epilepsy</span>
-                            </a>
-                            
+    
+                <div class="row pt-3 pb-3 offset-lg-3 col-lg-6">
+                    <section style="padding-bottom: 50px !important;" class="col-lg-12">
+                        <p class="mb-3">{{'landraito.t4.2' | translate }}</p>
+                        <div class="row center-elements">
+                            <div class="col-4 col-sm-3 mb-3 p-1">
+                                <a href="https://european-union.europa.eu/" target="_blank" class="dark">
+                                    <img class="img-responsive" src='assets/img/land/logos/eu_flag.jpg'>
+                                </a>
+                                
+                              </div>
+                            <div class="col-4 col-sm-3 mb-3 p-1">
+                                <a href="https://endo-ern.eu" target="_blank" class="dark">
+                                    <img class="img-responsive" src='assets/img/land/logos/ern-logo-single.png'>
+                                </a>
+                            </div>
+                            <div class="col-4 col-sm-3 mb-3 p-1">
+                                <a href="https://oife.org/" target="_blank" class="dark">
+                                    <img class="img-responsive" src='assets/img/home/logos/OIFE_logo_resized-01.png' style="max-height: 67px !important;">
+                                </a>
+                            </div>
+                            <div class="col-4 col-sm-3 mb-3 p-1">
+                                <a href="https://web.gencat.cat" target="_blank" class="dark">
+                                    <img class="img-responsive" src='assets/img/land/logos/salut.png'>
+                                </a>
+                              </div>
+                            <div class="offset-sm-3 col-4 col-sm-3 mb-3 p-1">
+                                <a href="https://foundation29.org" target="_blank" class="dark">
+                                    <img class="img-responsive" src='assets/img/land/logos/f29.png'>
+                                </a>
+                            </div>
+                            <div class="col-4 col-sm-3 mb-3 p-1">
+                                <a href="https://www.sjdhospitalbarcelona.org" target="_blank" class="dark">
+                                    <img class="img-responsive" src='assets/img/land/logos/sjd.png'>
+                                </a>
+                            </div>
                           </div>
-                        <div class="col-4 col-sm-3 mb-3 p-1">
-                            <a href="https://www.worldduchenne.org/" target="_blank" class="dark">
-                                <img class="img-responsive" src='assets/img/home/logos/WDO_Logo_Large.png'>
-                                <span class="d-block">World Duchenne Organization​</span>
-                            </a>
-                        </div>
-                        <div class="col-4 col-sm-3 mb-3 p-1">
-                            <a href="https://oife.org/" target="_blank" class="dark">
-                                <img class="img-responsive" src='assets/img/home/logos/OIFE_logo_resized-01.png' style="max-height: 67px !important;">
-                                <span class="d-block">Osteogenesis Imperfecta Federation Europe</span>
-                            </a>
-                        </div>
-                        <div class="col-4 col-sm-3 mb-3 p-1">
-                            <a href="https://www.sma-europe.eu/" target="_blank" class="dark">
-                                <img class="img-responsive" src='assets/img/home/logos/oopxBx20.png'>
-                                <span class="d-block">Spinal Muscular Atrophy Europe</span>
-                            </a>
-                          </div>
-                        <div class="col-4 col-sm-3 mb-3 p-1">
-                            <a href="https://dravet.eu/" target="_blank" class="dark">
-                                <img class="img-responsive" src='assets/img/home/logos/dravet.png'>
-                                <span class="d-block">Dravet Syndrome European Federation</span>
-                            </a>
-                        </div>
-                      </div>
-                  </section>
+                      </section>
+                </div>
             </div>
+            
         </div>
     </div>
 </div>

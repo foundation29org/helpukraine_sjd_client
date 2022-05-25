@@ -958,7 +958,7 @@ export class jsPDFService {
         if(obj.length>0){
             doc.setFontSize(9);
             doc.setTextColor(117, 120, 125)
-            doc.text(this.translate.instant("seizures.These are the symptoms included in Relief Ukraine by the user"), 10, lineText += 5)
+            doc.text(this.translate.instant("seizures.These are the symptoms included in Rare Diseases Hub Ukraine by the user"), 10, lineText += 5)
             doc.setTextColor(0, 0, 0)
             doc.setFontSize(10);
             lineText += 2;
@@ -971,7 +971,7 @@ export class jsPDFService {
                 lineText += 7;
             }
         }else{
-            lineText = this.writeText(doc, 10, lineText+= 7, this.translate.instant("seizures.No symptoms have been added in Relief Ukraine"));
+            lineText = this.writeText(doc, 10, lineText+= 7, this.translate.instant("seizures.No symptoms have been added in Rare Diseases Hub Ukraine"));
             lineText += 7;
         }
         

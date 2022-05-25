@@ -35,4 +35,9 @@ export class LandPageComponent implements OnInit {
             window.open('https://www.foundation29.org/en/', '_blank');
         }
     }
+
+    goTo(){
+        document.getElementById('waysoptions').scrollIntoView(true);
+    }
+
 }

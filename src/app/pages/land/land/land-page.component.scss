@@ -1,7 +1,7 @@
 .img-responsive{
     max-height: 80px;
-      opacity: 0.5;
-      filter: brightness( 100% ) contrast( 100% ) saturate( 0% ) blur( 0px ) hue-rotate( 0deg );
+      //opacity: 0.5;
+      //filter: brightness( 100% ) contrast( 100% ) saturate( 0% ) blur( 0px ) hue-rotate( 0deg );
       max-width: 100%;
       max-width: -moz-available;          /* For Mozzila */
       max-width: -webkit-fill-available;  /* For Chrome */
@@ -22,6 +22,28 @@
   .iconworks{
     width: 7em !important;
   }
+
+  .no-padding{
+    padding-left: 0 !important;
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+
+  @media (max-width: 992px) {
+    .no-padding{
+      padding: 1rem !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .element-option{
+      margin-bottom: 2.25rem !important;
+      margin-top: 2.25rem !important;
+    }
+  }
+
+  
 
   @media (max-width: 412px) {
     .iconworks{
