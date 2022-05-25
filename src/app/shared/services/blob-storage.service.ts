@@ -67,7 +67,7 @@ export class BlobStorageService {
 
     this.blobService.singleBlobPutThresholdInBytes = customBlockSize;
     var metadata = {
-        category: 'Relief Ukraine',
+        category: 'Rare Diseases Hub Ukraine',
         type: 'sample'
     }
     var extension = filename.substr(filename.lastIndexOf('.'));
