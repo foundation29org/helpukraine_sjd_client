@@ -23,6 +23,19 @@
     width: 7em !important;
   }
 
+  .no-padding{
+    padding-left: 0 !important;
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+
+  @media (max-width: 767px) {
+    .no-padding{
+      padding: 1rem !important;
+    }
+  }
+
   @media (max-width: 412px) {
     .iconworks{
       width: 5em !important;
