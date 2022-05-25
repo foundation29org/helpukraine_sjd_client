@@ -9,7 +9,7 @@
 }
 
 .logo-img {
-  width: 60px;
+  width: 12em;
 }
 
 .custom-navbar{
@@ -56,10 +56,6 @@ i{
       width: unset !important;
     }
 
-    .logo-img{
-      width: 60px;
-    }
-
     .text-logo{
       font-size: 12px;
       left: 85px;
@@ -97,9 +93,6 @@ i{
 }
 
 @media (max-width: 412px) {
-  .logo-img{
-    width: 40px;
-  }
   .navbar-toggle{
     margin-top: 0rem !important;
   }
