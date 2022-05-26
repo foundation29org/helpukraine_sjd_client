@@ -84,7 +84,7 @@
     "It is mandatory to read the privacy policy before continuing": "It is mandatory to read the privacy policy before continuing",
     "IMPORTANT NOTE": "IMPORTANT NOTE: you must read the PRIVACY POLICY (clicking on the link below) before you can indicate your acceptance by checking the corresponding box.",
     "Im a patient": "I am a patient/caregiver",
-    "Im a clinician": "I am a physician",
+    "Im a clinician": "I am a professional",
     "Im belong to a lab": "I'm belong to a lab",
     "Repeat email": "Repeat email",
     "The email do not match": "The email do not match",
@@ -1645,7 +1645,7 @@
     "needAssistance": "Need for assistance"
   },
   "physicians":{
-    "I am a physician who treats patients with": "What kind of patients do you treat?",
+    "I am a physician who treats patients with": "What is the disease of the patient?",
     "othertreat": "If you can’t your specialization, write it down so we can try to expand the list. This is an initial list that will grow as more associations join. Contact us if you have a suggestion.",
     "Does not appear on the list": "Does not appear on the list",
     "Write what kind of patients you treat": "Write what kind of patients you treat",

@@ -81,7 +81,7 @@
             <table class="table text-center">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>Id.</th>
                         <th>{{'generics.Date' | translate }}</th>
                         <th>{{'generics.Status' | translate }}</th>
                         <th></th>
@@ -91,7 +91,7 @@
                     <tr
                     *ngFor="let request of requests ; let j = index">
                         <td>
-                            <span>{{request.salesforceId}}</span>
+                            <span>{{request.salesforceCleanId}}</span>
                         </td>
                         <td>
                             <span><strong>{{request.creationDate |date}}</strong></span>
@@ -115,14 +115,16 @@
             </table>
         </div>
         <div *ngIf="indexRequest!=-1">
-            <div class="p-2">
-                <a (click)="back()" class="btn btn-primary" title="{{'generics.Back' | translate }}">
-                    <span class="menu-title">{{'generics.Back' | translate }}</span>
-                </a>
-            </div>
             <div *ngFor="let request of requests ; let j = index">
                 <div class="mx-auto" *ngIf="indexRequest==j">
-                <div class="card card-block p-1">
+                    <div class="col-12 p-2">
+                        <a (click)="back()" class="btn btn-primary mb-0" title="{{'generics.Back' | translate }}">
+                            <span class="menu-title">{{'generics.Back' | translate }}</span>
+                        </a>
+                        <span class="float-right">Id. {{request.salesforceCleanId}}</span>
+                    </div>
+                    
+                <div class="card card-block p-1 mt-0">
                     <div class="p-2">
                         <h4 class="text-bold-500 mb-0">{{'war.Detailed information' | translate }}
                             <span class="float-right">
@@ -211,8 +213,16 @@
                                   </div>
                             </div>
                     </div>
-                    <div class="card-block mt-3">
-                        <h4 class="content-header mt-0">{{'war.The drugs I need' | translate }}</h4>
+                    <div class="card-block">
+                        <div class="form-group mb-3 mt-3">
+                            <div class="">
+                                <h4 class="content-header mb-0">{{'war.titleneedAssistance' | translate }}</h4>
+                                <textarea [autosize]="true" name="needAssistance" [(ngModel)]="request.needAssistance"
+									placeholder="{{'war.needAssistance' | translate }}" ngModel required #needAssistance="ngModel"
+									class="form-control mb-3"></textarea>
+                            </div>
+                        </div>
+                        <h4 class="content-header mt-3">{{'war.The drugs I need' | translate }}</h4>
                         <p class="mb-0"><span [innerHTML]="'war.helpdrug' | translate "></span> <span class="ml-1"><a class="info" (click)="openModal(SampleDrug)">{{'war.helpdrug2' | translate }}</a></span></p>
                         <div *ngIf="!callingTextAnalytics && request.drugs.length>0" class="table-responsive">
                             <form class="mt-2">
@@ -264,18 +274,11 @@
                             </table>
                             
                         </div>
-                        <div class="mt-2">
+                        <div class="">
                             <button class="btn btn-info" (click)="addDrug(InfoDrug, false, j)">{{'war.Add drug' | translate }}</button>
                         </div>
 
-                        <div class="form-group mb-3 mt-3">
-                            <div class="">
-                                <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
-                                <textarea [autosize]="true" name="needAssistance" [(ngModel)]="request.needAssistance"
-									placeholder="{{'war.needAssistance' | translate }}" ngModel required #needAssistance="ngModel"
-									class="form-control mb-3"></textarea>
-                            </div>
-                        </div>          
+                                 
                         <div class="center-elements mt-3">
                             <button *ngIf="!saving" class="mt-2 btn btn-primary mr-1" (click)="confirmDeleteRequest(j);" href="javascript:void(0)">{{'generics.Delete' | translate}}</button>
                             <button *ngIf="!saving" class="mt-2 btn btn-dark ml-1" (click)="updateRequest(request,requestIndex);">{{'generics.Save changes' | translate
@@ -395,7 +398,15 @@
                                     </div>
                         </div>
                         <div *ngIf="step=='4'" class="text-left">
-                            <p class="text-bold-500 mt-0 mb-0">{{'war.DrugsNeeds' | translate }}</p>
+                            <div class="form-group mb-3 mt-0">
+                                <div class="">
+                                    <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
+                                    <textarea [autosize]="true" name="needAssistance" [(ngModel)]="actualRequest.needAssistance"
+									placeholder="{{'war.needAssistance' | translate }}"
+									class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <p class="text-bold-500 mt-3 mb-0">{{'war.DrugsNeeds' | translate }}</p>
                             <p class="mb-0"><span [innerHTML]="'war.needsSubtitle' | translate "></span> <span class="ml-1"><a class="info" (click)="openModal(SampleDrug)">{{'war.helpdrug2' | translate }}</a></span></p>
                             <div *ngIf="!callingTextAnalytics && actualRequest.drugs.length>0" class="table-responsive">
                                 <form class="mt-2">
@@ -447,17 +458,9 @@
                                 </table>
                                 
                             </div>
-                            <div class="mt-2">
+                            <div class="">
                                 <button class="btn btn-info" (click)="addDrug(InfoDrug, true, '')">{{'war.Add drug' | translate }}</button>
-                            </div>         
-                            <div class="form-group mb-3 mt-3">
-                                <div class="">
-                                    <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
-                                    <textarea [autosize]="true" name="needAssistance" [(ngModel)]="actualRequest.needAssistance"
-									placeholder="{{'war.needAssistance' | translate }}"
-									class="form-control"></textarea>
-                                </div>
-                            </div>
+                            </div>   
                             <div class="center-elements mt-3">
                                 <span class="danger d-block mb-2" *ngIf="!saving && actualRequest.drugs.length==0 && actualRequest.needAssistance == ''">{{'war.mandatoryfields' | translate }}</span>
                                 <button *ngIf="!saving" class="btn btn-primary mr-1 mb-0"

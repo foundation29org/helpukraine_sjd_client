@@ -9,21 +9,26 @@ import { EventsService } from 'app/shared/services/events.service';
 
 export class LandPageComponent implements OnInit {
     isApp: boolean = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1 && location.hostname != "localhost" && location.hostname != "127.0.0.1";
-    iconandroid: string = 'assets/img/home/android_en.png';
-    iconios: string = 'assets/img/home/ios_en.png';
+    iconjsd: string = 'assets/img/land/logos/sjd_en.png';
     lang: string = 'en';
     constructor(private eventsService: EventsService) {
         this.lang = sessionStorage.getItem('lang');
-        this.iconandroid = 'assets/img/home/android_'+this.lang+'.png';
-        this.iconios = 'assets/img/home/ios_'+this.lang+'.png';
+        if(this.lang=='es'){
+            this.iconjsd = 'assets/img/land/logos/sjd_es.png';
+        }else{
+            this.iconjsd = 'assets/img/land/logos/sjd_en.png';
+        }
     }
 
     ngOnInit() {
 
         this.eventsService.on('changelang', function (lang) {
             this.lang = lang;
-            this.iconandroid = 'assets/img/home/android_'+this.lang+'.png';
-            this.iconios = 'assets/img/home/ios_'+this.lang+'.png';
+            if(this.lang=='es'){
+                this.iconjsd = 'assets/img/land/logos/sjd_es.png';
+            }else{
+                this.iconjsd = 'assets/img/land/logos/sjd_en.png';
+            }
         }.bind(this));
     
       }
