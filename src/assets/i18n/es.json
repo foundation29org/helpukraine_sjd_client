@@ -1647,7 +1647,7 @@
     "needAssistance": "Necesidad de asistencia"
   },
   "physicians":{
-    "I am a physician who treats patients with": "¿Qué tipo de pacientes tratas?",
+    "I am a physician who treats patients with": "¿Cuál es la enfermedad del paciente?",
     "othertreat": "Si no sabes cuál es tu especialización, anótalo para que podamos intentar ampliar la lista. Esta es una lista inicial que irá creciendo a medida que se unan más asociaciones. Póngase en contacto con nosotros si tiene una sugerencia.",
     "Does not appear on the list": "No aparece en la lista",
     "Write what kind of patients you treat": "Escribe qué tipo de pacientes tratas",
