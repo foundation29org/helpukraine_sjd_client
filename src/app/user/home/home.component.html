@@ -152,7 +152,12 @@
                             </div>
                         </div>
                         <div *ngIf="step=='5'" class="text-left">
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-3 mt-0">
+                                <div class="">
+                                    <p class="mb-0 text-bold-500">{{'war.titleneeds' | translate }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 mt-3">
                                 <div class="">
                                     <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
                                     <textarea [autosize]="true" name="needAssistance" [(ngModel)]="basicInfoPatient.needAssistance"
@@ -324,8 +329,8 @@
                               </mat-radio-group>
                         </p>
                         <div class="form-group">
-                            <div class="">
-                                <h4 class="content-header">{{'land.Disease' | translate }}</h4>
+                            <div class="mt-5">
+                                <h4 class="content-header">{{'homeraito.t2' | translate }}</h4>
                                 <input type="text" class="form-control mb-3" name="group" id="group"
                                     placeholder="{{'war.Write the name of your disease' | translate }}" ngModel required
                                     #group="ngModel" [(ngModel)]="basicInfoPatient.group">
@@ -376,7 +381,7 @@
                                     #pickerOnset></mat-datepicker>
                             </div>
                         </div>
-                        <div>
+                        <div class="mt-5">
                             <h4 class="content-header d-block row col-12 mb-0">{{'physicians.Location' | translate }}</h4>
                             <p *ngIf="basicInfoPatient.lat!=''" class="mb-0">{{'war.This is where the patient is currently located' | translate }}</p>
                             <p *ngIf="basicInfoPatient.lat==''" class="mb-0" [innerHTML]="'war.optionalLocation' | translate "></p>
@@ -402,6 +407,11 @@
                               </div>
                         </div>
                     </form>
+                    <div class="form-group mb-3 mt-5">
+                        <div class="">
+                            <p class="mb-0 text-bold-500">{{'war.titleneeds' | translate }}</p>
+                        </div>
+                    </div>
                     <div class="form-group mb-3 mt-3">
                         <div class="">
                             <h4 class="content-header mb-0">{{'war.titleneedAssistance' | translate }}</h4>

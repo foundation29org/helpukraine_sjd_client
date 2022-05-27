@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="">
+                                <div class="mt-5">
                                     <h4 class="content-header">{{'physicians.I am a physician who treats patients with' | translate }}</h4>
                                     <input type="text" class="form-control" name="group" id="group"
                                         placeholder="{{'physicians.Write what kind of patients you treat' | translate }}" ngModel required
@@ -184,7 +184,7 @@
                                             #referralCenter="ngModel" [(ngModel)]="request.referralCenter">
                                 </div>
                             </div>
-                            <div>
+                            <div class="mt-5">
                                 <h4 class="content-header d-block row col-12 mb-0">{{'physicians.Location' | translate }}</h4>
                                 <p *ngIf="request.lat!=''" class="mb-0">{{'war.This is where the patient is currently located' | translate }}</p>
                                 <p *ngIf="request.lat==''" class="mb-0" [innerHTML]="'war.optionalLocation' | translate "></p>
@@ -214,6 +214,11 @@
                             </div>
                     </div>
                     <div class="card-block">
+                        <div class="form-group mb-3 mt-5">
+                            <div class="">
+                                <p class="mb-0 text-bold-500">{{'war.titleneeds' | translate }}</p>
+                            </div>
+                        </div>
                         <div class="form-group mb-3 mt-3">
                             <div class="">
                                 <h4 class="content-header mb-0">{{'war.titleneedAssistance' | translate }}</h4>
@@ -399,6 +404,11 @@
                         </div>
                         <div *ngIf="step=='4'" class="text-left">
                             <div class="form-group mb-3 mt-0">
+                                <div class="">
+                                    <p class="mb-0 text-bold-500">{{'war.titleneeds' | translate }}</p>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 mt-3">
                                 <div class="">
                                     <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
                                     <textarea [autosize]="true" name="needAssistance" [(ngModel)]="actualRequest.needAssistance"
