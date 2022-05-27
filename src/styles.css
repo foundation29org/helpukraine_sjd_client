@@ -25,6 +25,7 @@
 
 body{
   font-size: 1rem !important;
+  line-height: 1.3em !important;
 }
 
 p{
@@ -45,6 +46,20 @@ span{
 
 .dark{
   color: #343a40;
+}
+
+.blue{
+  color: #005bbb !important;
+}
+
+.btn-yellow {
+  color: #fff !important;
+  background-color: #ffd500;
+  border-color: #ffd500;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
 }
 
 form label {
