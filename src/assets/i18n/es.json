@@ -1318,12 +1318,12 @@
     "p1.1": "Le han diagnosticado una enfermedad rara, necesita apoyo médico especializado o tiene una necesidad clínica aguda no cubierta en este momento.",
     "p1.2": "Ha sido residente permanente de Ucrania y actualmente está afectado por la guerra.",
     "t1.2": "Eres un profesional",
-    "p1.3": "Trabajar en un hospital, ONG, organización de pacientes o entidad de respuesta a emergencias en contacto con un paciente al que se le ha diagnosticado una enfermedad rara o sospecha alta de tener una enfermedad rara.",
+    "p1.3": "Trabaja en un hospital, ONG, asociación de pacientes u organización de respuesta a emergencias en contacto con un paciente al que se le ha diagnosticado una enfermedad minoritaria o existe una sospecha alta de tener una enfermedad minoritaria.",
     "t2": "Cómo funciona",
     "t2.1t": "Registrarse",
     "t2.1a": "Cree su cuenta para identificarse como paciente o médico.",
     "t2.2t": "Explique su necesidad médica",
-    "t2.2a": "Proporcione su información básica: qué organización debe ayudarlo, dónde se encuentra y qué necesita.",
+    "t2.2a": "Faciliténos información básica: qué necesita y dónde se encuentra.",
     "t2.3t": "Ser contactado",
     "t2.3a": "La organización que trabaja con tu enfermedad se pondrá en contacto para intentar darte la ayuda que necesitas. No hay garantía de que esto se pueda lograr.",
     "t3.title": "Formas de realizar una solicitud",
@@ -1333,7 +1333,7 @@
     "t3.3.2": "De lunes a viernes de 9 am a 5 pm Hora de Europa Central",
     "t4.title": "Colaborar con Rare Diseases Hub Ukraine",
     "t4.1": "Si eres una organización y puedes proporcionar alguna ayuda a los pacientes con una enfermedad rara, escribe un correo electrónico a",
-    "t4.2": "Estas son las organizaciones que están trabajando detrás de esta herramienta:",
+    "t4.2": "Organizaciones que están trabajando detrás de esta herramienta:",
     "button": "Haz una solicitud"
   },
   "homeraito":{
