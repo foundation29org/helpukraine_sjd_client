@@ -14,7 +14,6 @@
 						<th>{{'support.Message' | translate }}</th>
             <th>Files</th>
 						<th>Date</th>
-            <th>Status</th>
             <th>Issue type</th>
 					</tr>
 				</thead>
@@ -38,14 +37,6 @@
               </div>
             </td>
             <td>{{msg.date | date: timeformat}}</td>
-            <td>
-              <select id="status" name="status{{i}}" [(ngModel)]="msg.status" (change)="fieldStatusChanged(msg)" [disabled]="true">
-								<option value="unread">{{'support.Unread' | translate }}</option>
-								<option value="read">{{'support.Read' | translate }}</option>
-                <option value="pending">{{'support.Pending' | translate }}</option>
-                <option value="solved">{{'support.Solved' | translate }}</option>
-							</select>
-            </td>
             <td>
               <select id="type" name="type" disabled [(ngModel)]="msg.type">
                 <option value="technical">{{'support.Technical error' | translate }}</option>

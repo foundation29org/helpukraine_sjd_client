@@ -42,7 +42,7 @@
 			<div class="card-header">
 				<h4 class="card-title">{{'adminRole.t2' | translate }}
 					<div class="float-right">
-						<button class="mb-0 btn btn-primary btn-sm"
+						<button class="mb-0 btn btn-dark btn-sm"
 							(click)="onSubmitExportData()">{{'generics.ExportData' | translate }}</button>
 						<div class="d-none"><span id="content"></span></div>
 					</div>
@@ -116,9 +116,6 @@
 								<span *ngIf="row.msgs.length>0">
 									<a class="info" (click)="openModal(rowIndex, row, EmailPanel)"
 										href="javascript:void(0)">{{row.msgs.length}}</a>
-									<span *ngIf="row.unread" class="ml-2 badge badge-success"><a class="white"
-											(click)="openModal(rowIndex, row, EmailPanel)"
-											href="javascript:void(0)">{{'generics.New' | translate }}</a></span>
 								</span>
 							</span>
 						</ng-template>
@@ -417,7 +414,6 @@
 									<th>{{'support.Message' | translate }}</th>
 									<th>Files</th>
 									<th>Date</th>
-									<th>Status</th>
 									<th>Issue type</th>
 								</tr>
 							</thead>
@@ -447,15 +443,6 @@
 										</div>
 									</td>
 									<td>{{msg.date | date: timeformat}}</td>
-									<td>
-										<select id="status" name="status{{i}}" [(ngModel)]="msg.status"
-											(change)="fieldStatusChanged2(msg, i)">
-											<option value="unread">{{'support.Unread' | translate }}</option>
-											<option value="read">{{'support.Read' | translate }}</option>
-											<option value="pending">{{'support.Pending' | translate }}</option>
-											<option value="solved">{{'support.Solved' | translate }}</option>
-										</select>
-									</td>
 									<td>
 										<select id="type" name="type" disabled [(ngModel)]="msg.type">
 											<option value="technical">{{'support.Technical error' | translate }}

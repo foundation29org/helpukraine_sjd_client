@@ -14,7 +14,7 @@
 		<div class="col-md-3" style="margin-bottom:1em;">
 			
 			<div class="chat-sidebar d-none d-sm-none d-md-block d-lg-block">
-				<a class="list-group-item bg-blue-grey bg-lighten-5 border-right-primary border-right-2" (click)="SetActive($event, 'panelGeneral')">
+				<a class="list-group-item bg-blue-grey bg-lighten-5 border-right-info border-right-2" (click)="SetActive($event, 'panelGeneral')">
 						{{tittleGeneral}}
 				</a>
 				<a class="list-group-item no-border" (click)="SetActive($event, 'panelPassword')">
@@ -32,10 +32,10 @@
 			<div class="chat-name p-2 bg-white" style="border-bottom: 1px solid #e4e7ed;">
 				<div class="media-body">
 					<h4 class="form-section">
-						<i [ngClass]="{'ft-user success': activeTittleMenu=='General'}"></i>
-						<i [ngClass]="{'ft-lock danger': activeTittleMenu=='Password'}"></i>
-						<i [ngClass]="{'fas fa-archive danger': activeTittleMenu=='Permissions'}"></i>
-						<i [ngClass]="{'fas fa-bell danger': activeTittleMenu=='Notifications'}"></i>
+						<i [ngClass]="{'ft-user blue': activeTittleMenu=='General'}"></i>
+						<i [ngClass]="{'ft-lock blue': activeTittleMenu=='Password'}"></i>
+						<i [ngClass]="{'fas fa-archive blue': activeTittleMenu=='Permissions'}"></i>
+						<i [ngClass]="{'fas fa-bell blue': activeTittleMenu=='Notifications'}"></i>
 						{{ msgActiveTittleMenu }}
 					</h4>
 				</div>
@@ -107,7 +107,7 @@
 													  </div>
 													</div>
 												  </div>
-												<h4 class="form-section"><i class="ft-settings warning"></i> {{'profile.Settings' | translate }}</h4>
+												<h4 class="form-section"><i class="ft-settings"></i> {{'profile.Settings' | translate }}</h4>
 												<div class="row">
 													<div class="col-md-6">
 														<div class="form-group">
@@ -233,7 +233,7 @@
 														name="changeData" [(ngModel)]="notificationsAdmin.notifications.changeData"></ui-switch>
 													</div>
 													<div class="form-group mt-3">
-														<button class="d-block btn btn-primary" type="button"
+														<button class="d-block btn btn-dark" type="button"
 																(click)="setNotificationsAdmin()">{{'generics.Save' | translate }}</button>
 													</div>
 												</div>

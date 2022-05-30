@@ -107,7 +107,7 @@
                             </span>
                         </td>
                         <td>
-                            <a class="btn btn-outline-info btn-sm mb-0 mr-1" (click)="viewRequest(j);" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-outline-dark btn-sm mb-0 mr-1" (click)="viewRequest(j);" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
                             <a class="btn btn-outline-danger btn-sm mb-0 ml-1" (click)="confirmDeleteRequest(j);" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
                         </td>
                     </tr>
@@ -178,9 +178,9 @@
                             </div>
                             <div class="form-group mb-3">
                                 <div class="">
-                                    <p class="mb-0 text-bold-500">{{'war.titleReferralMedicalCenter' | translate }}</p>
+                                    <p class="mb-0 text-bold-500">{{'war.Referral medical center' | translate }}</p>
                                     <input type="text" class="form-control mb-3" name="referralCenter" id="referralCenter"
-                                            placeholder="{{'war.Referral medical center' | translate }}" ngModel required
+                                            placeholder="{{'war.titleReferralMedicalCenter' | translate }}" ngModel required
                                             #referralCenter="ngModel" [(ngModel)]="request.referralCenter">
                                 </div>
                             </div>
@@ -221,7 +221,7 @@
                         </div>
                         <div class="form-group mb-3 mt-3">
                             <div class="">
-                                <h4 class="content-header mb-0">{{'war.titleneedAssistance' | translate }}</h4>
+                                <h4 class="content-header">{{'war.titleneedAssistance' | translate }}</h4>
                                 <textarea [autosize]="true" name="needAssistance" [(ngModel)]="request.needAssistance"
 									placeholder="{{'war.needAssistance' | translate }}" ngModel required #needAssistance="ngModel"
 									class="form-control mb-3"></textarea>
@@ -271,7 +271,7 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <a class="btn btn-outline-info btn-sm mb-0 col-sm-6 mr-1 ml-1 mb-1" (click)="editDrug(i, InfoDrug, false, j);" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
+                                            <a class="btn btn-outline-dark btn-sm mb-0 col-sm-6 mr-1 ml-1 mb-1" (click)="editDrug(i, InfoDrug, false, j);" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
                                             <a class="btn btn-outline-danger btn-sm mb-0 col-sm-6 mr-1 ml-1" (click)="confirmDeleteDrug(i, false, j);" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -280,7 +280,7 @@
                             
                         </div>
                         <div class="">
-                            <button class="btn btn-info" (click)="addDrug(InfoDrug, false, j)">{{'war.Add drug' | translate }}</button>
+                            <button class="btn btn-info mt-1" (click)="addDrug(InfoDrug, false, j)">{{'war.Add drug' | translate }}</button>
                         </div>
 
                                  
@@ -312,7 +312,7 @@
                 </div>
                 <div *ngIf="loadedRequest">
                     <div class="justify-content-center align-items-center text-left">
-                        <span *ngIf="requests.length>0" class="float-right">
+                        <span *ngIf="requests.length>0" class="" style="position: absolute;right: 5px;top: -20px;">
                             <button type="button" class="close" aria-label="Close" (click)="back()">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -322,17 +322,17 @@
                             <p class="text-muted">
                                 {{'homeraito.p1' | translate }}
                             </p>
-                            <p class="text-muted">
+                            <!--<p class="text-muted">
                                 {{'homeraito.p1.1' | translate }}
-                            </p>                          
+                            </p>-->                 
                             <div class="center-elements mt-1">
-                                <button class="btn btn-primary mb-0" style="width: 100px;" (click)="question0();">{{'generics.Next' |
+                                <button class="btn btn-dark mb-0" style="width: 100px;" (click)="question0();">{{'generics.Next' |
                                     translate }}</button>
                             </div>
                         </div>
                         <div *ngIf="step=='2'">
                             <h2 class="content-header mb-3 mt-0" style="font-weight: 600;">{{'generics.Welcome to ucr' | translate }}</h2>
-                            <p class="mb-1 text-bold-500">{{'physicians.I am a physician who treats patients with' | translate }}</p>
+                            <p class="mb-1 text-bold-500">{{'physicians.I am a physician who treats patients with' | translate }} <span class="red">*</span></p>
                             <input type="text" class="form-control mb-3" name="group" id="group"
                                     placeholder="{{'physicians.Write what kind of patients you treat' | translate }}" ngModel required
                                     #group="ngModel" [(ngModel)]="actualRequest.group">
@@ -357,9 +357,9 @@
                             </div>-->
                             <div class="form-group mb-3">
                                 <div class="">
-                                    <p class="mb-0 text-bold-500">{{'war.titleReferralMedicalCenter' | translate }}</p>
+                                    <p class="mb-0 text-bold-500">{{'war.Referral medical center' | translate }}</p>
                                     <input type="text" class="form-control mb-3" name="referralCenter" id="referralCenter"
-                                            placeholder="{{'war.Referral medical center' | translate }}" ngModel required
+                                            placeholder="{{'war.titleReferralMedicalCenter' | translate }}" ngModel required
                                             #referralCenter="ngModel" [(ngModel)]="actualRequest.referralCenter">
                                 </div>
                             </div>
@@ -367,7 +367,7 @@
                             <div class="center-elements">
                                 <button class="mb-0 btn btn-primary mr-1"
                                           (click)="step='1'">{{'generics.Previous' | translate }}</button>
-                                <button class="mb-0 btn btn-dark ml-1" [disabled]="actualRequest.group==null  || (actualRequest.group == '622f83174c824c0dec16c78b' && (actualRequest.othergroup==null || actualRequest.othergroup==''))"
+                                <button class="mb-0 btn btn-dark ml-1" [disabled]="actualRequest.group==null || actualRequest.group==''"
                                     (click)="question1();">{{'generics.Next' | translate }}</button>
                             </div>
                         </div>
@@ -460,7 +460,7 @@
                                                 </span>
                                             </td>
                                             <td>
-                                                <a class="btn btn-outline-info btn-sm mb-0 col-sm-6 mr-1 ml-1 mb-1" (click)="editDrug(i, InfoDrug, true, '');" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-outline-dark btn-sm mb-0 col-sm-6 mr-1 ml-1 mb-1" (click)="editDrug(i, InfoDrug, true, '');" href="javascript:void(0)"><i class="fa fa-edit"></i></a>
                                                 <a class="btn btn-outline-danger btn-sm mb-0 col-sm-6 mr-1 ml-1" (click)="confirmDeleteDrug(i, true, '');" href="javascript:void(0)"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
@@ -469,7 +469,7 @@
                                 
                             </div>
                             <div class="">
-                                <button class="btn btn-info" (click)="addDrug(InfoDrug, true, '')">{{'war.Add drug' | translate }}</button>
+                                <button class="btn btn-info mt-1" (click)="addDrug(InfoDrug, true, '')">{{'war.Add drug' | translate }}</button>
                             </div>   
                             <div class="center-elements mt-3">
                                 <span class="danger d-block mb-2" *ngIf="!saving && actualRequest.drugs.length==0 && actualRequest.needAssistance == ''">{{'war.mandatoryfields' | translate }}</span>

@@ -15,11 +15,11 @@
                                     <div class="row">
                                       <div class="col-md-12">
                                         <div class="form-group">
-                                          <label for="type">{{'support.Issue type' | translate }}</label>
+                                          <label for="type">{{'support.Issue type' | translate }} <span class="red">*</span></label>
                                           <select id="type" class="form-control"  name="type" [(ngModel)]="supportInfo.type" required ngModel required #type="ngModel">
                                             <option [ngValue]="null" disabled selected>--{{'support.Select Issue type' | translate }}--</option>
-                                            <option value="technical">{{'support.Technical error' | translate }}</option>
                                             <option value="doubt">{{'support.I have a question' | translate }}</option>
+                                            <option value="technical">{{'support.Technical error' | translate }}</option>
                                             <option value="another">{{'support.Another type' | translate }}</option>
                                           </select>
                                           <small class="form-text text-muted danger" *ngIf="!type.valid && (type.dirty || type.touched)">{{'generics.required' | translate }}</small>
@@ -29,14 +29,14 @@
                                     <div class="row">
                                       <div class="col-md-12">
                                         <div class="form-group">
-                                          <label for="subject">{{'support.Subject' | translate }}</label>
+                                          <label for="subject">{{'support.Subject' | translate }} <span class="red">*</span></label>
                                           <input type="text" id="subject" class="form-control"  name="subject" [(ngModel)]="supportInfo.subject" required ngModel required #subject="ngModel">
                                           <small class="form-text text-muted danger" *ngIf="!subject.valid && (subject.dirty || subject.touched)">{{'generics.required' | translate }}</small>
                                         </div>
                                       </div>
                                       <div class="col-md-12">
                                         <div class="form-group">
-                                          <label for="description">{{'support.Message' | translate }}</label>
+                                          <label for="description">{{'support.Message' | translate }} <span class="red">*</span></label>
                                           <textarea name="description" [autosize]="true" class="form-control" [(ngModel)]="supportInfo.description" name="description" required ngModel required #description="ngModel"></textarea>
                                           <small class="form-text text-muted danger" *ngIf="!description.valid && (description.dirty || description.touched)">{{'generics.required' | translate }}</small>
                                         </div>
@@ -51,7 +51,7 @@
                                         <label for="distance">{{'support.New File' | translate }} <small>{{'support.Uploading a capture can help us a lot' | translate }}</small></label>
                                         <p style="margin: 0;"></p>
                                         <input type="text" class="form-control"  hidden>
-                                        <label *ngIf="!uploadingFile" class="btn btn-outline-primary">
+                                        <label *ngIf="!uploadingFile" class="btn btn-outline-dark">
                                             <i class="fa ft-upload-cloud"></i> <input type="file" (change)="onFileChange($event);" style="display: none;">
                                         </label>
                                         <h4 *ngIf="uploadingFile" class="center-elements">{{'generics.Upload Progress' | translate }}: {{uploadProgress | async}}%</h4>
@@ -101,7 +101,6 @@
     							<th>{{'support.Subject' | translate }}</th>
     							<th>{{'support.Message' | translate }}</th>
     							<th>{{'generics.Date' | translate }}</th>
-                  <th>{{'generics.Status' | translate }}</th>
     						</tr>
     					</thead>
     					<tbody>
@@ -109,12 +108,6 @@
     							<td>{{msg.subject}}</td>
                   <td>{{msg.description}}</td>
                   <td>{{msg.date | date: 'dd MMM y': '' : translate.currentLang}}</td>
-                  <td>
-                    <span *ngIf="msg.status=='unread'">{{'support.Unread' | translate }}</span>
-                    <span *ngIf="msg.status=='read'">{{'support.Read' | translate }}</span>
-                    <span *ngIf="msg.status=='pending'">{{'support.Pending' | translate }}</span>
-                    <span *ngIf="msg.status=='solved'">{{'support.Solved' | translate }}</span>
-                  </td>
     						</tr>
     					</tbody>
     				</table>
