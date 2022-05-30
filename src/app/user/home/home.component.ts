@@ -163,7 +163,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   showRightYAxisLabel: boolean = true;
   yAxisLabelRight: string;
   valueprogressbar = 0;
-  consentgroup: boolean = false;
   recommendedDoses: any = [];
   showNotiSeizu: boolean = false;
   showNotiFeel: boolean = false;
@@ -287,15 +286,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.initEnvironment();
   }
 
-  getConsentGroup() {
-    this.subscription.add(this.http.get(environment.api + '/api/patient/consentgroup/' + this.authService.getCurrentPatient().sub)
-      .subscribe((res: any) => {
-        this.consentgroup = res.consentgroup;
-      }, (err) => {
-        console.log(err.error);
-      }));
-  }
-
   loadEnvironment() {
     this.medications = [];
     this.actualMedications = [];
@@ -341,7 +331,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
     this.loadGroups();
     this.getInfoPatient();
-    this.getConsentGroup();
     this.getChecks();
   }
 
@@ -496,8 +485,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  question2(response) {
-    this.basicInfoPatient.consentgroup = response;
+  question2() {
     this.step = '2';
   }
 

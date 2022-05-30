@@ -150,8 +150,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="mt-5">
-                                    <h4 class="content-header">{{'physicians.I am a physician who treats patients with' | translate }}</h4>
+                                <div class="mt-3">
+                                    <p class="mb-1 text-bold-500">{{'physicians.I am a physician who treats patients with' | translate }}</p>
                                     <input type="text" class="form-control" name="group" id="group"
                                         placeholder="{{'physicians.Write what kind of patients you treat' | translate }}" ngModel required
                                         #group="ngModel" [(ngModel)]="request.group">
@@ -178,16 +178,34 @@
                             </div>
                             <div class="form-group mb-3">
                                 <div class="">
-                                    <p class="mb-0 text-bold-500">{{'war.Referral medical center' | translate }}</p>
+                                    <p class="mb-1 text-bold-500">{{'war.Referral medical center' | translate }}</p>
                                     <input type="text" class="form-control mb-3" name="referralCenter" id="referralCenter"
                                             placeholder="{{'war.titleReferralMedicalCenter' | translate }}" ngModel required
                                             #referralCenter="ngModel" [(ngModel)]="request.referralCenter">
                                 </div>
                             </div>
-                            <div class="mt-5">
-                                <h4 class="content-header d-block row col-12 mb-0">{{'physicians.Location' | translate }}</h4>
-                                <p *ngIf="request.lat!=''" class="mb-0">{{'war.This is where the patient is currently located' | translate }}</p>
-                                <p *ngIf="request.lat==''" class="mb-0" [innerHTML]="'war.optionalLocation' | translate "></p>
+                            <div class="form-group">
+                                <div class="">
+                                    <p class="mb-1 text-bold-500">{{'war.Patient date of birth' | translate }}</p>
+                                    <input class="form-control d-none" id="birthDate_" name="birthDate" matInput
+                                        placeholder="{{'personalinfo.Birth Date' | translate }}" readonly
+                                        [matDatepicker]="pickerOnset" (click)="pickerOnset.open()"
+                                        [(ngModel)]="request.birthDate">
+                                    <input readonly class="form-control d-inline" (click)="pickerOnset.open()"
+                                        style="background-color: #fff !important;"
+                                        [placeholder]="(request.birthDate!=null) ? (request.birthDate | date: 'dd MMM y': '' : translate.currentLang) : getLiteral('personalinfo.Birth Date')">
+            
+                                    <mat-datepicker-toggle matSuffix [for]="pickerOnset" class="d-none">
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker startView="multi-year"
+                                        (daySelected)="closeDatePickerStart($event, pickerOnset)" touchUi="true"
+                                        #pickerOnset></mat-datepicker>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <p class="mb-1 text-bold-500">{{'physicians.Location' | translate }}</p>
+                                <p *ngIf="request.lat!=''" class="mb-1">{{'war.This is where the patient is currently located' | translate }}</p>
+                                <p *ngIf="request.lat==''" class="mb-1" [innerHTML]="'war.optionalLocation' | translate "></p>
                                 <agm-map *ngIf="request.lat==''" [latitude]="lat" [longitude]="lng" [zoom]="zoom"  (mapReady)="mapReadyHandler2($event, j)">
                                     <agm-marker *ngIf="request.lat!=''" [latitude]="request.lat" [longitude]="request.lng" [title]="'Pickup Location'"></agm-marker>
                                 </agm-map>
@@ -221,13 +239,13 @@
                         </div>
                         <div class="form-group mb-3 mt-3">
                             <div class="">
-                                <h4 class="content-header">{{'war.titleneedAssistance' | translate }}</h4>
+                                <p class="mb-1 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
                                 <textarea [autosize]="true" name="needAssistance" [(ngModel)]="request.needAssistance"
 									placeholder="{{'war.needAssistance' | translate }}" ngModel required #needAssistance="ngModel"
 									class="form-control mb-3"></textarea>
                             </div>
                         </div>
-                        <h4 class="content-header mt-3">{{'war.The drugs I need' | translate }}</h4>
+                        <p class="mb-1 text-bold-500">{{'war.The drugs I need' | translate }}</p>
                         <p class="mb-0"><span [innerHTML]="'war.helpdrug' | translate "></span> <span class="ml-1"><a class="info" (click)="openModal(SampleDrug)">{{'war.helpdrug2' | translate }}</a></span></p>
                         <div *ngIf="!callingTextAnalytics && request.drugs.length>0" class="table-responsive">
                             <form class="mt-2">
@@ -336,34 +354,32 @@
                             <input type="text" class="form-control mb-3" name="group" id="group"
                                     placeholder="{{'physicians.Write what kind of patients you treat' | translate }}" ngModel required
                                     #group="ngModel" [(ngModel)]="actualRequest.group">
-
-                            <!--<select id="group" name="group" class="form-control mb-3" ngModel
-                                [(ngModel)]="actualRequest.group">
-                                <option [value]="null" disabled selected>--{{'generics.Please select' | translate }}--</option>
-                                <option *ngFor="let group of groups" [ngValue]="group._id">
-                                    <span
-                                        *ngIf="group.name != 'None'">{{group.name}}</span>
-                                    <span *ngIf="group.name == 'None'">{{'physicians.Does not appear on the list' | translate }}</span>
-                                </option>
-                            </select>-->
-                            <!--<div *ngIf="actualRequest.group">
-                                <div *ngIf="actualRequest.group == '622f83174c824c0dec16c78b'" class="mb-3">
-                                    <p class="mb-1 text-bold-500">{{'physicians.othertreat' | translate }}</p>
-                                    <input type="text" class="form-control" name="othergroup" id="othergroup"
-                                    placeholder="{{'physicians.Write what kind of patients you treat' | translate }}" ngModel required
-                                    #othergroup="ngModel" [(ngModel)]="actualRequest.othergroup">
-                                </div>
-                                
-                            </div>-->
                             <div class="form-group mb-3">
                                 <div class="">
-                                    <p class="mb-0 text-bold-500">{{'war.Referral medical center' | translate }}</p>
+                                    <p class="mb-1 text-bold-500">{{'war.Referral medical center' | translate }}</p>
                                     <input type="text" class="form-control mb-3" name="referralCenter" id="referralCenter"
                                             placeholder="{{'war.titleReferralMedicalCenter' | translate }}" ngModel required
                                             #referralCenter="ngModel" [(ngModel)]="actualRequest.referralCenter">
                                 </div>
                             </div>
+                            <div class="form-group mb-3">
+                                <div class="">
+                                    <p class="mb-1 text-bold-500">{{'war.When was the patient born' | translate }}</p>
+                                    <input class="form-control d-none" id="birthDate_" name="birthDate" matInput
+                                        placeholder="{{'personalinfo.Birth Date' | translate }}" readonly
+                                        [matDatepicker]="pickerOnset" (click)="pickerOnset.open()"
+                                        [(ngModel)]="actualRequest.birthDate">
+                                    <input readonly class="form-control d-inline" (click)="pickerOnset.open()"
+                                        style="background-color: #fff !important;"
+                                        [placeholder]="(actualRequest.birthDate!=null) ? (actualRequest.birthDate | date: 'dd MMM y': '' : translate.currentLang) : getLiteral('personalinfo.Birth Date')">
 
+                                    <mat-datepicker-toggle matSuffix [for]="pickerOnset" class="d-none">
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker startView="multi-year"
+                                        (daySelected)="closeDatePickerStart($event, pickerOnset)" touchUi="true"
+                                        #pickerOnset></mat-datepicker>
+                                </div>
+                            </div>
                             <div class="center-elements">
                                 <button class="mb-0 btn btn-primary mr-1"
                                           (click)="step='1'">{{'generics.Previous' | translate }}</button>
@@ -372,7 +388,7 @@
                             </div>
                         </div>
                         <div *ngIf="step=='3'">
-                                    <p class="text-bold-500 mt-0 mb-0">{{'physicians.Location' | translate }}</p>
+                                    <p class="text-bold-500 mt-0 mb-1">{{'physicians.Location' | translate }}</p>
                                     <p class="mb-2">{{'war.location2' | translate }}</p>
                                     <p *ngIf="actualRequest.lat==''" class="mb-2" [innerHTML]="'war.optionalLocation' | translate "></p>
                                     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"  (mapReady)="mapReadyHandler($event)">
@@ -410,13 +426,13 @@
                             </div>
                             <div class="form-group mb-3 mt-3">
                                 <div class="">
-                                    <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
+                                    <p class="mb-1 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
                                     <textarea [autosize]="true" name="needAssistance" [(ngModel)]="actualRequest.needAssistance"
 									placeholder="{{'war.needAssistance' | translate }}"
 									class="form-control"></textarea>
                                 </div>
                             </div>
-                            <p class="text-bold-500 mt-3 mb-0">{{'war.DrugsNeeds' | translate }}</p>
+                            <p class="text-bold-500 mt-3 mb-1">{{'war.DrugsNeeds' | translate }}</p>
                             <p class="mb-0"><span [innerHTML]="'war.needsSubtitle' | translate "></span> <span class="ml-1"><a class="info" (click)="openModal(SampleDrug)">{{'war.helpdrug2' | translate }}</a></span></p>
                             <div *ngIf="!callingTextAnalytics && actualRequest.drugs.length>0" class="table-responsive">
                                 <form class="mt-2">

@@ -55,8 +55,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   step: string = '1';
   private subscription: Subscription = new Subscription();
 
-  consentgroup: boolean = false;
-
   actualLocation: any = {};
   @ViewChild('f') personalInfoForm: NgForm;
   sending: boolean = false;
@@ -213,23 +211,12 @@ export class HomeComponent implements OnInit, OnDestroy {
       }));
   }
 
-
-  getConsentGroup() {
-    this.subscription.add(this.http.get(environment.api + '/api/patient/consentgroup/' + this.authService.getCurrentPatient().sub)
-      .subscribe((res: any) => {
-        this.consentgroup = res.consentgroup;
-      }, (err) => {
-        console.log(err.error);
-      }));
-  }
-
   loadEnvironment() {
     this.group = this.authService.getGroup();
     this.patient = {
     };
     this.loadTranslations();
     this.loadGroups();
-    //this.getConsentGroup();
   }
 
 
