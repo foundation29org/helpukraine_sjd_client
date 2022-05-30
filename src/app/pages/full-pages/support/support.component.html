@@ -101,7 +101,6 @@
     							<th>{{'support.Subject' | translate }}</th>
     							<th>{{'support.Message' | translate }}</th>
     							<th>{{'generics.Date' | translate }}</th>
-                  <th>{{'generics.Status' | translate }}</th>
     						</tr>
     					</thead>
     					<tbody>
@@ -109,12 +108,6 @@
     							<td>{{msg.subject}}</td>
                   <td>{{msg.description}}</td>
                   <td>{{msg.date | date: 'dd MMM y': '' : translate.currentLang}}</td>
-                  <td>
-                    <span *ngIf="msg.status=='unread'">{{'support.Unread' | translate }}</span>
-                    <span *ngIf="msg.status=='read'">{{'support.Read' | translate }}</span>
-                    <span *ngIf="msg.status=='pending'">{{'support.Pending' | translate }}</span>
-                    <span *ngIf="msg.status=='solved'">{{'support.Solved' | translate }}</span>
-                  </td>
     						</tr>
     					</tbody>
     				</table>
