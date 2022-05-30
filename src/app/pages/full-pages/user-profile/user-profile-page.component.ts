@@ -278,7 +278,7 @@ export class UserProfilePageComponent implements OnInit, OnDestroy {
         item.setAttribute('class', 'list-group-item no-border');
       });
       //set active class for selected item
-      event.currentTarget.setAttribute('class', 'list-group-item bg-blue-grey bg-lighten-5 border-right-primary border-right-2');
+      event.currentTarget.setAttribute('class', 'list-group-item bg-blue-grey bg-lighten-5 border-right-info border-right-2');
 
       if (panelId === 'panelGeneral') {
         this.activeTittleMenu = "General";
