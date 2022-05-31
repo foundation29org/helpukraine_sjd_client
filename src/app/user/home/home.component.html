@@ -284,10 +284,10 @@
                             <p class="">{{'war.The status of your profile is' | translate }}</p>
                         </div>
                         <div class="col-4">
-                            <span *ngIf="basicInfoPatient.status == null || basicInfoPatient.status == 'new'" class="badge badge-custom">{{'war.status.t1' | translate }}</span>
-                            <span *ngIf="basicInfoPatient.status == 'contacted'" class="badge badge-custom">{{'war.status.t2' | translate }}</span>
-                            <span *ngIf="basicInfoPatient.status == 'pending'" class="badge badge-custom">{{'war.status.t3' | translate }}</span>
-                            <span *ngIf="basicInfoPatient.status == 'ontheway'" class="badge badge-custom">{{'war.status.t4' | translate }}</span>
+                            <span *ngIf="basicInfoPatient.status == null || basicInfoPatient.status == 'new'" class="badge badge-custom">{{'war.status.opt1' | translate }}</span>
+                            <span *ngIf="basicInfoPatient.status == 'contacted'" class="badge badge-custom">{{'war.status.opt2' | translate }}</span>
+                            <span *ngIf="basicInfoPatient.status == 'pending'" class="badge badge-custom">{{'war.status.opt3' | translate }}</span>
+                            <span *ngIf="basicInfoPatient.status == 'ontheway'" class="badge badge-custom">{{'war.status.opt4' | translate }}</span>
                             <span *ngIf="basicInfoPatient.status == 'contactlost'" class="badge badge-custom">{{'war.status.opt5' | translate }}</span>
                             <span *ngIf="basicInfoPatient.status == 'helped'" class="badge badge-custom">{{'war.status.opt6' | translate }}</span>
                         </div>

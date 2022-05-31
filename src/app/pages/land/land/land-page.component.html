@@ -5,7 +5,7 @@
             <div class="row pt-3 pb-3">
                 <div class="offset-md-3 col-md-6 center-elements">
                     <div class=""><!--text-center-->
-                        <h2 class="mt-5">Rare Diseases <span class="text-bold-500 d-block" style="font-size: 2rem !important;">Hub Ukraine</span></h2>
+                        <h2 class="mt-4">Rare Diseases <span class="text-bold-500 d-block" style="font-size: 2rem !important;">Hub Ukraine</span></h2>
                         <p class="">{{'landraito.title' | translate }}</p>
                     </div>
                     <button (click)="goTo()" class="btn btn-dark mt-3 btn-lg" title="{{'landraito.button' | translate }}">
@@ -185,14 +185,14 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <p>
-                                    <a routerLink="/privacy-policy">
-                                     <span>Aviso legal</span>
+                                    <a href="javascript:;" (click)="openModal(avisoLegalPanel)">
+                                     <span>{{'legal.title' | translate }}</span>
                                     </a>
                                 </p>
                             </div>
                             <div class="col-md-4">
                                 <p>
-                                    <a routerLink="/privacy-policy">
+                                    <a href="javascript:;" (click)="openTerms()">
                                      <span>{{'registration.Privacy Policy' | translate }}</span>
                                     </a>
                                 </p>
@@ -200,8 +200,8 @@
                             </div>
                             <div class="col-md-4">
                                 <p>
-                                    <a routerLink="/privacy-policy">
-                                        <span>Política de cookies</span>
+                                    <a href="javascript:;" (click)="openModal(cookiesPanel)">
+                                        <span>{{'cookies.title' | translate }}</span>
                                        </a>
                                 </p>
                             </div>
@@ -212,3 +212,105 @@
         </div>
     </div>
 </div>
+
+<ng-template #avisoLegalPanel let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title">{{'legal.title' | translate }}</h4>
+		<button type="button" class="close" aria-label="Close" (click)="closeModal()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div class="px-3">
+			<div class="form-body">
+				<div class="row">
+					<div class="col-sm-12">
+                        <h6 class="pt-2 text-bold-600">{{'legal.t1' | translate }}</h6>
+                        <p>{{'legal.p1.1' | translate }}</p>
+                        <p>{{'legal.p1.2' | translate }}</p>
+                        <p>{{'legal.p1.3' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t2' | translate }}</h6>
+                        <p>{{'legal.p2.1' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t3' | translate }}</h6>
+                        <p>{{'legal.p3.1' | translate }}</p>
+                        <p>{{'legal.p3.2' | translate }}</p>
+                        <p>{{'legal.p3.3' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t4' | translate }}</h6>
+                        <p>{{'legal.p4.1' | translate }}</p>
+                        <p>{{'legal.p4.2' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t5' | translate }}</h6>
+                        <p>{{'legal.p5.1' | translate }}</p>
+                        <p>{{'legal.p5.2' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t6' | translate }}</h6>
+                        <p>{{'legal.p6.1' | translate }}</p>
+                        <p>{{'legal.p6.2' | translate }}</p>
+                        <p>{{'legal.p6.3' | translate }}</p>
+                        <p>{{'legal.p6.4' | translate }}</p>
+                        <p>{{'legal.p6.5' | translate }}</p>
+                        <p class="mb-0">{{'legal.p6.6' | translate }}</p>
+                        <a mailto="rarediseaseshub4ua@sjd.es" href="mailto:rarediseaseshub4ua@sjd.es">rarediseaseshub4ua@sjd.es</a>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t7' | translate }}</h6>
+                        <p>{{'legal.p7.1' | translate }}</p>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template #cookiesPanel let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title">{{'cookies.title' | translate }}</h4>
+		<button type="button" class="close" aria-label="Close" (click)="closeModal()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div class="px-3">
+			<div class="form-body">
+				<div class="row">
+					<div class="col-sm-12">
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t1' | translate }}</h6>
+                        <p [innerHTML]="'cookies.p1.1' | translate "></p>
+                        <p>{{'cookies.p1.2' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t2' | translate }}</h6>
+                        <p>{{'cookies.p2.1' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t3' | translate }}</h6>
+                        <p>{{'cookies.p3.1' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t4' | translate }}</h6>
+                        <p>{{'cookies.p4.1' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t5' | translate }}</h6>
+                        <p [innerHTML]="'cookies.p5.1' | translate "></p>
+                        <p [innerHTML]="'cookies.p5.2' | translate "></p>
+                        <ul>
+                            <li>
+                                {{'cookies.p5.2.1' | translate }}
+                            </li>
+                            <li>
+                                {{'cookies.p5.2.2' | translate }}
+                            </li>
+                        </ul>
+                        <p>{{'cookies.p5.3' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t6' | translate }}</h6>
+                        <p>{{'cookies.p6.1' | translate }}</p>
+
+                        <ul class="mt-2">
+                            <li>
+                                Google Chrome.
+                            </li>
+                            <li>
+                                Internet Explorer.
+                            </li>
+                            <li>
+                                Mozilla Firefox.
+                            </li>
+                            <li>
+                                Safari iPhone, iPad {{'generics.and' | translate }} iPod touch {{'generics.and' | translate }} Safari para Mac.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</ng-template>

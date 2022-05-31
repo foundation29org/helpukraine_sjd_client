@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="col-md-12" *ngIf="indexRequest==-1">
-            <button class="btn btn-dark" (click)="newRequest();">Create new</button>
+            <button class="btn btn-dark" (click)="newRequest();">{{'war.Create new' | translate }}</button>
         </div>
         <div *ngIf="indexRequest==-1">
             <table class="table text-center">
@@ -98,10 +98,10 @@
                         </td>
                         <td>
                             <span>
-                                <span *ngIf="request.status == null || request.status == 'new'" class="badge badge-custom">{{'war.status.t1' | translate }}</span>
-                                <span *ngIf="request.status == 'contacted'" class="badge badge-custom">{{'war.status.t2' | translate }}</span>
-                                <span *ngIf="request.status == 'pending'" class="badge badge-custom">{{'war.status.t3' | translate }}</span>
-                                <span *ngIf="request.status == 'ontheway'" class="badge badge-custom">{{'war.status.t4' | translate }}</span>
+                                <span *ngIf="request.status == null || request.status == 'new'" class="badge badge-custom">{{'war.status.opt1' | translate }}</span>
+                                <span *ngIf="request.status == 'contacted'" class="badge badge-custom">{{'war.status.opt2' | translate }}</span>
+                                <span *ngIf="request.status == 'pending'" class="badge badge-custom">{{'war.status.opt3' | translate }}</span>
+                                <span *ngIf="request.status == 'ontheway'" class="badge badge-custom">{{'war.status.opt4' | translate }}</span>
                                 <span *ngIf="request.status == 'contactlost'" class="badge badge-custom">{{'war.status.opt5' | translate }}</span>
                                 <span *ngIf="request.status == 'helped'" class="badge badge-custom">{{'war.status.opt6' | translate }}</span>
                             </span>
@@ -141,10 +141,10 @@
                                     <p class="">{{'war.The status of your profile is' | translate }}</p>
                                 </div>
                                 <div class="col-4">
-                                    <span *ngIf="request.status == null || request.status == 'new'" class="badge badge-custom">{{'war.status.t1' | translate }}</span>
-                                    <span *ngIf="request.status == 'contacted'" class="badge badge-custom">{{'war.status.t2' | translate }}</span>
-                                    <span *ngIf="request.status == 'pending'" class="badge badge-custom">{{'war.status.t3' | translate }}</span>
-                                    <span *ngIf="request.status == 'ontheway'" class="badge badge-custom">{{'war.status.t4' | translate }}</span>
+                                    <span *ngIf="request.status == null || request.status == 'new'" class="badge badge-custom">{{'war.status.opt1' | translate }}</span>
+                                    <span *ngIf="request.status == 'contacted'" class="badge badge-custom">{{'war.status.opt2' | translate }}</span>
+                                    <span *ngIf="request.status == 'pending'" class="badge badge-custom">{{'war.status.opt3' | translate }}</span>
+                                    <span *ngIf="request.status == 'ontheway'" class="badge badge-custom">{{'war.status.opt4' | translate }}</span>
                                     <span *ngIf="request.status == 'contactlost'" class="badge badge-custom">{{'war.status.opt5' | translate }}</span>
                                     <span *ngIf="request.status == 'helped'" class="badge badge-custom">{{'war.status.opt6' | translate }}</span>
                                 </div>

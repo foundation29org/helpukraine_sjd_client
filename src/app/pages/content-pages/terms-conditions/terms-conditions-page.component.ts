@@ -16,7 +16,7 @@ export class TermsConditionsPageComponent implements OnInit{
   constructor(public activeModal: NgbActiveModal, public translate: TranslateService, private modalService: NgbModal) {
     setTimeout(function () {
         this.goTo('initpos');
-    }.bind(this), 500);
+    }.bind(this), 100);
 
   }
 
