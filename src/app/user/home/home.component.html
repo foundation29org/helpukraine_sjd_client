@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div *ngIf="step=='3'">
-                                        <p class="text-bold-500 mt-0 mb-1">{{'war.What is their location' | translate }}</p>
+                            <h2 class="content-header mt-0" style="font-weight: 600;">{{'war.What is their location' | translate }}</h2>
                                         <p class="mb-2">{{'war.location2' | translate }}</p>
                                         <p *ngIf="basicInfoPatient.lat==''" class="mb-2" [innerHTML]="'war.optionalLocation' | translate "></p>
                                         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"  (mapReady)="mapReadyHandler($event)">
@@ -154,12 +154,13 @@
                         <div *ngIf="step=='5'" class="text-left">
                             <div class="form-group mb-3 mt-0">
                                 <div class="">
-                                    <p class="mb-0 text-bold-500">{{'war.titleneeds' | translate }}</p>
+                                    <h2 class="content-header mt-0" style="font-weight: 600;">{{'war.titleneedAssistance' | translate }}</h2>
+                                     <p class="mb-0"><span [innerHTML]="'war.titleneeds' | translate "></span></p>
                                 </div>
                             </div>
                             <div class="form-group mb-3 mt-3">
                                 <div class="">
-                                    <p class="mb-1 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
+                                    <p class="mb-1 text-bold-500">{{'war.needAssistance' | translate }}</p>
                                     <textarea [autosize]="true" name="needAssistance" [(ngModel)]="basicInfoPatient.needAssistance"
                                         placeholder="{{'war.needAssistance' | translate }}" ngModel required #needAssistance="ngModel"
                                         class="form-control mb-3"></textarea>
@@ -409,12 +410,13 @@
                     </form>
                     <div class="form-group mb-3 mt-5">
                         <div class="">
-                            <p class="mb-0 text-bold-500">{{'war.titleneeds' | translate }}</p>
+                            <h2 class="content-header mt-0" style="font-weight: 600;">{{'war.titleneedAssistance' | translate }}</h2>
+                            <p class="mb-0"><span [innerHTML]="'war.titleneeds' | translate "></span></p>
                         </div>
                     </div>
                     <div class="form-group mb-3 mt-3">
                         <div class="">
-                            <p class="mb-1 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
+                            <p class="mb-1 text-bold-500">{{'war.needAssistance' | translate }}</p>
                             <textarea [autosize]="true" name="needAssistance" [(ngModel)]="basicInfoPatient.needAssistance"
                                 placeholder="{{'war.needAssistance' | translate }}"
                                 class="form-control"></textarea>
