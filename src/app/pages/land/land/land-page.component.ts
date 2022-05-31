@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventsService } from 'app/shared/services/events.service';
+import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TermsConditionsPageComponent } from "../../content-pages/terms-conditions/terms-conditions-page.component";
 
 @Component({
     selector: 'app-land-page',
@@ -8,14 +10,16 @@ import { EventsService } from 'app/shared/services/events.service';
 })
 
 export class LandPageComponent implements OnInit {
-    isApp: boolean = document.URL.indexOf( 'http://' ) === -1 && document.URL.indexOf( 'https://' ) === -1 && location.hostname != "localhost" && location.hostname != "127.0.0.1";
+    isApp: boolean = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1 && location.hostname != "localhost" && location.hostname != "127.0.0.1";
     iconjsd: string = 'assets/img/land/logos/sjd_en.png';
     lang: string = 'en';
-    constructor(private eventsService: EventsService) {
+    modalReference: NgbModalRef;
+
+    constructor(private eventsService: EventsService, private modalService: NgbModal) {
         this.lang = sessionStorage.getItem('lang');
-        if(this.lang=='es'){
+        if (this.lang == 'es') {
             this.iconjsd = 'assets/img/land/logos/sjd_es.png';
-        }else{
+        } else {
             this.iconjsd = 'assets/img/land/logos/sjd_en.png';
         }
     }
@@ -24,25 +28,49 @@ export class LandPageComponent implements OnInit {
 
         this.eventsService.on('changelang', function (lang) {
             this.lang = lang;
-            if(this.lang=='es'){
+            if (this.lang == 'es') {
                 this.iconjsd = 'assets/img/land/logos/sjd_es.png';
-            }else{
+            } else {
                 this.iconjsd = 'assets/img/land/logos/sjd_en.png';
             }
         }.bind(this));
-    
-      }
 
-    openWeb(){
-        if(this.lang=='es'){
+    }
+
+    openWeb() {
+        if (this.lang == 'es') {
             window.open('https://www.foundation29.org', '_blank');
-        }else{
+        } else {
             window.open('https://www.foundation29.org/en/', '_blank');
         }
     }
 
-    goTo(){
+    goTo() {
         document.getElementById('waysoptions').scrollIntoView(true);
     }
+
+    openModal(panel) {
+        let ngbModalOptions: NgbModalOptions = {
+            keyboard: false,
+            backdrop: 'static',
+            windowClass: 'ModalClass-sm'// xl, lg, sm
+        };
+        this.modalReference = this.modalService.open(panel, ngbModalOptions);
+    }
+
+    closeModal() {
+        if (this.modalReference != undefined) {
+            this.modalReference.close()
+        }
+    }
+
+    openTerms() {
+        let ngbModalOptions: NgbModalOptions = {
+          backdrop: 'static',
+          keyboard: false,
+          windowClass: 'ModalClass-sm'
+        };
+        this.modalReference = this.modalService.open(TermsConditionsPageComponent, ngbModalOptions);
+      }
 
 }

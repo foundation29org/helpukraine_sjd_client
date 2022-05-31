@@ -42,8 +42,6 @@ export class RegisterPageComponent implements OnDestroy, OnInit {
   isVerifyemail: boolean = false;
   isEmailBusy: boolean = false;
   isFailEmail: boolean = false;
-
-  termso: boolean = false;
   openedTerms: boolean = false;
   isApp: boolean = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1 && location.hostname != "localhost" && location.hostname != "127.0.0.1";
   role: string = 'User';

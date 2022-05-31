@@ -5,7 +5,7 @@
             <div class="row pt-3 pb-3">
                 <div class="offset-md-3 col-md-6 center-elements">
                     <div class=""><!--text-center-->
-                        <h2 class="mt-5">Rare Diseases <span class="text-bold-500 d-block" style="font-size: 2rem !important;">Hub Ukraine</span></h2>
+                        <h2 class="mt-4">Rare Diseases <span class="text-bold-500 d-block" style="font-size: 2rem !important;">Hub Ukraine</span></h2>
                         <p class="">{{'landraito.title' | translate }}</p>
                     </div>
                     <button (click)="goTo()" class="btn btn-dark mt-3 btn-lg" title="{{'landraito.button' | translate }}">
@@ -17,9 +17,9 @@
                 </div>
             </div>
             <div class="row pt-3 pb-3">
-                <div class="row offset-lg-3 col-lg-6 margin-0 mb-5 text-center">
+                <div class="row offset-lg-3 col-lg-6 margin-0 mb-4 text-center">
                     <div class='col-md-12 pb-3'>
-                        <h3 class="text-bold-500 mt-5">{{'landraito.Contact us if' | translate }}:</h3>
+                        <h3 class="text-bold-500 mt-4">{{'landraito.Contact us if' | translate }}</h3>
                     </div>
                     <div class="col-md-6">
                         <div class="center-elements">
@@ -54,9 +54,9 @@
             </div>
             
             <div class="row pt-3 pb-3" style="background: #f5f5f5;">
-                <div class="row offset-lg-1 col-lg-10 mb-5 margin-0 text-center">
+                <div class="row offset-lg-1 col-lg-10 mb-4 margin-0 text-center">
                     <div class="col-lg-12">
-                        <h3 class="text-bold-500 mt-5 pb-3">{{'landraito.t2' | translate }}</h3>
+                        <h3 class="text-bold-500 mt-4 pb-3">{{'landraito.t2' | translate }}</h3>
                         <div class="row mt-3">
                             <div class="col-md-4 mt-2">
                                 <span class="circleblue">1</span>
@@ -78,11 +78,11 @@
                 </div>
             </div>
             <a id="waysoptions" class="akey"></a>
-            <div class="row pt-3 pb-3 offset-lg-1 col-lg-10 mb-5 margin-0 text-center">
+            <div class="row pt-3 pb-3 offset-lg-1 col-lg-10 mb-4 margin-0 text-center">
                 <div class='col-md-12 pb-3'>
-                    <h3 class="text-bold-500 mt-5">{{'landraito.t3.title' | translate }}</h3>
+                    <h3 class="text-bold-500 mt-4">{{'landraito.t3.title' | translate }}</h3>
                 </div>
-                <div class="col-lg-4 mt-4 center-elements element-option">
+                <div class="col-lg-4 mt-3 center-elements element-option">
                     <div>
                         <img class="" style="width: 80px;" src='assets/img/land/app.png'/>
                     </div>
@@ -98,7 +98,7 @@
                     </div>
                     
                 </div>
-                <div class="col-lg-4 mt-4 center-elements element-option">
+                <div class="col-lg-4 mt-3 center-elements element-option">
                     <div>
                         <img class="" style="width: 80px;" src='assets/img/land/mail.png'/>
                     </div>
@@ -111,7 +111,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 mt-4 center-elements element-option">
+                <div class="col-lg-4 mt-3 center-elements element-option">
                     <div>
                         <img class="" style="width: 80px;" src='assets/img/land/phone.png'/>
                     </div>
@@ -129,7 +129,7 @@
             <div class="row pt-3 pb-3 white" style="background: #005bbb;">
                 <div class="row offset-md-4 col-md-4 offset-sm-3 col-sm-6 mb-4 margin-0 text-center">
                     <div class='col-md-12'>
-                        <h3 class="text-bold-500 mt-5">{{'landraito.t4.title' | translate }}</h3>
+                        <h3 class="text-bold-500 mt-4">{{'landraito.t4.title' | translate }}</h3>
                     </div>
                     <div class="col-md-12">
                         <div class="">
@@ -140,8 +140,8 @@
                 </div>
             </div>
             <div class="row pt-3">
-                <div class="row pt-5 offset-lg-3 col-lg-6 margin-0 text-center">
-                    <section style="padding-bottom: 50px !important;" class="col-lg-12">
+                <div class="row pt-4 offset-lg-3 col-lg-6 margin-0 text-center">
+                    <section style="padding-bottom: 40px !important;" class="col-lg-12">
                         <p class="mb-3 offset-sm-2 col-sm-8">{{'landraito.t4.2' | translate }}</p>
                         <div class="row center-elements">
                             <div class="col-4 col-lg-3 mb-3 p-1">
@@ -179,7 +179,138 @@
                       </section>
                 </div>
             </div>
-            
+            <div class="row pt-3" style="background: #f5f5f5;">
+                <div class="row offset-lg-1 col-lg-10 margin-0 text-center">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p>
+                                    <a href="javascript:;" (click)="openModal(avisoLegalPanel)">
+                                     <span>{{'legal.title' | translate }}</span>
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>
+                                    <a href="javascript:;" (click)="openTerms()">
+                                     <span>{{'registration.Privacy Policy' | translate }}</span>
+                                    </a>
+                                </p>
+                                
+                            </div>
+                            <div class="col-md-4">
+                                <p>
+                                    <a href="javascript:;" (click)="openModal(cookiesPanel)">
+                                        <span>{{'cookies.title' | translate }}</span>
+                                       </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<ng-template #avisoLegalPanel let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title">{{'legal.title' | translate }}</h4>
+		<button type="button" class="close" aria-label="Close" (click)="closeModal()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div class="px-3">
+			<div class="form-body">
+				<div class="row">
+					<div class="col-sm-12">
+                        <h6 class="pt-2 text-bold-600">{{'legal.t1' | translate }}</h6>
+                        <p>{{'legal.p1.1' | translate }}</p>
+                        <p>{{'legal.p1.2' | translate }}</p>
+                        <p>{{'legal.p1.3' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t2' | translate }}</h6>
+                        <p>{{'legal.p2.1' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t3' | translate }}</h6>
+                        <p>{{'legal.p3.1' | translate }}</p>
+                        <p>{{'legal.p3.2' | translate }}</p>
+                        <p>{{'legal.p3.3' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t4' | translate }}</h6>
+                        <p>{{'legal.p4.1' | translate }}</p>
+                        <p>{{'legal.p4.2' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t5' | translate }}</h6>
+                        <p>{{'legal.p5.1' | translate }}</p>
+                        <p>{{'legal.p5.2' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t6' | translate }}</h6>
+                        <p>{{'legal.p6.1' | translate }}</p>
+                        <p>{{'legal.p6.2' | translate }}</p>
+                        <p>{{'legal.p6.3' | translate }}</p>
+                        <p>{{'legal.p6.4' | translate }}</p>
+                        <p>{{'legal.p6.5' | translate }}</p>
+                        <p class="mb-0">{{'legal.p6.6' | translate }}</p>
+                        <a mailto="rarediseaseshub4ua@sjd.es" href="mailto:rarediseaseshub4ua@sjd.es">rarediseaseshub4ua@sjd.es</a>
+                        <h6 class="pt-2 text-bold-600">{{'legal.t7' | translate }}</h6>
+                        <p>{{'legal.p7.1' | translate }}</p>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</ng-template>
+
+<ng-template #cookiesPanel let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title">{{'cookies.title' | translate }}</h4>
+		<button type="button" class="close" aria-label="Close" (click)="closeModal()">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+	<div class="modal-body">
+		<div class="px-3">
+			<div class="form-body">
+				<div class="row">
+					<div class="col-sm-12">
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t1' | translate }}</h6>
+                        <p [innerHTML]="'cookies.p1.1' | translate "></p>
+                        <p>{{'cookies.p1.2' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t2' | translate }}</h6>
+                        <p>{{'cookies.p2.1' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t3' | translate }}</h6>
+                        <p>{{'cookies.p3.1' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t4' | translate }}</h6>
+                        <p>{{'cookies.p4.1' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t5' | translate }}</h6>
+                        <p [innerHTML]="'cookies.p5.1' | translate "></p>
+                        <p [innerHTML]="'cookies.p5.2' | translate "></p>
+                        <ul>
+                            <li>
+                                {{'cookies.p5.2.1' | translate }}
+                            </li>
+                            <li>
+                                {{'cookies.p5.2.2' | translate }}
+                            </li>
+                        </ul>
+                        <p>{{'cookies.p5.3' | translate }}</p>
+                        <h6 class="pt-2 text-bold-600">{{'cookies.t6' | translate }}</h6>
+                        <p>{{'cookies.p6.1' | translate }}</p>
+
+                        <ul class="mt-2">
+                            <li>
+                                Google Chrome.
+                            </li>
+                            <li>
+                                Internet Explorer.
+                            </li>
+                            <li>
+                                Mozilla Firefox.
+                            </li>
+                            <li>
+                                Safari iPhone, iPad {{'generics.and' | translate }} iPod touch {{'generics.and' | translate }} Safari para Mac.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</ng-template>

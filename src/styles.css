@@ -25,7 +25,6 @@
 
 body{
   font-size: 1rem !important;
-  line-height: 1.3em !important;
 }
 
 p{
@@ -53,7 +52,7 @@ span{
 }
 
 .btn-yellow {
-  color: #fff !important;
+  color: #000 !important;
   background-color: #ffd500;
   border-color: #ffd500;
   padding: 0.375rem 0.75rem;
@@ -155,7 +154,11 @@ body {
 }
 
 .nav-tabs .nav-link.active {
-  color: #33658a;
+  color: #005bbb;
+}
+
+.dropdown-item.active, .dropdown-item:active{
+  background-color: #005bbb !important;
 }
 
 .alert-warning {
@@ -169,7 +172,7 @@ body {
 }
 
 :host /deep/ a{
-  color: #33658a !important;
+  color: #005bbb !important;
 }
 
 a:hover, a:focus {
@@ -191,7 +194,7 @@ a:hover, a:focus {
 }
 
 a{
-  color: #33658a;
+  color: #005bbb;
 }
 
 .btn-outline-secondary:hover {
@@ -214,7 +217,7 @@ a{
 }
 
 .hr-custom{
-  background-color: #33658a; 
+  background-color: #005bbb; 
   height: 3px; 
   border: 0;
   width: 30%;
@@ -241,9 +244,9 @@ a{
 }
 
 .btn-info-nohover{
-  background-color: #33658a !important;
+  background-color: #005bbb !important;
   color: #fff !important;
-  border-color: #33658a;
+  border-color: #005bbb;
 }
 
 .btn-info-nohover:focus, .btn-info-nohover.focus {
@@ -276,7 +279,7 @@ a{
 
 .btn-active-info {
   color: #fff;
-  background-color: #33658a;
+  background-color: #005bbb;
   border-color: #205883;
   box-shadow: 0 0 0 0.2rem rgba(250, 94, 88, 0.5);
 }
@@ -295,9 +298,9 @@ a{
 }
 
 .btn-info {
-  background-color: #33658a !important;
+  background-color: #005bbb !important;
   color: #fff !important;
-  border-color: #33658a;
+  border-color: #005bbb;
 }
 
 .btn-secondary {

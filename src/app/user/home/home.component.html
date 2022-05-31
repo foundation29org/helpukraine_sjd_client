@@ -29,13 +29,13 @@
                                 {{'homeraito.p1.1' | translate }}
                             </p>-->
                             <div class="center-elements mt-1">
-                                <button class="btn btn-dark" style="width: 100px;" (click)="question2(true);">{{'generics.Next' |
+                                <button class="btn btn-dark" style="width: 100px;" (click)="question2();">{{'generics.Next' |
                                     translate }}</button>
                             </div>
                         </div>
                         <div *ngIf="step=='2'">
                             <h2 class="content-header mb-3 mt-0" style="font-weight: 600;">{{'generics.Welcome to ucr' | translate }}</h2>
-                            <p class="mb-0 text-bold-500">{{'homeraito.t2' | translate }} <span class="red">*</span></p>
+                            <p class="mb-1 text-bold-500">{{'homeraito.t2' | translate }} <span class="red">*</span></p>
                             <!--<p class="text-muted mb-1">
                                 {{'homeraito.t2.1' | translate }}
                             </p>-->
@@ -64,7 +64,7 @@
                             </div>-->
                             <div class="form-group mb-3">
                                 <div class="">
-                                    <p class="mb-0 text-bold-500">{{'war.Referral medical center' | translate }}</p>
+                                    <p class="mb-1 text-bold-500">{{'war.Referral medical center' | translate }}</p>
                                     <input type="text" class="form-control mb-3" name="referralCenter" id="referralCenter"
                                             placeholder="{{'war.titleReferralMedicalCenter' | translate }}" ngModel required
                                             #referralCenter="ngModel" [(ngModel)]="basicInfoPatient.referralCenter">
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div *ngIf="step=='3'">
-                                        <p class="text-bold-500 mt-0 mb-0">{{'war.What is their location' | translate }}</p>
+                            <h2 class="content-header mt-0" style="font-weight: 600;">{{'war.What is their location' | translate }}</h2>
                                         <p class="mb-2">{{'war.location2' | translate }}</p>
                                         <p *ngIf="basicInfoPatient.lat==''" class="mb-2" [innerHTML]="'war.optionalLocation' | translate "></p>
                                         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"  (mapReady)="mapReadyHandler($event)">
@@ -154,19 +154,20 @@
                         <div *ngIf="step=='5'" class="text-left">
                             <div class="form-group mb-3 mt-0">
                                 <div class="">
-                                    <p class="mb-0 text-bold-500">{{'war.titleneeds' | translate }}</p>
+                                    <h2 class="content-header mt-0" style="font-weight: 600;">{{'war.titleneedAssistance' | translate }}</h2>
+                                     <p class="mb-0"><span [innerHTML]="'war.titleneeds' | translate "></span></p>
                                 </div>
                             </div>
                             <div class="form-group mb-3 mt-3">
                                 <div class="">
-                                    <p class="mb-0 text-bold-500">{{'war.titleneedAssistance' | translate }}</p>
+                                    <p class="mb-1 text-bold-500">{{'war.needAssistance' | translate }}</p>
                                     <textarea [autosize]="true" name="needAssistance" [(ngModel)]="basicInfoPatient.needAssistance"
                                         placeholder="{{'war.needAssistance' | translate }}" ngModel required #needAssistance="ngModel"
                                         class="form-control mb-3"></textarea>
                                 </div>
                             </div>
 
-                            <p class="text-bold-500 mt-3 mb-0">{{'war.DrugsNeeds' | translate }}</p>
+                            <p class="text-bold-500 mt-3 mb-1">{{'war.DrugsNeeds' | translate }}</p>
                             <p class="mb-0"><span [innerHTML]="'war.needsSubtitle' | translate "></span> <span class="ml-1"><a class="info" (click)="openModal(SampleDrug)">{{'war.helpdrug2' | translate }}</a></span></p>
                             <div *ngIf="!callingTextAnalytics && basicInfoPatient.drugs.length>0" class="table-responsive">
                                 <form class="mt-2">
@@ -283,10 +284,10 @@
                             <p class="">{{'war.The status of your profile is' | translate }}</p>
                         </div>
                         <div class="col-4">
-                            <span *ngIf="basicInfoPatient.status == null || basicInfoPatient.status == 'new'" class="badge badge-custom">{{'war.status.t1' | translate }}</span>
-                            <span *ngIf="basicInfoPatient.status == 'contacted'" class="badge badge-custom">{{'war.status.t2' | translate }}</span>
-                            <span *ngIf="basicInfoPatient.status == 'pending'" class="badge badge-custom">{{'war.status.t3' | translate }}</span>
-                            <span *ngIf="basicInfoPatient.status == 'ontheway'" class="badge badge-custom">{{'war.status.t4' | translate }}</span>
+                            <span *ngIf="basicInfoPatient.status == null || basicInfoPatient.status == 'new'" class="badge badge-custom">{{'war.status.opt1' | translate }}</span>
+                            <span *ngIf="basicInfoPatient.status == 'contacted'" class="badge badge-custom">{{'war.status.opt2' | translate }}</span>
+                            <span *ngIf="basicInfoPatient.status == 'pending'" class="badge badge-custom">{{'war.status.opt3' | translate }}</span>
+                            <span *ngIf="basicInfoPatient.status == 'ontheway'" class="badge badge-custom">{{'war.status.opt4' | translate }}</span>
                             <span *ngIf="basicInfoPatient.status == 'contactlost'" class="badge badge-custom">{{'war.status.opt5' | translate }}</span>
                             <span *ngIf="basicInfoPatient.status == 'helped'" class="badge badge-custom">{{'war.status.opt6' | translate }}</span>
                         </div>
@@ -329,8 +330,8 @@
                               </mat-radio-group>
                         </p>
                         <div class="form-group">
-                            <div class="mt-5">
-                                <h4 class="content-header">{{'homeraito.t2' | translate }}</h4>
+                            <div class="mt-3">
+                                <p class="mb-1 text-bold-500">{{'homeraito.t2' | translate }}</p>
                                 <input type="text" class="form-control mb-3" name="group" id="group"
                                     placeholder="{{'war.Write the name of your disease' | translate }}" ngModel required
                                     #group="ngModel" [(ngModel)]="basicInfoPatient.group">
@@ -357,7 +358,7 @@
 
                         <div class="form-group mb-3">
                             <div class="">
-                                <p class="mb-0 text-bold-500">{{'war.Referral medical center' | translate }}</p>
+                                <p class="mb-1 text-bold-500">{{'war.Referral medical center' | translate }}</p>
                                 <input type="text" class="form-control mb-3" name="referralCenter" id="referralCenter"
                                         placeholder="{{'war.titleReferralMedicalCenter' | translate }}" ngModel required
                                         #referralCenter="ngModel" [(ngModel)]="basicInfoPatient.referralCenter">
@@ -365,7 +366,7 @@
                         </div>
                         <div class="form-group">
                             <div class="">
-                                <h4 class="content-header">{{'war.Patient date of birth' | translate }}</h4>
+                                <p class="mb-1 text-bold-500">{{'war.Patient date of birth' | translate }}</p>
                                 <input class="form-control d-none" id="birthDate_" name="birthDate" matInput
                                     placeholder="{{'personalinfo.Birth Date' | translate }}" readonly
                                     [matDatepicker]="pickerOnset" (click)="pickerOnset.open()"
@@ -381,10 +382,10 @@
                                     #pickerOnset></mat-datepicker>
                             </div>
                         </div>
-                        <div class="mt-5">
-                            <h4 class="content-header d-block row col-12 mb-0">{{'physicians.Location' | translate }}</h4>
-                            <p *ngIf="basicInfoPatient.lat!=''" class="mb-0">{{'war.This is where the patient is currently located' | translate }}</p>
-                            <p *ngIf="basicInfoPatient.lat==''" class="mb-0" [innerHTML]="'war.optionalLocation' | translate "></p>
+                        <div class="mt-3">
+                            <p class="mb-1 text-bold-500">{{'physicians.Location' | translate }}</p>
+                            <p *ngIf="basicInfoPatient.lat!=''" class="mb-1">{{'war.This is where the patient is currently located' | translate }}</p>
+                            <p *ngIf="basicInfoPatient.lat==''" class="mb-1" [innerHTML]="'war.optionalLocation' | translate "></p>
                             <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"  (mapReady)="mapReadyHandler($event)">
                                 <agm-marker *ngIf="showMarker && basicInfoPatient.lat!=''" [latitude]="basicInfoPatient.lat" [longitude]="basicInfoPatient.lng" [title]="'Pickup Location'"></agm-marker>
                             </agm-map>
@@ -409,19 +410,20 @@
                     </form>
                     <div class="form-group mb-3 mt-5">
                         <div class="">
-                            <p class="mb-0 text-bold-500">{{'war.titleneeds' | translate }}</p>
+                            <h2 class="content-header mt-0" style="font-weight: 600;">{{'war.titleneedAssistance' | translate }}</h2>
+                            <p class="mb-0"><span [innerHTML]="'war.titleneeds' | translate "></span></p>
                         </div>
                     </div>
                     <div class="form-group mb-3 mt-3">
                         <div class="">
-                            <h4 class="content-header">{{'war.titleneedAssistance' | translate }}</h4>
+                            <p class="mb-1 text-bold-500">{{'war.needAssistance' | translate }}</p>
                             <textarea [autosize]="true" name="needAssistance" [(ngModel)]="basicInfoPatient.needAssistance"
                                 placeholder="{{'war.needAssistance' | translate }}"
                                 class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="mt-3">
-                        <h4 class="content-header mt-0">{{'war.The drugs I need' | translate }}</h4>
+                        <p class="mb-1 text-bold-500">{{'war.The drugs I need' | translate }}</p>
                         <p class="mb-0"><span [innerHTML]="'war.helpdrug' | translate "></span> <span class="ml-1"><a class="info" (click)="openModal(SampleDrug)">{{'war.helpdrug2' | translate }}</a></span></p>
                         <div *ngIf="!callingTextAnalytics && basicInfoPatient.drugs.length>0" class="table-responsive">
                             <form class="mt-2">
