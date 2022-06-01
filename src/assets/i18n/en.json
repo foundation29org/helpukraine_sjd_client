@@ -1726,6 +1726,15 @@
     "p5.3": "The Application does not use personalization cookies, advertising cookies or behavioral advertising cookies.",
     "t6": "6. Deactivating and uninstalling cookies",
     "p6.1": "Most computers automatically accept the use of cookies. However, the User can decide whether or not to continue enabling cookies on their computer. Disabling cookies may mean the Application to operate suboptimally, disabling some of the characteristics or services provided (e.g. making it impossible to register, among others). Nevertheless, and even after all cookies have been disabled, the web browser will continue to collect certain essential information for the basic functioning of the Application. Users can disable cookies from the preferences section on their Internet browser. Here are some links provided by the most popular browsers, with instructions for managing cookies on different devices and versions, if required."
+  },
+  "cookie": {
+    "header": "Cookies used on the Application!",
+    "message": "This Application uses cookies to ensure you get the best experience on our Application.",
+    "dismiss": "Got it!",
+    "allow": "Allow cookies",
+    "deny": "Decline",
+    "link": "Learn more",
+    "policy": "Cookie Policy"
   }
 }
 

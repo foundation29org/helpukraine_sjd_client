@@ -1728,5 +1728,14 @@
     "p5.3": "La Aplicación no utiliza cookies de personalización, cookies publicitarias ni cookies de publicidad comportamental.",
     "t6": "Desactivación y desinstalación de las cookies",
     "p6.1": "La mayoría de dispositivos de sobremesa o móviles aceptan la utilización de cookies automáticamente. Sin embargo, el usuario tiene la posibilidad de decidir si mantiene las cookies habilitadas o no en su ordenador. El hecho de deshabilitar las cookies puede implicar la pérdida de un funcionamiento óptimo de la Aplicación, quedando inhabilitadas algunas de las características o servicios prestados por la misma (por ejemplo, imposibilidad de registrarse, entre otras). Con todo, incluso habiendo desactivado todas las cookies, el navegador web recoge determinada información esencial para el funcionamiento básico de la Aplicación. El usuario que desee deshabilitar las cookies puede hacerlo desde la sección de preferencias de su navegador de Internet. A continuación, indicamos los enlaces habilitados por los navegadores más populares, con las instrucciones para gestionar las cookies, en diversos dispositivos y versiones si es necesario."
+  },
+  "cookie": {
+    "header": "¡Cookies utilizadas en la Aplicación!",
+    "message": "Esta aplicación utiliza cookies para garantizar que obtenga la mejor experiencia en nuestra aplicación.",
+    "dismiss": "¡Entendido!",
+    "allow": "Permitir cookies",
+    "deny": "Rechazar",
+    "link": "Más información",
+    "policy": "Política de cookies"
   }
 }
