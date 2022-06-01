@@ -1622,13 +1622,13 @@
     "Blocked account": "Cuenta bloqueada",
     "Patient demographics": "Datos demográficos del paciente",
     "When was the patient born": "Fecha de nacimiento del paciente",
-    "What is their location": "¿Cuál es tu ubicación?",
+    "What is their location": "¿Cuál es su ubicación?",
     "location2": "La ubicación no necesita ser precisa. Se utiliza para identificar necesidades en áreas específicas. Basta con proporcionar la ubicación a nivel de barrio o aldea.",
     "My status": "Mi estado",
     "The status of your profile is": "El estado de tu perfil es:",
     "Write email": "Escriba un correo",
     "Summary": "Resumen",
-    "Patient date of birth": "Fecha de nacimiento de la paciente",
+    "Patient date of birth": "Fecha de nacimiento del paciente",
     "Patient location": "Ubicación del paciente",
     "This is where the patient is currently located": "Aquí es donde se necesita ayuda actualmente:",
     "These are the drug currently needed": "Estos son los medicamentos que se necesitan actualmente",
@@ -1726,8 +1726,8 @@
     "p5.2.1": "Google Analytics: se utiliza para distinguir a los usuarios",
     "p5.2.2": "Hotjar: se utiliza para registrar la navegación del usuario por los elementos del sitio web. ",
     "p5.3": "La Aplicación no utiliza cookies de personalización, cookies publicitarias ni cookies de publicidad comportamental.",
-    "t6": "Desactivación y desinstalación de las cookies",
-    "p6.1": "La mayoría de dispositivos de sobremesa o móviles aceptan la utilización de cookies automáticamente. Sin embargo, el usuario tiene la posibilidad de decidir si mantiene las cookies habilitadas o no en su ordenador. El hecho de deshabilitar las cookies puede implicar la pérdida de un funcionamiento óptimo de la Aplicación, quedando inhabilitadas algunas de las características o servicios prestados por la misma (por ejemplo, imposibilidad de registrarse, entre otras). Con todo, incluso habiendo desactivado todas las cookies, el navegador web recoge determinada información esencial para el funcionamiento básico de la Aplicación. El usuario que desee deshabilitar las cookies puede hacerlo desde la sección de preferencias de su navegador de Internet. A continuación, indicamos los enlaces habilitados por los navegadores más populares, con las instrucciones para gestionar las cookies, en diversos dispositivos y versiones si es necesario."
+    "t6": "6. Desactivación y desinstalación de las cookies",
+    "p6.1": "El usuario que desee deshabilitar las cookies puede hacerlo desde la sección de preferencias de su navegador de Internet. A continuación, indicamos los enlaces habilitados por los navegadores más populares, con las instrucciones para gestionar las cookies, en diversos dispositivos y versiones si es necesario."
   },
   "cookie": {
     "header": "¡Cookies utilizadas en la Aplicación!",

@@ -17,7 +17,7 @@ export class LangService {
       return this.http.get(environment.api+'/api/langs')
         .map( (res : any) => {
             this.langs = res;
-            res.sort(this.sortService.GetSortOrder("name"));
+            res.sort(this.sortService.GetSortOrder("order"));
             return res;
          }, (err) => {
            console.log(err);

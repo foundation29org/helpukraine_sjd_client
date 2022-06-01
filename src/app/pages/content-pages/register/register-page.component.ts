@@ -208,7 +208,7 @@ export class RegisterPageComponent implements OnDestroy, OnInit {
         .subscribe((res: any) => {
           if (res.message == 'Account created') {
             this.isVerifyemail = true;
-            Swal.fire('', this.translate.instant("registration.Check the email")+' supporthub4ua@hsjdbcn.es', "success");
+            Swal.fire('', this.translate.instant("registration.Check the email")+' supporthub4ua@sjd.es', "success");
           } else if (res.message == 'Fail sending email') {
             console.log("email fallido");
             this.isFailEmail = true;
