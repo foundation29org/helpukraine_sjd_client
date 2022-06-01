@@ -79,14 +79,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private msgDataSavedOk: string;
   private msgDataSavedFail: string;
-  private transWeight: string;
-  private transHeight: string;
   private msgDate: string;
-  private titleSeizures: string;
-  private titleDose: string;
-  private titleDrugsVsNormalized: string;
-  titleDrugsVsDrugs: string;
-  private titleDrugsVsNoNormalized: string;
   private group: string;
   actualMedications: any;
   loadedFeels: boolean = false;
@@ -112,7 +105,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   basicInfoPatientCopy: any;
   age: number = null;
   weight: string;
-  groups: Array<any> = [];
   step: string = '1';
   private subscription: Subscription = new Subscription();
   rangeDate: string = 'month';
@@ -161,7 +153,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   };
 
   showRightYAxisLabel: boolean = true;
-  yAxisLabelRight: string;
   valueprogressbar = 0;
   recommendedDoses: any = [];
   showNotiSeizu: boolean = false;
@@ -185,7 +176,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   modalReference: NgbModalRef;
   editingDrugIndex: number = -1;
   checks: any = {};
-  groupName = '';
   mapClickListener: any;
   map: any;
 
@@ -209,41 +199,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     this.loadCountries();
-  }
-
-
-  loadGroups() {
-    this.subscription.add(this.apiDx29ServerService.loadGroups()
-      .subscribe((res: any) => {
-        console.log(res);
-        for(let i = 0; i < res.length; i++){
-          if(res[i].name == 'None'){
-            res[i].name = this.translate.instant("personalinfo.I dont belong to a patient group"); 
-          }else{
-            for(let j = 0; j < res[i].translations.length; j++){
-              if(this.lang==res[i].translations[j].code){
-                res[i].name = res[i].translations[j].name;
-              }
-            }
-          }
-          
-        }
-        
-        
-        this.groups = res;
-        this.groups.sort(this.sortService.GetSortOrder("order"));
-      }, (err) => {
-        console.log(err);
-      }));
-  }
-
-  getGroupName(){
-    //find the group name from the group id
-    for(let i = 0; i < this.groups.length; i++){
-      if(this.basicInfoPatient.group == this.groups[i]._id){
-        this.groupName = this.groups[i].name;
-      }
-    }
   }
 
   loadCountries() {
@@ -329,7 +284,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         break;
 
     }
-    this.loadGroups();
     this.getInfoPatient();
     this.getChecks();
   }
@@ -360,30 +314,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.translate.get('generics.Data saved fail').subscribe((res: string) => {
       this.msgDataSavedFail = res;
     });
-
-    this.translate.get('anthropometry.Weight').subscribe((res: string) => {
-      this.transWeight = res;
-    });
-    this.translate.get('menu.Feel').subscribe((res: string) => {
-      this.transHeight = res;
-    });
     this.translate.get('generics.Date').subscribe((res: string) => {
       this.msgDate = res;
-    });
-
-    this.translate.get('menu.Seizures').subscribe((res: string) => {
-      this.titleSeizures = res;
-    });
-    this.translate.get('medication.Dose mg').subscribe((res: string) => {
-      this.yAxisLabelRight = res;
-    });
-    this.translate.get('homeraito.Normalized').subscribe((res: string) => {
-      this.titleDrugsVsNormalized = res;
-      this.titleDose = res;
-      this.titleDrugsVsDrugs = this.titleDrugsVsNormalized;
-    });
-    this.translate.get('homeraito.Not normalized').subscribe((res: string) => {
-      this.titleDrugsVsNoNormalized = res;
     });
   }
 
@@ -433,9 +365,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.basicInfoPatient = res.patient;
         this.basicInfoPatientCopy = JSON.parse(JSON.stringify(res.patient));
         this.loadedInfoPatient = true;
-        if (this.authService.getGroup() != null) {
-          this.getGroupName();
-        }
         if(this.basicInfoPatient.lat!=''){
           this.lat = parseFloat(this.basicInfoPatient.lat)
           this.lng = parseFloat(this.basicInfoPatient.lng)
@@ -468,9 +397,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   question1() {
-
     this.step = '1';
-    this.loadGroups();
   }
 
   question3() {
@@ -508,7 +435,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       var paramssend = { drugs: this.newDrugs };
       this.subscription.add( this.http.put(environment.api+'/api/patient/drugs/'+this.authService.getCurrentPatient().sub, paramssend)
       .subscribe( (res : any) => {
-        console.log(res);
         if(res.message=='drugs changed'){
           this.newDrugs = res.patientUpdated.drugs;
         }
@@ -567,7 +493,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription.add(this.http.put(environment.api + '/api/patients/' + this.authService.getCurrentPatient().sub, this.basicInfoPatient)
       .subscribe((res: any) => {
         this.authService.setGroup(this.basicInfoPatient.group);
-        this.getGroupName();
         this.saving = false;
         if(this.basicInfoPatient.lat==""){
           //this.getLocationInfo();
@@ -598,7 +523,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.mapClickListener = this.map.addListener('click', (e: google.maps.MouseEvent) => {
       this.zone.run(() => {
         // Here we can get correct event
-        console.log(e.latLng.lat(), e.latLng.lng());
         this.basicInfoPatient.lat = e.latLng.lat();
         this.basicInfoPatient.lng = e.latLng.lng();
         this.showMarker = true;

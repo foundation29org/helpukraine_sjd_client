@@ -155,22 +155,6 @@
                                     <input type="text" class="form-control" name="group" id="group"
                                         placeholder="{{'physicians.Write what kind of patients you treat' | translate }}" ngModel required
                                         #group="ngModel" [(ngModel)]="request.group">
-                                    <!--<select id="group" name="group" class="form-control" ngModel #group="ngModel"
-                                        [(ngModel)]="request.group" [required]="true">
-                                        <option [value]="null" disabled selected>--{{'generics.Please select' | translate }}--</option>
-                                        <option *ngFor="let group of groups" [ngValue]="group._id">
-                                            <span
-                                                *ngIf="group.name != 'None'">{{group.name}}</span>
-                                            <span *ngIf="group.name == 'None'">{{'personalinfo.I dont belong to a
-                                                patient group' | translate }}</span>
-                                        </option>
-                                    </select>
-                                    <div *ngIf="request.group == '622f83174c824c0dec16c78b'" class="mb-3 mt-2">
-                                        <p class="mb-1 text-bold-500">{{'physicians.othertreat' | translate }}</p>
-                                        <input type="text" class="form-control" name="othergroup" id="othergroup"
-                                        placeholder="{{'war.Write the name of your disease' | translate }}" ngModel required
-                                        #othergroup="ngModel" [(ngModel)]="request.othergroup">
-                                    </div>-->
                                     <small class="form-text text-muted danger"
                                         *ngIf="!group.valid && (group.dirty || group.touched)">{{'generics.required'
                                         | translate }}</small>
