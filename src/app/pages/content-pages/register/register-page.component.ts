@@ -17,7 +17,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TermsConditionsPageComponent } from "../terms-conditions/terms-conditions-page.component";
-import { DataProcessingAgreementComponent } from "../data-processing-agreement/data-processing-agreement.component";
 import { ApiDx29ServerService } from 'app/shared/services/api-dx29-server.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs/Subscription';
@@ -92,9 +91,7 @@ export class RegisterPageComponent implements OnDestroy, OnInit {
       phone1: '',
       phone2: '',
       birthDate: null,
-      gender: null,
-      siblings: [],
-      parents: []
+      gender: null
     };
     this.dateAdapter.setLocale(sessionStorage.getItem('lang'));
 
@@ -164,15 +161,6 @@ export class RegisterPageComponent implements OnDestroy, OnInit {
 
   setOpenTerms(){
     this.openedTerms = true;
-  }
-
-  openDataProcessingAgreement() {
-    let ngbModalOptions: NgbModalOptions = {
-      backdrop: 'static',
-      keyboard: false,
-      windowClass: 'ModalClass-sm'
-    };
-    this.modalService.open(DataProcessingAgreementComponent, ngbModalOptions);
   }
 
   submitInvalidForm() {

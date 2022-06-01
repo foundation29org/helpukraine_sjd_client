@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   basicInfoPatientCopy: any;
   age: number = null;
   weight: string;
-  groups: Array<any> = [];
   step: string = '1';
   private subscription: Subscription = new Subscription();
 
@@ -133,35 +132,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   }
 
-
-  loadGroups() {
-    this.subscription.add(this.apiDx29ServerService.loadGroups()
-      .subscribe((res: any) => {
-        for(let i = 0; i < res.length; i++){
-          if(res[i].name == 'None'){
-            res[i].name = this.translate.instant("personalinfo.I dont belong to a patient group"); 
-          }else{
-            for(let j = 0; j < res[i].translations.length; j++){
-              if(this.lang==res[i].translations[j].code){
-                res[i].name = res[i].translations[j].name;
-              }
-            }
-          }
-          
-        }
-        //show patients with epilepsy and diabetes and None
-        /*for (let i = 0; i < res.length; i++) {
-          if (res[i].name == 'Patients with epilepsy' || res[i].name == 'Diabetes' || res[i].name == 'None') {
-            this.groups.push(res[i]);
-          }
-        }*/
-        this.groups = res;
-        this.groups.sort(this.sortService.GetSortOrder("order"));
-      }, (err) => {
-        console.log(err);
-      }));
-  }
-
   ngOnDestroy() {
     this.subscription.unsubscribe();
     if (this.mapClickListener) {
@@ -216,7 +186,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.patient = {
     };
     this.loadTranslations();
-    this.loadGroups();
   }
 
 
@@ -232,7 +201,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   initEnvironment() {
     this.userId = this.authService.getIdUser();
-    console.log(this.userId);
     this.loadEnvironment();
   }
 
@@ -334,8 +302,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   changePickupMarkerLocation($event: { coords: any }, index) {
-    console.log(this.requests);
-    console.log(index);
     this.requests[index].lat = $event.coords.lat;
     this.requests[index].lng = $event.coords.lng;
     //this.showMarker = true;
@@ -352,7 +318,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.mapClickListener = this.map.addListener('click', (e: google.maps.MouseEvent) => {
       this.zone.run(() => {
         // Here we can get correct event
-        console.log(e.latLng.lat(), e.latLng.lng());
         this.actualRequest.lat = e.latLng.lat();
         this.actualRequest.lng = e.latLng.lng();
         //this.showMarker = true;
@@ -365,7 +330,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.mapClickListener = this.map.addListener('click', (e: google.maps.MouseEvent) => {
       this.zone.run(() => {
         // Here we can get correct event
-        console.log(e.latLng.lat(), e.latLng.lng());
         this.requests[index].lat = e.latLng.lat();
         this.requests[index].lng = e.latLng.lng();
         //this.showMarker = true;
@@ -410,7 +374,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           var info = {drugs: this.requests[indexRequest].drugs, index: index};
           this.subscription.add(this.requestCliService.deletedrug(this.requests[indexRequest]._id, info)
           .subscribe((res: any) => {
-            console.log(res);
+            //console.log(res);
           }, (err) => {
             console.log(err);
           }));
@@ -458,14 +422,12 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   changeRequest(info){
-    console.log(info);
     if(this.modalReference != undefined){
       this.modalReference.close()
     }
     if(info._id!=null){
       this.subscription.add(this.requestCliService.updateRequest(info._id, info)
       .subscribe((res: any) => {
-        console.log(res);
         this.saving = false;
         this.step = '1';
         this.toastr.success('', this.translate.instant("generics.Data saved successfully"));
