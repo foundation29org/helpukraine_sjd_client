@@ -33,12 +33,13 @@ export class UsersAdminComponent implements OnInit, OnDestroy{
   working: boolean = false;
   sending: boolean = false;
   loadingUsers: boolean = false;
+  loadingUsersNotActived: boolean = false;
+  notActivedUsers: any = [];
   users: any = [];
   user: any = {};
   modalReference: NgbModalRef;
   private subscription: Subscription = new Subscription();
   timeformat="";
-  countries: any;
   // Google map lat-long
   lat: number = 50.431134;
   lng: number = 30.654701;
@@ -76,19 +77,10 @@ export class UsersAdminComponent implements OnInit, OnDestroy{
 
   ngOnInit() {
     this.getUsers();
+    this.getNotActivatedUsers();
     this.getAzureBlobSasToken();
   }
-  
-  loadCountries(){
-    this.subscription.add( this.http.get('assets/jsons/countries.json')
-    .subscribe( (res : any) => {
-      this.countries=res;
-      this.getUsers();
-    }, (err) => {
-      console.log(err);
-      this.getUsers();
-    }));
-  }
+
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
@@ -115,21 +107,25 @@ export class UsersAdminComponent implements OnInit, OnDestroy{
     }));
   }
 
-  capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  getNotActivatedUsers(){
+    this.loadingUsersNotActived = true;
+    this.subscription.add( this.http.get(environment.api+'/api/admin/notactivedusers/')
+    .subscribe( (res : any) => {
+      for(var j=0;j<res.length;j++){
+        res[j].userName = this.capitalizeFirstLetter(res[j].userName);
+        res[j].phone = res[j].countryPhoneCode+ ' ' + res[j].phone;
+      }
+      res.sort(this.sortService.GetSortOrderInverse("signupDate"));
+      this.notActivedUsers = res;
+      this.loadingUsersNotActived = false;      
+    }, (err) => {
+      console.log(err);
+      this.loadingUsersNotActived = false;
+    }));
   }
 
-  getNameCountry(value){
-    var res = '';
-    var enc=false;
-    for(var i =0; i<this.countries.length;i++){
-      if(this.countries[i].code==value){
-        res= this.countries[i].name;
-        enc = true;
-      }
-    }
-    return res;
-
+  capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
   fieldStatusChanged(row){
