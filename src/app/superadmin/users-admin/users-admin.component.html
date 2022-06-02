@@ -74,6 +74,14 @@
 
 						</ng-template>
 					</ngx-datatable-column>
+					<ngx-datatable-column name="ID" prop="salesforceId" [flexGrow]="3"
+						[sortable]="true">
+						<ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+							<span>
+								{{value}}
+							</span>
+						</ng-template>
+					</ngx-datatable-column>
 					<ngx-datatable-column name="{{'menu.User Profile' | translate }}" prop="userName" [flexGrow]="3"
 						[sortable]="true">
 						<ng-template let-value="value" ngx-datatable-cell-template let-row="row">
@@ -153,6 +161,76 @@
 			</div>
 
 		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Unactivated users</h4>
+			</div>
+			<div class="center-elements" *ngIf="loadingUsersNotActived">
+				<div>
+					<p class="centerSpinner"><i class="fa fa-spinner fa-spin fa-3x fa-fw pink"></i></p>
+				</div>
+			</div>
+			<div class="mt-2 table-responsive" *ngIf="!loadingUsersNotActived && notActivedUsers.length>0">
+				<ngx-datatable class="bootstrap fullscreen" [columnMode]="'flex'" [headerHeight]="50"
+					[footerHeight]="50" [rowHeight]="'auto'" [rows]="notActivedUsers">
+					<!--[limit]="20"-->
+					<ngx-datatable-column name="ID" prop="salesforceId" [flexGrow]="3"
+						[sortable]="true">
+						<ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+							<span>
+								{{value}}
+							</span>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="{{'menu.User Profile' | translate }}" prop="userName" [flexGrow]="3"
+						[sortable]="true">
+						<ng-template let-value="value" ngx-datatable-cell-template let-row="row">
+							<span>
+								{{value}}
+							</span>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="{{'generics.Email' | translate }}" prop="email" [flexGrow]="4"
+						[sortable]="true">
+						<ng-template let-value="value" ngx-datatable-cell-template>
+							<span>
+								{{value}}
+							</span>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="{{'personalinfo.Phone' | translate }}" prop="phone" [flexGrow]="2"
+						[sortable]="true">
+						<ng-template let-value="value" ngx-datatable-cell-template>
+							<span>
+								{{value}}
+							</span>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="{{'generics.Lang' | translate }}" prop="lang" [flexGrow]="2"
+						[sortable]="true">
+						<ng-template let-value="value" ngx-datatable-cell-template>
+							<span>
+								{{value}}
+							</span>
+						</ng-template>
+					</ngx-datatable-column>
+					<ngx-datatable-column name="{{'war.Date of registration' | translate }}" prop="signupDate" [flexGrow]="2"
+						[sortable]="true">
+						<ng-template let-value="value" ngx-datatable-cell-template>
+							<span>
+								{{value | date: 'dd MMM
+								y': '' : translate.currentLang}}
+							</span>
+						</ng-template>
+					</ngx-datatable-column>
+				</ngx-datatable>
+			</div>
+			<div class="card-body table-responsive" *ngIf="!loadingUsersNotActived && notActivedUsers.length==0">
+				-
+			</div>
+
+		</div>
 	</div>
 </div>
 <div class="col-lg-12 col-12 form-group" *ngIf="working">
@@ -228,7 +306,7 @@
 							</div>
 						</div>
 
-						<div *ngIf="user.role =='User'">
+						<div>
 							<h4 class="mt-3 mb-0 text-bold-400">
 								{{'menu.Basic Info' | translate }}
 							</h4>
@@ -249,15 +327,6 @@
 									</p>
 								</div>
 
-							</div>
-						</div>
-						<div *ngIf="user.role =='Clinical'" class="row">
-							<div class="col-md-12">
-								<p class="mb-0">
-									<strong>{{'land.Disease' | translate }}:</strong> <span class="ml-1"
-										*ngIf="user.group">{{user.group}}</span> <span class="ml-1"
-										*ngIf="!user.group">-</span>
-								</p>
 							</div>
 						</div>
 						<div class="row">
@@ -368,6 +437,9 @@
 									</tbody>
 								</table>
 
+							</div>
+							<div *ngIf="user.drugs.length==0" class="col-md-12">
+								-
 							</div>
 						</div>
 
