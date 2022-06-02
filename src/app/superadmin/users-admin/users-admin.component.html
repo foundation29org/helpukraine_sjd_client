@@ -228,7 +228,7 @@
 							</div>
 						</div>
 
-						<div *ngIf="user.role =='User'">
+						<div>
 							<h4 class="mt-3 mb-0 text-bold-400">
 								{{'menu.Basic Info' | translate }}
 							</h4>
@@ -249,15 +249,6 @@
 									</p>
 								</div>
 
-							</div>
-						</div>
-						<div *ngIf="user.role =='Clinical'" class="row">
-							<div class="col-md-12">
-								<p class="mb-0">
-									<strong>{{'land.Disease' | translate }}:</strong> <span class="ml-1"
-										*ngIf="user.group">{{user.group}}</span> <span class="ml-1"
-										*ngIf="!user.group">-</span>
-								</p>
 							</div>
 						</div>
 						<div class="row">
@@ -368,6 +359,9 @@
 									</tbody>
 								</table>
 
+							</div>
+							<div *ngIf="user.drugs.length==0" class="col-md-12">
+								-
 							</div>
 						</div>
 
