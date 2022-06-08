@@ -7,7 +7,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/shared/auth/auth.service';
 import { PatientService } from 'app/shared/services/patient.service';
 import { ApiDx29ServerService } from 'app/shared/services/api-dx29-server.service';
-import { ApiExternalServices } from 'app/shared/services/api-external.service';
 import { ToastrService } from 'ngx-toastr';
 import { SearchService } from 'app/shared/services/search.service';
 import { SortService } from 'app/shared/services/sort.service';
@@ -26,7 +25,7 @@ import { DateAdapter } from '@angular/material/core';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [PatientService, Apif29BioService, ApiDx29ServerService, ApiExternalServices]
+  providers: [PatientService, Apif29BioService, ApiDx29ServerService]
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
@@ -179,7 +178,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   mapClickListener: any;
   map: any;
 
-  constructor(private http: HttpClient, public translate: TranslateService, private authService: AuthService, private patientService: PatientService, public searchFilterPipe: SearchFilterPipe, public toastr: ToastrService, private dateService: DateService, private apiDx29ServerService: ApiDx29ServerService, private sortService: SortService, private adapter: DateAdapter<any>, private searchService: SearchService, private router: Router, private apiExternalServices: ApiExternalServices, private apif29BioService: Apif29BioService, private modalService: NgbModal, private zone: NgZone) {
+  constructor(private http: HttpClient, public translate: TranslateService, private authService: AuthService, private patientService: PatientService, public searchFilterPipe: SearchFilterPipe, public toastr: ToastrService, private dateService: DateService, private apiDx29ServerService: ApiDx29ServerService, private sortService: SortService, private adapter: DateAdapter<any>, private searchService: SearchService, private router: Router, private apif29BioService: Apif29BioService, private modalService: NgbModal, private zone: NgZone) {
     this.adapter.setLocale(this.authService.getLang());
     this.lang = this.authService.getLang();
     switch (this.authService.getLang()) {
@@ -404,7 +403,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     //this.loadCountries();
     this.step = '3';
     if(this.basicInfoPatient.lat==""){
-      //this.getLocationInfo();
     }else{
       this.lat = parseFloat(this.basicInfoPatient.lat)
       this.lng = parseFloat(this.basicInfoPatient.lng)
@@ -450,24 +448,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     //this.goStep('1');
   }
 
-  getLocationInfo(){
-    this.subscription.add(this.apiExternalServices.getInfoLocation()
-        .subscribe((res: any) => {
-            this.actualLocation = res;
-            var param = this.actualLocation.loc.split(',');
-            if(param[1]){
-              this.basicInfoPatient.lat = Number(param[0]);
-              this.basicInfoPatient.lng = Number(param[1]);
-              this.lat = parseFloat(this.basicInfoPatient.lat)
-              this.lng = parseFloat(this.basicInfoPatient.lng)
-              this.showMarker = true;
-            }
-            
-        }, (err) => {
-            console.log(err);
-        }));
-  }
-
   getLiteral(literal) {
     return this.translate.instant(literal);
   }
@@ -495,7 +475,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.authService.setGroup(this.basicInfoPatient.group);
         this.saving = false;
         if(this.basicInfoPatient.lat==""){
-          //this.getLocationInfo();
         }else{
           this.lat = parseFloat(this.basicInfoPatient.lat)
           this.lng = parseFloat(this.basicInfoPatient.lng)
@@ -610,6 +589,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     if(testLangText.length>0){
       this.subscription.add(this.apiDx29ServerService.getDetectLanguage(testLangText)
       .subscribe((res: any) => {
+        console.log(res);
         if(res[0].language!='en'){
           var info = [{"Text":drug.name}]
           this.subscription.add(this.apif29BioService.getTranslationDictionary2(res[0].language, info)

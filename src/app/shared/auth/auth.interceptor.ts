@@ -53,18 +53,6 @@ export class AuthInterceptor implements HttpInterceptor {
       }
     }
 
-    if (req.url.indexOf('logic.azure.com') !== -1 || req.url.indexOf('http://ipinfo.io') !== -1) {
-      isExternalReq = true;
-    }
-
-    if (req.url.indexOf('/api/Document/Parse') !== -1) {
-      isExternalReq = true;
-      const headers = new HttpHeaders({
-        'Content-Type': 'application/octet-stream'
-      });
-      authReq = req.clone({ headers });
-    }
-
     // Pass on the cloned request instead of the original request.
     return next.handle(authReq)
       .catch((error, caught) => {

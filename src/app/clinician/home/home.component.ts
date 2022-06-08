@@ -7,7 +7,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from 'app/shared/auth/auth.service';
 import { RequestCliService } from 'app/shared/services/request-cli.service';
 import { ApiDx29ServerService } from 'app/shared/services/api-dx29-server.service';
-import { ApiExternalServices } from 'app/shared/services/api-external.service';
 import { ToastrService } from 'ngx-toastr';
 import { SearchService } from 'app/shared/services/search.service';
 import { SortService } from 'app/shared/services/sort.service';
@@ -25,7 +24,7 @@ import { DateAdapter } from '@angular/material/core';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  providers: [RequestCliService, Apif29BioService, ApiDx29ServerService, ApiExternalServices]
+  providers: [RequestCliService, Apif29BioService, ApiDx29ServerService]
 })
 
 export class HomeComponent implements OnInit, OnDestroy {
@@ -84,7 +83,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   indexRequest= -1;
   countries: any = [];
 
-  constructor(private http: HttpClient, public translate: TranslateService, private authService: AuthService, private requestCliService: RequestCliService, public searchFilterPipe: SearchFilterPipe, public toastr: ToastrService, private dateService: DateService, private apiDx29ServerService: ApiDx29ServerService, private sortService: SortService, private adapter: DateAdapter<any>, private searchService: SearchService, private router: Router, private apiExternalServices: ApiExternalServices, private apif29BioService: Apif29BioService, private modalService: NgbModal, private zone: NgZone) {
+  constructor(private http: HttpClient, public translate: TranslateService, private authService: AuthService, private requestCliService: RequestCliService, public searchFilterPipe: SearchFilterPipe, public toastr: ToastrService, private dateService: DateService, private apiDx29ServerService: ApiDx29ServerService, private sortService: SortService, private adapter: DateAdapter<any>, private searchService: SearchService, private router: Router, private apif29BioService: Apif29BioService, private modalService: NgbModal, private zone: NgZone) {
     this.adapter.setLocale(this.authService.getLang());
     this.lang = this.authService.getLang();
     switch (this.authService.getLang()) {
@@ -210,7 +209,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe((res: any) => {
         this.userInfo = res;
         if (this.userInfo.lat == "") {
-          //this.getLocationInfo();
         }
       }, (err) => {
         console.log(err);
@@ -246,22 +244,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   question2() {
     this.step = '4';
-  }
-
-  getLocationInfo() {
-    this.subscription.add(this.apiExternalServices.getInfoLocation()
-      .subscribe((res: any) => {
-        this.actualLocation = res;
-        var param = this.actualLocation.loc.split(',');
-        if (param[1]) {
-          this.userInfo.lat = Number(param[0]);
-          this.userInfo.lng = Number(param[1]);
-          //this.showMarker = true;
-        }
-
-      }, (err) => {
-        console.log(err);
-      }));
   }
 
   getLiteral(literal) {
