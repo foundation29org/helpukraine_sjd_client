@@ -170,7 +170,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           this.getChecks();
         }
         
-        
+        this.indexRequest = -1;
         this.loadedRequest = true;
         
       }, (err) => {
@@ -382,6 +382,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       notes: '',
       needs: '',
       needAssistance: '',
+      referralCenter: '',
       country: null,
       status: null,
       updateDate: Date.now(),
