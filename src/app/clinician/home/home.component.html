@@ -91,7 +91,8 @@
                     <tr
                     *ngFor="let request of requests ; let j = index">
                         <td>
-                            <span>{{request.salesforceCleanId}}</span>
+                            <span *ngIf="request.salesforceCleanId!=null">{{request.salesforceCleanId}}</span>
+                            <span *ngIf="request.salesforceCleanId==null"><a class="btn btn-outline-dark btn-sm mb-0 mr-1" (click)="getRequestCli();" href="javascript:void(0)"><i class="fa fa-refresh"></i></a></span>
                         </td>
                         <td>
                             <span><strong>{{request.creationDate |date}}</strong></span>
