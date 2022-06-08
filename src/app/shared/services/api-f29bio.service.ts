@@ -36,17 +36,6 @@ export class Apif29BioService {
         })
     }
 
-    getTranslationDictionary(lang,segments){
-      var body = {lang:lang, segments: segments}
-        return this.http.post(environment.api+'/api/Translation/document/translate', body)
-        .map( (res : any) => {
-            return res;
-        }, (err) => {
-            console.log(err);
-            return err;
-        })
-    }
-
     getTranslationDictionary2(lang,info){
         var body = {lang:lang, info: info}
           return this.http.post(environment.api+'/api/Translation/document/translate2', body)
