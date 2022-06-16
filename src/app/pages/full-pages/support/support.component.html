@@ -41,11 +41,12 @@
                                           <small class="form-text text-muted danger" *ngIf="!description.valid && (description.dirty || description.touched)">{{'generics.required' | translate }}</small>
                                         </div>
                                       </div>
+                                      <!--
                                       <div class="mt-2 col-md-12" *ngFor="let eachfile of supportInfo.files ; let i = index">
                                         <p *ngIf="eachfile">
-                                          <span>{{eachfile}}</span>
+                                          <span>{{eachfile |json}}</span>
                                           <a class="btn btn-outline-danger mb-0 ml-1" (click)="deleteDataAndFile(i);" href="javascript:void(0)"><i class="fa fa-times"></i></a>
-                                      </p>
+                                        </p>
                                       </div>
                                       <div class="mt-2 col-md-12" >
                                         <label for="distance">{{'support.New File' | translate }} <small class="d-block">{{'support.Uploading a capture can help us a lot' | translate }}</small></label>
@@ -57,6 +58,8 @@
                                         <h4 *ngIf="uploadingFile" class="center-elements">{{'generics.Upload Progress' | translate }}: {{uploadProgress | async}}%</h4>
                       
                                       </div>
+                                      -->
+                                      
                                     </div>
                                   </div>
                                   <div class="form-actions">

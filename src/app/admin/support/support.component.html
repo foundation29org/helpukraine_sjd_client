@@ -12,7 +12,6 @@
             <th>Email</th>
 						<th>{{'support.Subject' | translate }}</th>
 						<th>{{'support.Message' | translate }}</th>
-            <th>Files</th>
 						<th>Date</th>
             <th>Issue type</th>
 					</tr>
@@ -25,16 +24,6 @@
               <span class="" *ngIf="lang!='uk'">
                 <a href="javascript:;" (click)="goToLink(msg)" class="btn btn-dark mb-0 mt-2"><em class="fa fa fa-language mr-1"></em>{{'war.Translate' | translate }}</a>
               </span>
-            </td>
-            <td>
-              <div *ngIf="msg.files.length>0">
-                <p *ngFor="let file of msg.files ; let i = index">
-                  {{file}} <a class="btn btn-outline-danger mb-0" href="{{accessToken.blobAccountUrl}}filessupport/{{file}}{{accessToken.sasToken}}" download="{{file}}" target="_blank"><i class="fa ft-download-cloud"></i></a>
-                </p>
-              </div>
-              <div *ngIf="msg.files.length==0">
-                -
-              </div>
             </td>
             <td>{{msg.date | date: timeformat}}</td>
             <td>
