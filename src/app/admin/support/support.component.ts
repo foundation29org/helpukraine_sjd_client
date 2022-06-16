@@ -8,8 +8,6 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'environments/environment';
 import { Subscription } from 'rxjs/Subscription';
 import { ApiDx29ServerService } from 'app/shared/services/api-dx29-server.service';
-import { BlobStorageSupportService, IBlobAccessToken } from 'app/shared/services/blob-storage-support.service';
-import swal from 'sweetalert2';
 import { Observable } from 'rxjs/Observable';
 import {DateAdapter} from '@angular/material/core';
 
@@ -24,12 +22,6 @@ export class SupportComponent implements OnDestroy{
 
   private subscription: Subscription = new Subscription();
 
-  accessToken: IBlobAccessToken = {
-    // tslint:disable-next-line:max-line-length
-    sasToken: environment.blobAccessToken.sasToken,
-    blobAccountUrl: environment.blobAccessToken.blobAccountUrl,
-    containerName: 'filessupport'
-  };
   uploadProgress: Observable<number>;
   totalSize: number = 0;
   msgList: any = [];
@@ -37,7 +29,7 @@ export class SupportComponent implements OnDestroy{
   groupId: any;
   lang: any;
 
-  constructor(private http: HttpClient, private translate : TranslateService, private authService: AuthService, private authGuard: AuthGuard, private blob: BlobStorageSupportService, public toastr: ToastrService, private sortService: SortService, private adapter: DateAdapter<any>, private apiDx29ServerService: ApiDx29ServerService) {
+  constructor(private http: HttpClient, private translate : TranslateService, private authService: AuthService, private authGuard: AuthGuard, public toastr: ToastrService, private sortService: SortService, private adapter: DateAdapter<any>, private apiDx29ServerService: ApiDx29ServerService) {
 
     this.initVars();
     this.lang = this.authService.getLang()
@@ -61,18 +53,7 @@ export class SupportComponent implements OnDestroy{
           break;
 
     }
-    this.getAzureBlobSasToken();
     this.loadGroupId();
-  }
-
-  getAzureBlobSasToken(){
-    this.subscription.add( this.apiDx29ServerService.getAzureBlobSasToken('filessupport')
-    .subscribe( (res : any) => {
-      this.accessToken.sasToken = '?'+res;
-      this.blob.init(this.accessToken);
-    }, (err) => {
-      console.log(err);
-    }));
   }
 
   loadGroupId(){

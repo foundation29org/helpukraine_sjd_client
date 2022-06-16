@@ -14,7 +14,6 @@ import {DateAdapter} from '@angular/material/core';
 import { SortService} from 'app/shared/services/sort.service';
 import { json2csv } from 'json-2-csv';
 import { ApiDx29ServerService } from 'app/shared/services/api-dx29-server.service';
-import { BlobStorageSupportService, IBlobAccessToken } from 'app/shared/services/blob-storage-support.service';
 
 @Component({
     selector: 'app-users-admin',
@@ -49,14 +48,8 @@ export class UsersAdminComponent implements OnDestroy{
   rowIndex: number = -1;
   emailMsg="";
   msgList: any = {};
-  accessToken: IBlobAccessToken = {
-    // tslint:disable-next-line:max-line-length
-    sasToken: environment.blobAccessToken.sasToken,
-    blobAccountUrl: environment.blobAccessToken.blobAccountUrl,
-    containerName: 'filessupport'
-  };
 
-  constructor(private http: HttpClient, public translate: TranslateService, private authService: AuthService, private authGuard: AuthGuard, public toastr: ToastrService, private modalService: NgbModal, private dateService: DateService,private adapter: DateAdapter<any>, private sortService: SortService, private apiDx29ServerService: ApiDx29ServerService, private blob: BlobStorageSupportService){
+  constructor(private http: HttpClient, public translate: TranslateService, private authService: AuthService, private authGuard: AuthGuard, public toastr: ToastrService, private modalService: NgbModal, private dateService: DateService,private adapter: DateAdapter<any>, private sortService: SortService, private apiDx29ServerService: ApiDx29ServerService){
 
     this.adapter.setLocale(this.authService.getLang());
     this.lang = this.authService.getLang()
@@ -77,7 +70,6 @@ export class UsersAdminComponent implements OnDestroy{
     }
     this.currentGroup = this.authService.getGroup()    
     this.loadGroupId();
-    this.getAzureBlobSasToken();
   }
 
   loadCountries(){
@@ -286,16 +278,6 @@ export class UsersAdminComponent implements OnDestroy{
       windowClass: 'ModalClass-lg'// xl, lg, sm
     };
     this.modalReference = this.modalService.open(EmailPanel, ngbModalOptions);
-  }
-
-  getAzureBlobSasToken(){
-    this.subscription.add( this.apiDx29ServerService.getAzureBlobSasToken('filessupport')
-    .subscribe( (res : any) => {
-      this.accessToken.sasToken = '?'+res;
-      this.blob.init(this.accessToken);
-    }, (err) => {
-      console.log(err);
-    }));
   }
 
   fieldStatusChanged2(msg, index){

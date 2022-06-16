@@ -31,16 +31,6 @@ export class ApiDx29ServerService {
         })
     }
 
-    getAzureBlobSasToken(containerName){
-      return this.http.get(environment.api+'/api/getAzureBlobSasTokenWithContainer/'+containerName)
-      .map( (res : any) => {
-          return res.containerSAS;
-      }, (err) => {
-          console.log(err);
-          return err;
-      })
-  }
-
     createblobOpenDx29(symptoms) {
       return this.http.post(environment.api + '/api/blobOpenDx29', symptoms)
         .map((res: any) => {
