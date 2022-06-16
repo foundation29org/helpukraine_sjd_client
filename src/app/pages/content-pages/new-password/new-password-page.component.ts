@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy, OnInit, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from "@angular/router";
 import { environment } from 'environments/environment';
@@ -14,18 +14,65 @@ import { Subscription } from 'rxjs/Subscription';
     styleUrls: ['./new-password-page.component.scss']
 })
 
-export class NewPasswordPageComponent implements OnDestroy{
+export class NewPasswordPageComponent implements OnDestroy, OnInit{
     @ViewChild('f') newPasswordForm: NgForm;
     sending: boolean = false;
     showlink:boolean = false;
     changed: boolean = false;
     private subscription: Subscription = new Subscription();
+    @ViewChild('recaptcha') recaptchaElement: ElementRef;
+    captchaToken: string = "";
+    needCaptcha: boolean = true;
 
     constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient, public translate: TranslateService) { }
+
+    ngOnInit() {
+      this.addRecaptchaScript();
+    }
 
     ngOnDestroy() {
       this.subscription.unsubscribe();
     }
+
+    renderReCaptch() {
+      this.needCaptcha = true;
+      if(this.recaptchaElement==undefined){
+        location.reload();
+      }else{
+        try{  
+        window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
+          'sitekey' : environment.captcha,
+          'callback': (response) => {
+            this.captchaToken = response;
+            console.log(response);
+            this.needCaptcha = false;
+  
+          }
+        });
+        }catch(e){
+          console.log(e);
+          window['grecaptcha'].reset();
+        }
+      }
+  
+    }
+  
+    addRecaptchaScript() {
+  
+      window['grecaptchaCallback'] = () => {
+        this.renderReCaptch();
+      }
+  
+      (function(d, s, id, obj){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { obj.renderReCaptch(); return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://www.google.com/recaptcha/api.js?onload=grecaptchaCallback&amp;render=explicit";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'recaptcha-jssdk', this));
+  
+    }
+    
 
     submitInvalidForm() {
       if (!this.newPasswordForm) { return; }
@@ -45,17 +92,26 @@ export class NewPasswordPageComponent implements OnDestroy{
       var param = this.router.parseUrl(this.router.url).queryParams;
       if(param.email && param.key){
         this.newPasswordForm.value.password=sha512(this.newPasswordForm.value.password);
-        var paramssend = { email: param.email, password: this.newPasswordForm.value.password, randomCodeRecoverPass: param.key};
+        var paramssend = { email: param.email, password: this.newPasswordForm.value.password, randomCodeRecoverPass: param.key, captchaToken: this.captchaToken};
 
         this.subscription.add( this.http.post(environment.api+'/api/updatepass',paramssend)
         .subscribe( (res : any) => {
-          Swal.fire('', this.translate.instant("recoverpass.Password changed"), "success");
-          this.changed = true;
+          console.log(res);
           this.sending = false;
           this.newPasswordForm.reset();
+          if (res.message == 'Token is empty or invalid' || res.message == 'recaptcha failed') {
+            this.needCaptcha = true;
+            Swal.fire(this.translate.instant("generics.Warning"), res.message, "warning");
+            this.addRecaptchaScript();
+          }else{
+            Swal.fire('', this.translate.instant("recoverpass.Password changed"), "success");
+            this.changed = true;
+          }
+         
          }, (err) => {
            //errores de fallos
            var errormsg=err.error.message;
+           console.log(errormsg);
            if(errormsg == 'invalid link'){
              Swal.fire(this.translate.instant("generics.Warning"), this.translate.instant("recoverpass.invalidLink"), "warning");
            }else if(errormsg == 'link expired'){
@@ -64,6 +120,8 @@ export class NewPasswordPageComponent implements OnDestroy{
            }else{
              Swal.fire(this.translate.instant("generics.Warning"), this.translate.instant("generics.error try again"), "warning");
            }
+           this.needCaptcha = true;
+           this.addRecaptchaScript();
            this.sending = false;
            this.newPasswordForm.reset();
          }));

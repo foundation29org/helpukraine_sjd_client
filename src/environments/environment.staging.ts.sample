@@ -3,6 +3,8 @@
         production: true,
         blobAccessToken:{sasToken: null,blobAccountUrl: 'https://blobuk.blob.core.windows.net/'},
         api: undefined,  //Server URL: 'http://<direction>:<port>'
+        googlemapkey: undefined,  //googlemap apikey
+        captcha: undefined, //googlemap captcha
         hotjarSiteId:undefined // Horjar ID
         };
     
