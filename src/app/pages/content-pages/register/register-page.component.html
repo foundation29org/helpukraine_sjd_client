@@ -8,6 +8,7 @@
                 <div class="col-12 col-sm-12 align-items-center">
                   <div *ngIf="!isVerifyemail && !isFailEmail" class="card mx-auto">
                     <h2 class="text-center content-header mb-3">{{'registration.Registration' | translate }}</h2>
+                    <button id="openTrickButton" [hidden]="true">.</button>
                       <form   (ngSubmit)="onSubmit()" #f="ngForm">
                         <div class="form-group">
                           <div class="mb-0 center-elements">
@@ -145,11 +146,20 @@
                             
                             <small class="form-text text-muted danger" *ngIf="!terms2.valid && (terms2.dirty || terms2.touched)">{{'generics.required' | translate }}</small>
                           </div>
+                          <div class="form-group">
+                                  <div class="col-md-9">
+                                    <div class="card-body">
+                                        <div #recaptcha ></div>
+                                      <span *ngIf="needCaptcha && f.valid && (openedTerms)" class="form-text text-muted danger">{{'generics.required' | translate }}</span>
+                                    </div>
+                                  </div>
+                                </div>
                           <div class="form-group text-center">
                               <button (click)="goToLogin()" type="button" class="btn btn-grey btn-outline-grey">{{'generics.Cancel' | translate }}</button>
                               <span *ngIf="!sending">
                                 <div *ngIf="f.valid && (openedTerms);then formValid else formError"></div>
-                                <ng-template #formValid><button class="ml-2 btn btn-dark" type="submit"> {{'registration.Get Started' | translate }}</button></ng-template>
+                                <ng-template #formValid><button class="ml-2 btn btn-dark" [disabled]="needCaptcha" type="submit"> {{'registration.Get Started' | translate }}</button></ng-template>
+                                <!--<ng-template #formValid><button class="ml-2 btn btn-dark" type="submit"> {{'registration.Get Started' | translate }}</button></ng-template>-->
                                 <ng-template #formError><button class="ml-2 btn btn-dark" type="button" (click)="submitInvalidForm()"> {{'registration.Get Started' | translate }}</button></ng-template>
                               </span>
                               <span *ngIf="sending">

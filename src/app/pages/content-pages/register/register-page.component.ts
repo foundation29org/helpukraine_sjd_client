@@ -55,6 +55,9 @@ export class RegisterPageComponent implements OnDestroy, OnInit {
   phoneCodes:any=[];
   phoneCodeSelected:String="";
   seleccionado: string = null;
+  @ViewChild('recaptcha') recaptchaElement: ElementRef;
+  captchaToken: string = "";
+  needCaptcha: boolean = true;
 
   private subscription: Subscription = new Subscription();
 
@@ -106,6 +109,45 @@ export class RegisterPageComponent implements OnDestroy, OnInit {
       }
 
     }.bind(this));
+    this.addRecaptchaScript();
+  }
+
+ renderReCaptch() {
+      this.needCaptcha = true;
+      if(this.recaptchaElement==undefined){
+        location.reload();
+      }else{
+        try{  
+        window['grecaptcha'].render(this.recaptchaElement.nativeElement, {
+          'sitekey' : environment.captcha,
+          'callback': (response) => {
+            this.captchaToken = response;
+            console.log(response);
+            this.needCaptcha = false;
+  
+          }
+        });
+        }catch(e){
+          console.log(e);
+          window['grecaptcha'].reset();
+        }
+      }
+  
+    }
+
+  addRecaptchaScript() {
+
+    window['grecaptchaCallback'] = () => {
+      this.renderReCaptch();
+    }
+
+    (function(d, s, id, obj){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { obj.renderReCaptch(); return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://www.google.com/recaptcha/api.js?onload=grecaptchaCallback&amp;render=explicit";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'recaptcha-jssdk', this));
 
   }
 
@@ -191,6 +233,7 @@ export class RegisterPageComponent implements OnDestroy, OnInit {
       if (params.role == 'Clinical') {
         params.subrole = null
       }
+      params.captchaToken = this.captchaToken;
       //params.phone = params.countryselectedPhoneCode+ " " +params.phone;
       this.subscription.add(this.http.post(environment.api + '/api/signup', params)
         .subscribe((res: any) => {
@@ -204,6 +247,12 @@ export class RegisterPageComponent implements OnDestroy, OnInit {
           } else if (res.message == 'user exists') {
             this.isEmailBusy = true;
             Swal.fire(this.translate.instant("generics.Warning"), this.translate.instant("registration.email already exists"), "warning");
+          }else if (res.message == 'Token is empty or invalid' || res.message == 'recaptcha failed') {
+            Swal.fire(this.translate.instant("generics.Warning"), res.message, "warning");
+          }
+          if (res.message != 'Account created') {
+            this.needCaptcha = true;
+            this.addRecaptchaScript();
           }
           this.registerForm.reset();
           this.sending = false;
