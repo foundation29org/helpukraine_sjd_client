@@ -12,11 +12,17 @@ import { TermsConditionsPageComponent } from "../../content-pages/terms-conditio
 export class LandPageComponent implements OnInit {
     isApp: boolean = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1 && location.hostname != "localhost" && location.hostname != "127.0.0.1";
     iconjsd: string = 'assets/img/land/logos/sjd_en.png';
+    iconmoh: string = 'assets/img/land/logos/MoH_en.png';
     lang: string = 'en';
     modalReference: NgbModalRef;
 
     constructor(private eventsService: EventsService, private modalService: NgbModal) {
         this.lang = sessionStorage.getItem('lang');
+        if (this.lang == 'uk') {
+            this.iconmoh = 'assets/img/land/logos/MoH_uk.png';
+        }else{
+            this.iconmoh = 'assets/img/land/logos/MoH_en.png';
+        }
         if (this.lang == 'es') {
             this.iconjsd = 'assets/img/land/logos/sjd_es.png';
         } else {
@@ -28,6 +34,11 @@ export class LandPageComponent implements OnInit {
 
         this.eventsService.on('changelang', function (lang) {
             this.lang = lang;
+            if (this.lang == 'uk') {
+                this.iconmoh = 'assets/img/land/logos/MoH_uk.png';
+            }else{
+                this.iconmoh = 'assets/img/land/logos/MoH_en.png';
+            }
             if (this.lang == 'es') {
                 this.iconjsd = 'assets/img/land/logos/sjd_es.png';
             } else {
