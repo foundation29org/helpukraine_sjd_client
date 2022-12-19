@@ -271,7 +271,11 @@
     "t5.4": "Organization Hunter",
     "t5.5": "Organization Hunter & Communications Officer",
     "t6.title": "Team",
-    "button": "Make a request"
+    "button": "Make a request",
+    "swal1": "We are working hard to make this website available again soon. Shortly, you will find new challenge in our organization for be more effective!",
+    "swal2": "If do you need urgent support, please send your request to the following email address: hub_ukraine@ohmatdyt.com.ua or contact by phone at +38 068 1240804",
+    "swal3": "Thank you for your understanding,",
+    "swal4": "Best regards"
   },
   "homeraito":{
     "t1": "Do you belong to a patient organization?",
