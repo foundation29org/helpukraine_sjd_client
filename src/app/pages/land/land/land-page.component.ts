@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EventsService } from 'app/shared/services/events.service';
 import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TermsConditionsPageComponent } from "../../content-pages/terms-conditions/terms-conditions-page.component";
+import { TranslateService } from '@ngx-translate/core';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-land-page',
@@ -15,8 +17,12 @@ export class LandPageComponent implements OnInit {
     iconmoh: string = 'assets/img/land/logos/MoH_en.png';
     lang: string = 'en';
     modalReference: NgbModalRef;
+    swal1: string = '';
+    swal2: string = '';
+    swal3: string = '';
+    swal4: string = '';
 
-    constructor(private eventsService: EventsService, private modalService: NgbModal) {
+    constructor(private eventsService: EventsService, private modalService: NgbModal, public translate: TranslateService) {
         this.lang = sessionStorage.getItem('lang');
         if (this.lang == 'uk') {
             this.iconmoh = 'assets/img/land/logos/MoH_uk.png';
@@ -45,7 +51,33 @@ export class LandPageComponent implements OnInit {
                 this.iconjsd = 'assets/img/land/logos/sjd_en.png';
             }
         }.bind(this));
+        this.loadTranslations();
+    }
 
+    loadTranslations() {
+        this.translate.get('landraito.swal1').subscribe((res: string) => {
+            this.swal1 = res;
+        });
+        this.translate.get('landraito.swal2').subscribe((res: string) => {
+            this.swal2 = res;
+        });
+        this.translate.get('landraito.swal3').subscribe((res: string) => {
+            this.swal3 = res;
+        });
+        this.translate.get('landraito.swal4').subscribe((res: string) => {
+            this.swal4 = res;
+            this.showSwal();
+        });
+    }
+
+    showSwal() {
+        Swal.fire({
+            icon: 'warning',
+            html: '<p>'+this.swal1+'</p>'+'<p>'+this.swal2+'</p>'+'<p>'+this.swal3+'</p>'+'<p>'+this.swal4+'</p>',
+            showCancelButton: false,
+            showConfirmButton: false,
+            allowOutsideClick: false
+        })
     }
 
     openWeb() {
